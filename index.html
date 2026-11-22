@@ -6,6 +6,8 @@
 <title>رحلات تعليمية · Learning Journeys</title>
 <meta name="description" content="تطبيقات تعليمية مجانية للطلاب والأسر من إعداد حالم فاروق — Free educational apps for students and families by Halim Faroug.">
 <meta name="theme-color" content="#0B67D1">
+<meta property="og:title" content="رحلات تعليمية · Learning Journeys">
+<meta property="og:description" content="من حالمٍ بتعلّمٍ أجمل — تطبيقات تعليمية مجانية للطلاب والأسر.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230B67D1'/><path d='M14 44 L28 26 L36 36 L44 22 L50 44 Z' fill='%23FFD566'/><circle cx='44' cy='18' r='5' fill='%23fff'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
@@ -25,6 +27,7 @@ header.bar{display:flex;align-items:center;justify-content:space-between;padding
 .hero::after{content:"";position:absolute;inset-inline-end:-60px;bottom:-90px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
 .kicker{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px 14px;font-size:14px;font-weight:800}
 .hero h1{font-size:clamp(32px,6vw,52px);line-height:1.2;margin:12px 0 8px;font-weight:900}
+.dream{font-size:clamp(18px,3vw,22px);font-weight:800;color:#FFD566;margin:-2px 0 10px;position:relative;z-index:1}
 .hero p{margin:0;max-width:640px;font-size:18px;font-weight:600;color:rgba(255,255,255,.93)}
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;position:relative;z-index:1}
 .badges span{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:6px 12px;font-weight:800;font-size:14px}
@@ -63,6 +66,7 @@ footer{text-align:center;color:var(--ink2);font-size:14px;padding:10px 0 34px}
 <section class="hero">
   <span class="kicker" data-t="kicker">تطبيقات تعليمية مجانية</span>
   <h1 data-t="title">رحلات تعليمية</h1>
+  <div class="dream" data-t="dream">من حالمٍ بتعلّمٍ أجمل ✨</div>
   <p data-t="lead">تطبيقات صُمّمت لتجعل التعلّم في البيت ممتعًا وواضحًا: مرتبطة بالمنهج، تعمل على الجوال، ويستطيع الطالب أن يتدرّب فيها وحده أو مع أسرته.</p>
   <div class="badges"><span data-t="b1">✓ مجانية بالكامل</span><span data-t="b2">✓ بلا حساب</span><span data-t="b3">✓ بلا إعلانات</span><span data-t="b4">✓ التقدّم محفوظ على جهازك</span></div>
 </section>
@@ -73,25 +77,25 @@ footer{text-align:center;color:var(--ink2);font-size:14px;padding:10px 0 34px}
     <div class="top"><div class="icon" aria-hidden="true">🧭</div><h3><span data-t="sj">رحلة المهارات</span><span class="en" data-t="sjs">Skills Journey</span></h3></div>
     <div class="tags"><span data-t="sjg">الصف الثالث والسادس</span><span data-t="sjc">لغتي · الرياضيات · العلوم</span></div>
     <p data-t="sjd">تدريب على مهارات الاختبارات الوطنية «نافس» بأكثر من 3,500 سؤال مرتبط بدروس الكتب، مع نصوص للفهم القرائي، واختبار تجريبي موقّت، وملخّص للأسرة.</p>
-    <a class="open" href="https://skillsjourney.vercel.app/" target="_blank" rel="noopener"><span data-t="open">افتح التطبيق</span> ↗</a>
+    <a class="open" href="./skills-journey/"><span data-t="open">افتح التطبيق</span> <span class="arr">←</span></a>
   </article>
   <article class="app">
     <div class="top"><div class="icon" aria-hidden="true">🔤</div><h3><span data-t="ka">كلماتي</span><span class="en" data-t="kas">Kalimati</span></h3></div>
     <div class="tags"><span data-t="kag">المرحلة الابتدائية</span><span data-t="kac">مفردات اللغة الإنجليزية</span></div>
     <p data-t="kad">أكثر من 20 كتابًا مصوّرًا لكلمات إنجليزية مع معانيها العربية ونطقها، وألعاب للمطابقة والإملاء وبناء الجمل، وملصقات تحفيزية.</p>
-    <a class="open" href="https://kalimati-crafter.vercel.app/" target="_blank" rel="noopener"><span data-t="open">افتح التطبيق</span> ↗</a>
+    <a class="open" href="./kalimati/"><span data-t="open">افتح التطبيق</span> <span class="arr">←</span></a>
   </article>
   <article class="app violet">
     <div class="top"><div class="icon" aria-hidden="true">٥</div><h3><span data-t="m5">مغامرة الرياضيات ٥</span><span class="en" data-t="m5s">Math5 Expert</span></h3></div>
     <div class="tags"><span data-t="m5g">الصف الخامس الابتدائي</span><span data-t="m5c">الرياضيات</span></div>
     <p data-t="m5d">66 تمرينًا تفاعليًّا في 6 فصول: الأعداد الكبيرة، والكسور، والهندسة، والضرب والقسمة، والأنماط والجبر، وحل المسائل.</p>
-    <a class="open" href="https://math-expert-zeta.vercel.app/" target="_blank" rel="noopener"><span data-t="open">افتح التطبيق</span> ↗</a>
+    <a class="open" href="./math5/"><span data-t="open">افتح التطبيق</span> <span class="arr">←</span></a>
   </article>
   <article class="app green">
     <div class="top"><div class="icon" aria-hidden="true">⚛️</div><h3><span data-t="qn">منصة العلوم التفاعلية</span><span class="en" data-t="qns">Quantum Nexus</span></h3></div>
     <div class="tags"><span data-t="qng">الأول والثالث المتوسط</span><span data-t="qnc">العلوم</span></div>
     <p data-t="qnd">32 درسًا في 8 وحدات، وجدول دوري تفاعلي لـ118 عنصرًا، وتجارب علمية افتراضية، واختبارات قصيرة مع نقاط وإنجازات.</p>
-    <a class="open" href="https://halimfaroug.github.io/Quantum-Nexus_Modern_Academy-Schools/" target="_blank" rel="noopener"><span data-t="open">افتح التطبيق</span> ↗</a>
+    <a class="open" href="./quantum-nexus/"><span data-t="open">افتح التطبيق</span> <span class="arr">←</span></a>
   </article>
 </div>
 
@@ -126,12 +130,12 @@ open:"Open the app",how:"Why these apps?",p1:"Tied to the curriculum",p1d:"Built
 p2:"Phone first",p2d:"Open straight from the link, and add to the home screen.",p3:"Fully private",p3d:"No accounts and no data collection; progress stays on the family's device.",
 p4:"Made for families too",p4d:"Helps parents follow their children's learning without fuss.",who:"Who is behind these apps?",
 whod:"I am Halim Faroug Abdulraheem Elhag, a lecturer in English language and translation at the University of Hafr Al-Batin. I build these apps voluntarily, because technology can bring learning closer to every student and family. The questions and content are for practice and do not replace the teacher or the textbook.",
-foot:"© 2026 Learning Journeys · Halim Faroug"};
+foot:"© 2026 Learning Journeys · Halim Faroug",dream:"From a dreamer of better learning ✨"};
 const AR={};document.querySelectorAll("[data-t]").forEach(e=>AR[e.dataset.t]=e.textContent);
 function apply(l){const d=l==="en"?EN:AR;document.querySelectorAll("[data-t]").forEach(e=>{if(d[e.dataset.t])e.textContent=d[e.dataset.t]});
 document.documentElement.lang=l==="en"?"en":"ar";document.documentElement.dir=l==="en"?"ltr":"rtl";
 const b=document.getElementById("lang");b.textContent=l==="en"?"العربية":"English";b.setAttribute("aria-label",l==="en"?"التبديل إلى العربية":"Switch to English");
-document.title=l==="en"?"Learning Journeys · رحلات تعليمية":"رحلات تعليمية · Learning Journeys";try{localStorage.setItem("lj-lang",l)}catch(e){}}
+document.querySelectorAll('.open .arr').forEach(a=>a.textContent=l==="en"?"→":"←");document.title=l==="en"?"Learning Journeys · رحلات تعليمية":"رحلات تعليمية · Learning Journeys";try{localStorage.setItem("lj-lang",l)}catch(e){}}
 function toggle(){apply(document.documentElement.lang==="ar"?"en":"ar")}
 try{if(localStorage.getItem("lj-lang")==="en")apply("en")}catch(e){}
 </script>
