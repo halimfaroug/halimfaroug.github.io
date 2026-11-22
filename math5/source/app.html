@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+__CARRY__
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>مغامرة الرياضيات ٥ · Math5</title>
+<meta name="description" content="تدريب تفاعلي على رياضيات الصف الخامس الابتدائي: القيمة المكانية، والكسور، والهندسة والقياس، والضرب والقسمة، والأنماط، وحل المسائل.">
+<meta name="theme-color" content="#1E9AB0">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14213D;--ink2:#56627A;--bg:#EEF6F8;--card:#fff;--line:#D5E4EA;--brand:#0B7A8F;--brand2:#0051BA;--good:#16A34A;--bad:#DC2626;--gold:#F5B800}
+@media (prefers-color-scheme:dark){:root{--ink:#E7F1F5;--ink2:#A6B8C2;--bg:#08161D;--card:#11252F;--line:#22404D;--brand:#3CC6DD}}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:Cairo,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px;-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}button{cursor:pointer}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;padding:10px 14px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.brand{flex:1;display:flex;align-items:center;gap:8px;font-weight:900;font-size:17px;min-width:0;white-space:nowrap;overflow:hidden}
+.brand img{width:30px;height:30px;border-radius:9px;flex:none}
+.pill{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-weight:800;font-size:14px;flex:none}
+#back{display:none}
+main{max-width:760px;margin:0 auto;padding:14px 14px 40px}
+.hero{border-radius:26px;color:#fff;padding:20px;margin:4px 0 16px;background:radial-gradient(120% 120% at 0% 0%,#FFD24D33 0%,transparent 45%),linear-gradient(135deg,#0B7A8F 0%,#0051BA 100%);box-shadow:0 12px 28px rgba(0,81,186,.28)}
+.hero h1{margin:0;font-size:25px;line-height:1.3;font-weight:900}
+.hero p{margin:6px 0 0;font-weight:700;opacity:.95}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stats div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:6px 4px;text-align:center}
+.stats b{display:block;font-size:20px;font-weight:900;line-height:1.3}.stats small{font-size:12.5px;font-weight:700;opacity:.95}
+.bar{height:9px;border-radius:999px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#FFD24D,#16A34A);border-radius:999px;transition:width .4s}
+.hero .bar{background:rgba(255,255,255,.25);margin-top:12px}
+.badges{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.badges span{font-size:13px;font-weight:800;background:rgba(255,255,255,.16);border-radius:999px;padding:2px 10px}
+.badges span.off{opacity:.62;filter:grayscale(1)}
+h2{font-size:19px;font-weight:900;margin:18px 2px 10px}
+.ch{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:12px 14px;border-radius:18px;border:1px solid var(--line);background:var(--card);margin-bottom:10px;box-shadow:0 3px 10px rgba(0,60,90,.06)}
+.ch .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}
+.ch b{display:block;font-size:17px;line-height:1.4}.ch small{color:var(--ink2);font-weight:700}
+.ch .mini{height:6px;margin-top:5px}
+.ch .done{margin-inline-start:auto;font-weight:900;color:var(--good);flex:none}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 12px}
+.dots button{width:34px;height:34px;border-radius:10px;border:2px solid var(--line);background:var(--card);font-weight:800;font-size:14px;padding:0}
+.dots button.ok{background:var(--good);border-color:var(--good);color:#fff}
+.dots button.now{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 30%,transparent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--ink2);font-weight:800;font-size:14px}
+.lvl{border-radius:999px;padding:1px 10px;font-size:13px;font-weight:800;white-space:nowrap;flex:none}
+.lvl.e{background:#DCFCE7;color:#166534}.lvl.m{background:#FEF3C7;color:#92400E}.lvl.h{background:#FEE2E2;color:#991B1B}
+.q{font-size:20px;font-weight:800;margin:8px 0}
+.x{direction:ltr;unicode-bidi:isolate;text-align:center;font-size:28px;font-weight:900;letter-spacing:.5px;background:color-mix(in srgb,var(--brand) 9%,var(--card));border-radius:16px;padding:10px;margin:8px 0;word-spacing:4px;overflow-wrap:anywhere}
+.row{display:flex;align-items:center;gap:10px;margin:12px 0}
+.inp{flex:1;min-width:0;font-size:26px;font-weight:900;text-align:center;padding:10px;border-radius:16px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.inp:focus{outline:none;border-color:var(--brand)}
+.inp.good{border-color:var(--good)}.inp.bad{border-color:var(--bad)}
+.unit{font-weight:800;color:var(--ink2);flex:none}
+.opt{display:block;width:100%;text-align:start;padding:12px 14px;margin-bottom:10px;border-radius:16px;border:2px solid var(--line);background:var(--bg);font-weight:800;font-size:18px}
+.opt.sel{border-color:var(--brand)}
+.opt.good{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.go{display:block;width:100%;border:0;border-radius:16px;padding:13px;font-weight:900;font-size:18px;color:#fff;background:linear-gradient(135deg,#0B7A8F,#0051BA);box-shadow:0 6px 14px rgba(0,81,186,.25);margin-top:10px}
+.go.alt{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.go:disabled{opacity:.5}
+.hintb{border:0;background:none;color:var(--brand);font-weight:800;padding:6px 0;font-size:16px}
+.hint{background:color-mix(in srgb,var(--gold) 16%,var(--card));border-radius:14px;padding:10px 12px;font-weight:700;margin-top:4px}
+.fb{border-radius:16px;padding:12px 14px;margin-top:12px;font-weight:700}
+.fb.good{background:color-mix(in srgb,var(--good) 13%,var(--card));border:1px solid var(--good)}
+.fb.bad{background:color-mix(in srgb,var(--bad) 10%,var(--card));border:1px solid var(--bad)}
+.fb b{font-size:18px}
+.fine{font-size:14px;color:var(--ink2);font-weight:600}.center{text-align:center}
+.foot{margin-top:24px;text-align:center;color:var(--ink2);font-size:14px;font-weight:700}
+.linkb{border:0;background:none;color:var(--brand);font-weight:800;text-decoration:underline;font-size:14px;padding:4px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 18px;border-radius:999px;font-weight:800;z-index:99;max-width:90vw;text-align:center}
+#fs small{font-size:.7em}
+@media (max-width:420px){.bt{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="pill" id="back" onclick="back()" aria-label="رجوع">رجوع</button>
+  <div class="brand"><img src="icon.svg" alt=""><span class="bt">مغامرة الرياضيات ٥</span></div>
+  <button class="pill" id="fs" onclick="fontStep()" aria-label="تكبير الخط أو تصغيره">أ+</button>
+  <span class="pill" aria-label="النجوم"><span id="tk">0</span> ⭐</span>
+</header>
+<main id="app"></main>
+<script>
+__DATA__
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+const LVL={e:["سهل",5],m:["متوسط",10],h:["صعب",15]};
+const ALL=CHAPTERS.flatMap(c=>c.ex.map((e,i)=>Object.assign({},e,{id:c.id+"e"+i,ch:c.id})));
+const TOTAL=ALL.length;
+const get=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
+let done=get("completedEx",{}),tokens=get("tokens",0),font=get("m5font",0);
+if(typeof done!=="object"||Array.isArray(done))done={};if(typeof tokens!=="number")tokens=0;
+function save(){try{localStorage.setItem("completedEx",JSON.stringify(done));localStorage.setItem("tokens",JSON.stringify(tokens));localStorage.setItem("m5font",JSON.stringify(font))}catch(e){}}
+const FS=[1.12,1.25,1.4],FSN=["عادي","كبير","كبير جدًّا"];
+function applyFont(){document.documentElement.style.zoom=FS[font]||1.12}
+function fontStep(){font=(font+1)%FS.length;save();applyFont();toast("حجم الخط: "+FSN[font])}
+applyFont();
+function toast(t){document.querySelectorAll(".toast").forEach(x=>x.remove());const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+let stack=[],cur=null;
+function show(h){$("#app").innerHTML=h;$("#back").style.display=stack.length?"inline-block":"none";$("#tk").textContent=tokens;scrollTo(0,0)}
+function go(fn,...a){if(cur)stack.push(cur);cur={fn,a};fn(...a)}
+function back(){const p=stack.pop();if(p){cur=p;p.fn(...p.a)}}
+const nDone=c=>c.ex.filter((_,i)=>done[c.id+"e"+i]).length;
+const BADGES=[["🌟","أول 5 تمارين",5],["🔥","منتصف الطريق",Math.ceil(TOTAL/2)],["👑","خبير",TOTAL-6],["💎","أنهيت الكل",TOTAL]];
+
+function home(){const n=Object.keys(done).filter(k=>ALL.some(e=>e.id===k)).length,pct=Math.round(n/TOTAL*100);
+  show(`<section class="hero"><h1>🎓 مغامرة الرياضيات&nbsp;٥</h1><p>تدريب ممتع على رياضيات الصف الخامس، مع شرح لكل إجابة.</p>
+  <div class="stats"><div><b>${n}/${TOTAL}</b><small>أنجزتها</small></div><div><b>${pct}%</b><small>تقدّمي</small></div><div><b>${tokens}</b><small>نجومي ⭐</small></div></div>
+  <div class="bar"><i style="width:${pct}%"></i></div>
+  <div class="badges">${BADGES.map(b=>`<span class="${n>=b[2]?"":"off"}" title="${b[1]}">${b[0]} ${b[1]}</span>`).join("")}</div></section>
+  <h2>الفصول</h2>
+  ${CHAPTERS.map((c,k)=>{const d=nDone(c);return `<button class="ch" onclick="go(chapter,${k})"><span class="ic" style="background:${c.c}22">${c.e}</span>
+   <span style="flex:1;min-width:0"><b>${k+1}. ${c.t}</b><small>${d} من ${c.ex.length} تمارين</small><div class="bar mini"><i style="width:${d/c.ex.length*100}%"></i></div></span>${d===c.ex.length?`<span class="done">✓</span>`:""}</button>`}).join("")}
+  <div class="foot">تمارين تدريبية أصلية · بلا حساب وبلا إعلانات · يعمل دون إنترنت بعد أول فتح<br>طوّره: حالم فاروق عبدالرحيم<br><button class="linkb" onclick="resetMine()">مسح تقدّمي في هذا التطبيق</button></div>`);
+}
+let S=null;
+function chapter(k,i){const c=CHAPTERS[k];if(i===undefined){i=c.ex.findIndex((_,j)=>!done[c.id+"e"+j]);if(i<0)i=0}
+  S={k,i,ans:null,checked:false};const e=ALL.find(x=>x.id===c.id+"e"+i);
+  show(`<h2 style="margin-top:6px">${c.e} ${c.t}</h2>
+  <div class="dots" aria-label="التمارين">${c.ex.map((_,j)=>`<button class="${done[c.id+"e"+j]?"ok":""} ${j===i?"now":""}" onclick="chapter(${k},${j})" aria-label="التمرين ${j+1}">${j+1}</button>`).join("")}</div>
+  <div class="card"><div class="qtop"><span>التمرين ${i+1} من ${c.ex.length}${done[e.id]?" · أنجزته ✓":""}</span><span class="lvl ${e.d}">${LVL[e.d][0]} · ${LVL[e.d][1]} ⭐</span></div>
+  <div class="q">${e.q}</div>${e.x?`<div class="x">${e.x}</div>`:""}${e.q2?`<div class="q">${e.q2}</div>`:""}
+  ${e.t==="m"?e.o.map((o,j)=>`<button class="opt" id="o${j}" onclick="sel(${j})">${o}</button>`).join(""):
+   `<div class="row"><input id="inp" class="inp" ${/\//.test(e.a)?'inputmode="text"':'inputmode="decimal"'} autocomplete="off" aria-label="اكتب إجابتك" placeholder="؟" onkeydown="if(event.key==='Enter')check()">${e.u?`<span class="unit">${e.u}</span>`:""}</div>`}
+  <button class="hintb" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">💡 تلميح</button><div class="hint" hidden>${hintOf(e)}</div>
+  <button class="go" id="chk" onclick="check()">تحقّق</button><div id="fb"></div></div>`);
+}
+function hintOf(e){return e.hi}
+function sel(j){if(S.checked)return;S.ans=j;document.querySelectorAll(".opt").forEach((b,k)=>b.classList.toggle("sel",k===j))}
+function norm(s){return String(s).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[,٬،\s]/g,"").replace(/[٫]/g,".").replace(/[\\⁄∕]/g,"/")}
+function val(s){s=norm(s);const m=s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);if(m)return +m[2]?+m[1]/+m[2]:NaN;return s!==""&&!isNaN(+s)?+s:NaN}
+function check(){if(S.checked)return;const c=CHAPTERS[S.k],e=ALL.find(x=>x.id===c.id+"e"+S.i);let ok,note="";
+  if(e.t==="m"){if(S.ans===null){toast("اختر إجابة أولًا");return}ok=e.o[S.ans]===e.a}
+  else{const raw=$("#inp").value;if(!raw.trim()){toast("اكتب إجابتك أولًا");$("#inp").focus();return}
+    const v=val(raw);if(isNaN(v)){toast("اكتب رقمًا، أو كسرًا مثل 1/2");return}
+    ok=Math.abs(v-val(e.a))<1e-9;
+    if(ok&&/\//.test(e.a)&&norm(raw)!==norm(e.a)){note=`إجابتك <b dir="ltr">${esc(raw.trim())}</b> صحيحة، وأبسط صورة لها <b dir="ltr">${e.a}</b>.`}
+    $("#inp").disabled=true;$("#inp").classList.add(ok?"good":"bad")}
+  S.checked=true;
+  if(e.t==="m")e.o.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o===e.a)b.classList.add("good");else if(j===S.ans)b.classList.add("bad")});
+  let gain=0;if(ok&&!done[e.id]){gain=LVL[e.d][1];done[e.id]=true;tokens+=gain;save()}
+  $("#tk").textContent=tokens;$("#chk").remove();
+  const nextI=c.ex.findIndex((_,j)=>j>S.i&&!done[c.id+"e"+j]),nxt=nextI>=0?nextI:(S.i+1<c.ex.length?S.i+1:-1);
+  $("#fb").innerHTML=`<div class="fb ${ok?"good":"bad"}"><b>${ok?"✅ إجابة صحيحة!"+(gain?` +${gain} ⭐`:""):"❌ الإجابة الصحيحة: "+(e.t==="i"?`<span dir="ltr">${e.a}</span>`:e.a)+(e.u?" "+e.u:"")}</b>${note?"<br>"+note:""}<br>${e.h}</div>
+  ${ok?"":`<button class="go alt" onclick="chapter(${S.k},${S.i})">🔁 حاول مرة أخرى</button>`}
+  ${nxt>=0?`<button class="go" onclick="chapter(${S.k},${nxt})">التمرين التالي ←</button>`:`<button class="go" onclick="back()">${nDone(c)===c.ex.length?"🎉 أنهيت الفصل! العودة إلى الفصول":"العودة إلى الفصول"}</button>`}`;
+  if(ok&&nDone(c)===c.ex.length&&gain)toast("🎉 أحسنت! أنهيت فصل «"+c.t+"»");
+  $("#fb").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function resetMine(){if(!confirm("مسح تقدّمك ونجومك في «مغامرة الرياضيات» فقط؟ (لن يتأثر أيّ تطبيق آخر)"))return;
+  done={};tokens=0;try{localStorage.removeItem("completedEx");localStorage.removeItem("tokens")}catch(e){}stack=[];cur=null;go(home);toast("تم مسح التقدّم")}
+go(home);
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>

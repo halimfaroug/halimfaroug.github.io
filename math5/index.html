@@ -2,1278 +2,238 @@
 <html lang="ar" dir="rtl">
 <head>
 <script>(function(){var h=location.hash,ok=["tokens", "completedEx"];if(h.indexOf("#carry=")===0){try{var d=JSON.parse(decodeURIComponent(escape(atob(h.slice(7).replace(/-/g,"+").replace(/_/g,"/")))));ok.forEach(function(k){if(d[k]!=null&&localStorage.getItem(k)===null)localStorage.setItem(k,d[k])})}catch(e){}try{history.replaceState(null,"",location.pathname)}catch(e){}}})();</script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="منصة تفاعلية شاملة لتعلم الرياضيات للصف الخامس الابتدائي - Math5 Expert Platform">
-  <meta name="theme-color" content="#0051BA">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="مغامرة الرياضيات">
-  <meta name="apple-mobile-web-app-icon-url" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230051BA' width='192' height='192'/><text x='96' y='120' font-size='100' font-weight='bold' fill='%23FFD700' text-anchor='middle' font-family='Arial'>٥</text></svg>">
-  <meta name="msapplication-config" content="browserconfig.xml">
-  <meta name="msapplication-TileColor" content="#0051BA">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="مغامرة الرياضيات ٥">
-  <meta name="twitter:description" content="تطبيق تعليمي تفاعلي لرياضيات الصف الخامس">
-  <meta name="og:type" content="website">
-  <meta name="og:title" content="مغامرة الرياضيات ٥ - Math5 Expert">
-  <meta name="og:description" content="منصة تفاعلية شاملة لتعلم الرياضيات">
-  <meta name="og:url" content="https://math5expert.example.com">
-  <meta name="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'><rect fill='%230051BA' width='1200' height='630'/><text x='600' y='315' font-size='200' font-weight='bold' fill='%23FFD700' text-anchor='middle' font-family='Arial'>٥</text><text x='600' y='450' font-size='60' fill='%23ffffff' text-anchor='middle' font-family='Arial'>Math5 Expert</text></svg>">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230051BA' width='100' height='100'/><text x='50' y='75' font-size='60' font-weight='bold' fill='%23FFD700' text-anchor='middle' font-family='Arial'>٥</text></svg>">
-  <title>مغامرة الرياضيات ٥ - الإصدار الاحترافي المحسّن</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary-teal: #1E9AB0;
-      --primary-dark-blue: #0051BA;
-      --accent-red: #C41E3A;
-      --accent-yellow: #FFD700;
-      --accent-green: #2ECC40;
-      --accent-purple: #9C27B0;
-      --accent-orange: #FF9800;
-      --bg-surface: #f3f2f2;
-      --bg-white: #ffffff;
-      --text-primary: #2b2118;
-      --text-secondary: #666666;
-      --text-muted: #999999;
-    }
-
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg, var(--bg-surface) 0%, #f8f6f1 100%);
-      color: var(--text-primary);
-      min-height: 100vh;
-      display: flex;
-      overflow-x: hidden;
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-      width: 280px;
-      background: linear-gradient(180deg, var(--primary-dark-blue) 0%, #003d8a 100%);
-      color: white;
-      padding: 25px 15px;
-      position: fixed;
-      height: 100vh;
-      overflow-y: auto;
-      box-shadow: 0 10px 40px rgba(0, 81, 186, 0.2);
-      z-index: 1000;
-    }
-
-    .sidebar-header {
-      text-align: center;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .sidebar-logo {
-      font-size: 48px;
-      margin-bottom: 12px;
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .sidebar-title {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .sidebar-subtitle {
-      font-size: 12px;
-      opacity: 0.8;
-      margin-top: 5px;
-    }
-
-    .sidebar-section {
-      margin-bottom: 25px;
-    }
-
-    .sidebar-section-title {
-      font-size: 12px;
-      text-transform: uppercase;
-      opacity: 0.7;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-
-    .chapter-btn {
-      width: 100%;
-      padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid transparent;
-      border-radius: 10px;
-      color: white;
-      cursor: pointer;
-      margin-bottom: 10px;
-      transition: all 0.3s;
-      font-family: 'Cairo', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      text-align: right;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .chapter-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateX(-5px);
-      border-color: var(--accent-yellow);
-    }
-
-    .chapter-btn.active {
-      background: var(--accent-yellow);
-      color: var(--primary-dark-blue);
-      border-color: var(--accent-yellow);
-    }
-
-    .chapter-number {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-    }
-
-    .chapter-btn.active .chapter-number {
-      background: var(--primary-dark-blue);
-    }
-
-    .stats-panel {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 20px;
-    }
-
-    .stat-mini {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      font-size: 13px;
-    }
-
-    .stat-mini:last-child {
-      margin-bottom: 0;
-    }
-
-    .stat-mini-label {
-      opacity: 0.8;
-    }
-
-    .stat-mini-value {
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    /* MAIN CONTENT */
-    .main-content {
-      margin-right: 280px;
-      flex: 1;
-      padding: 30px;
-      animation: fadeIn 0.5s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    header {
-      background: linear-gradient(135deg, var(--primary-dark-blue), var(--primary-teal));
-      color: white;
-      padding: 50px 40px;
-      border-radius: 20px;
-      margin-bottom: 40px;
-      box-shadow: 0 10px 40px rgba(0, 81, 186, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-      border-radius: 50%;
-    }
-
-    header h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 1;
-    }
-
-    header p {
-      font-size: 18px;
-      opacity: 0.95;
-      position: relative;
-      z-index: 1;
-    }
-
-    .developer-credit {
-      font-size: 13px;
-      opacity: 0.8;
-      margin-top: 15px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* TOP STATS */
-    .top-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      text-align: center;
-      transition: all 0.3s;
-      border-right: 4px solid var(--primary-teal);
-    }
-
-    .stat-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    }
-
-    .stat-icon {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .stat-value {
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--primary-teal);
-      margin-bottom: 5px;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-    }
-
-    /* PROGRESS */
-    .progress-section {
-      background: white;
-      padding: 24px;
-      border-radius: 16px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 14px;
-      background: #e8e8e8;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary-teal), var(--accent-green));
-      transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 0 15px rgba(30, 154, 176, 0.4);
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-    }
-
-    .achievements {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .badge:hover {
-      transform: scale(1.15);
-    }
-
-    .badge.locked {
-      opacity: 0.3;
-      background: #e8e8e8;
-    }
-
-    .badge.unlocked {
-      background: linear-gradient(135deg, var(--accent-yellow), #ffb300);
-      box-shadow: 0 4px 16px rgba(255, 215, 0, 0.4);
-      animation: pulse-badge 2s infinite;
-    }
-
-    @keyframes pulse-badge {
-      0%, 100% { box-shadow: 0 4px 16px rgba(255, 215, 0, 0.4); }
-      50% { box-shadow: 0 4px 24px rgba(255, 215, 0, 0.6); }
-    }
-
-    /* CHAPTER SECTION */
-    .chapter {
-      margin-bottom: 50px;
-      animation: slideUp 0.5s ease-out;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .chapter-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-      gap: 25px;
-    }
-
-    .chapter-icon {
-      width: 90px;
-      height: 90px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, var(--primary-dark-blue), var(--primary-teal));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 50px;
-      box-shadow: 0 8px 24px rgba(0, 81, 186, 0.3);
-      flex-shrink: 0;
-    }
-
-    .chapter-info h2 {
-      font-size: 36px;
-      color: var(--primary-teal);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .chapter-subtitle {
-      font-size: 16px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .exercises-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 24px;
-    }
-
-    .exercise-card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border: 2px solid transparent;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .exercise-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(30, 154, 176, 0.1), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-
-    .exercise-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-      border-color: var(--primary-teal);
-    }
-
-    .exercise-card:hover::before {
-      opacity: 1;
-    }
-
-    .exercise-card.completed {
-      background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(46, 204, 64, 0.05));
-      border-color: var(--accent-green);
-    }
-
-    .exercise-card.completed::after {
-      content: '✓';
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 40px;
-      height: 40px;
-      background: var(--accent-green);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 20px;
-      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-      animation: checkmark 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    @keyframes checkmark {
-      0% {
-        transform: scale(0) rotate(-45deg);
-      }
-      100% {
-        transform: scale(1) rotate(0);
-      }
-    }
-
-    .exercise-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      gap: 12px;
-    }
-
-    .exercise-number {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--primary-teal), var(--primary-dark-blue));
-      color: white;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      box-shadow: 0 2px 8px rgba(30, 154, 176, 0.2);
-    }
-
-    .difficulty {
-      font-size: 11px;
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-weight: 600;
-    }
-
-    .difficulty.easy {
-      background: #C8E6C9;
-      color: #1B5E20;
-    }
-
-    .difficulty.medium {
-      background: #FFE0B2;
-      color: #E65100;
-    }
-
-    .difficulty.hard {
-      background: #FFCCCC;
-      color: #B71C1C;
-    }
-
-    .exercise-question {
-      font-size: 18px;
-      margin-bottom: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .input-group {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .input-group input {
-      flex: 1;
-      padding: 12px 16px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 16px;
-      font-family: 'Cairo', sans-serif;
-      transition: all 0.3s;
-    }
-
-    .input-group input:focus {
-      outline: none;
-      border-color: var(--primary-teal);
-      box-shadow: 0 0 0 3px rgba(30, 154, 176, 0.1);
-    }
-
-    .input-group button {
-      padding: 12px 24px;
-      background: linear-gradient(135deg, var(--primary-teal), var(--primary-dark-blue));
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: all 0.3s;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .input-group button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 81, 186, 0.3);
-    }
-
-    .input-group button:active {
-      transform: translateY(0);
-    }
-
-    .multi-choice {
-      display: grid;
-      gap: 10px;
-    }
-
-    .choice-button {
-      padding: 14px 16px;
-      background: #f8f8f8;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      cursor: pointer;
-      text-align: right;
-      font-size: 16px;
-      transition: all 0.3s;
-      font-family: 'Cairo', sans-serif;
-      font-weight: 500;
-    }
-
-    .choice-button:hover {
-      border-color: var(--primary-teal);
-      background: #f0f7f9;
-      transform: translateX(-4px);
-    }
-
-    .choice-button.selected {
-      background: var(--primary-teal);
-      color: white;
-      border-color: var(--primary-teal);
-      box-shadow: 0 4px 12px rgba(30, 154, 176, 0.3);
-    }
-
-    .feedback {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 10px;
-      font-size: 15px;
-      display: none;
-      font-weight: 500;
-      animation: slideIn 0.3s ease-out;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .feedback.correct {
-      display: block;
-      background: #E8F5E9;
-      color: #1B5E20;
-      border-right: 4px solid var(--accent-green);
-      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);
-    }
-
-    .feedback.incorrect {
-      display: block;
-      background: #FFEBEE;
-      color: #B71C1C;
-      border-right: 4px solid #ff8a80;
-      box-shadow: 0 2px 8px rgba(255, 138, 128, 0.15);
-    }
-
-    .tokens-earned {
-      font-size: 13px;
-      margin-top: 10px;
-      font-weight: 600;
-      color: var(--accent-yellow);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      animation: fadeIn 0.3s;
-    }
-
-    .hint {
-      background: #E3F2FD;
-      padding: 12px 14px;
-      border-radius: 10px;
-      margin-top: 12px;
-      font-size: 14px;
-      color: var(--primary-dark-blue);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 500;
-      transition: all 0.3s;
-      border-right: 3px solid var(--primary-teal);
-    }
-
-    .hint:hover {
-      background: #d4e5f7;
-      transform: translateX(-4px);
-    }
-
-    .hint-content {
-      display: none;
-      margin-top: 12px;
-      padding: 14px 16px;
-      background: #f5f5f5;
-      border-left: 3px solid var(--primary-teal);
-      border-radius: 8px;
-      font-size: 14px;
-      color: var(--text-primary);
-      line-height: 1.7;
-      animation: slideIn 0.3s;
-    }
-
-    .hint-content.show {
-      display: block;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    button.secondary {
-      flex: 1;
-      padding: 12px;
-      background: #f0f0f0;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 14px;
-      color: var(--text-primary);
-      transition: all 0.3s;
-      font-family: 'Cairo', sans-serif;
-      font-weight: 600;
-    }
-
-    button.secondary:hover {
-      background: #e0e0e0;
-      border-color: var(--primary-teal);
-    }
-
-    .floating-btn {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-red), #a01729);
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 28px;
-      box-shadow: 0 6px 20px rgba(196, 30, 58, 0.3);
-      z-index: 999;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .floating-btn:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
-    }
-
-    .token-badge {
-      position: fixed;
-      top: 30px;
-      left: 30px;
-      background: white;
-      padding: 16px 24px;
-      border-radius: 50px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 16px;
-      z-index: 999;
-      border-right: 3px solid var(--accent-yellow);
-      animation: slideDown 0.5s ease-out;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .token-icon {
-      font-size: 32px;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
-    @media (max-width: 1200px) {
-      .sidebar {
-        width: 250px;
-      }
-      .main-content {
-        margin-right: 250px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        transform: translateX(100%);
-        width: 100%;
-        transition: transform 0.3s;
-      }
-
-      .sidebar.active {
-        transform: translateX(0);
-      }
-
-      .main-content {
-        margin-right: 0;
-        padding: 20px;
-      }
-
-      .exercises-grid {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        padding: 30px 20px;
-      }
-
-      header h1 {
-        font-size: 32px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>مغامرة الرياضيات ٥ · Math5</title>
+<meta name="description" content="تدريب تفاعلي على رياضيات الصف الخامس الابتدائي: القيمة المكانية، والكسور، والهندسة والقياس، والضرب والقسمة، والأنماط، وحل المسائل.">
+<meta name="theme-color" content="#1E9AB0">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14213D;--ink2:#56627A;--bg:#EEF6F8;--card:#fff;--line:#D5E4EA;--brand:#0B7A8F;--brand2:#0051BA;--good:#16A34A;--bad:#DC2626;--gold:#F5B800}
+@media (prefers-color-scheme:dark){:root{--ink:#E7F1F5;--ink2:#A6B8C2;--bg:#08161D;--card:#11252F;--line:#22404D;--brand:#3CC6DD}}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:Cairo,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px;-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}button{cursor:pointer}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;padding:10px 14px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.brand{flex:1;display:flex;align-items:center;gap:8px;font-weight:900;font-size:17px;min-width:0;white-space:nowrap;overflow:hidden}
+.brand img{width:30px;height:30px;border-radius:9px;flex:none}
+.pill{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-weight:800;font-size:14px;flex:none}
+#back{display:none}
+main{max-width:760px;margin:0 auto;padding:14px 14px 40px}
+.hero{border-radius:26px;color:#fff;padding:20px;margin:4px 0 16px;background:radial-gradient(120% 120% at 0% 0%,#FFD24D33 0%,transparent 45%),linear-gradient(135deg,#0B7A8F 0%,#0051BA 100%);box-shadow:0 12px 28px rgba(0,81,186,.28)}
+.hero h1{margin:0;font-size:25px;line-height:1.3;font-weight:900}
+.hero p{margin:6px 0 0;font-weight:700;opacity:.95}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stats div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:6px 4px;text-align:center}
+.stats b{display:block;font-size:20px;font-weight:900;line-height:1.3}.stats small{font-size:12.5px;font-weight:700;opacity:.95}
+.bar{height:9px;border-radius:999px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#FFD24D,#16A34A);border-radius:999px;transition:width .4s}
+.hero .bar{background:rgba(255,255,255,.25);margin-top:12px}
+.badges{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.badges span{font-size:13px;font-weight:800;background:rgba(255,255,255,.16);border-radius:999px;padding:2px 10px}
+.badges span.off{opacity:.62;filter:grayscale(1)}
+h2{font-size:19px;font-weight:900;margin:18px 2px 10px}
+.ch{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:12px 14px;border-radius:18px;border:1px solid var(--line);background:var(--card);margin-bottom:10px;box-shadow:0 3px 10px rgba(0,60,90,.06)}
+.ch .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}
+.ch b{display:block;font-size:17px;line-height:1.4}.ch small{color:var(--ink2);font-weight:700}
+.ch .mini{height:6px;margin-top:5px}
+.ch .done{margin-inline-start:auto;font-weight:900;color:var(--good);flex:none}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 12px}
+.dots button{width:34px;height:34px;border-radius:10px;border:2px solid var(--line);background:var(--card);font-weight:800;font-size:14px;padding:0}
+.dots button.ok{background:var(--good);border-color:var(--good);color:#fff}
+.dots button.now{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 30%,transparent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--ink2);font-weight:800;font-size:14px}
+.lvl{border-radius:999px;padding:1px 10px;font-size:13px;font-weight:800;white-space:nowrap;flex:none}
+.lvl.e{background:#DCFCE7;color:#166534}.lvl.m{background:#FEF3C7;color:#92400E}.lvl.h{background:#FEE2E2;color:#991B1B}
+.q{font-size:20px;font-weight:800;margin:8px 0}
+.x{direction:ltr;unicode-bidi:isolate;text-align:center;font-size:28px;font-weight:900;letter-spacing:.5px;background:color-mix(in srgb,var(--brand) 9%,var(--card));border-radius:16px;padding:10px;margin:8px 0;word-spacing:4px;overflow-wrap:anywhere}
+.row{display:flex;align-items:center;gap:10px;margin:12px 0}
+.inp{flex:1;min-width:0;font-size:26px;font-weight:900;text-align:center;padding:10px;border-radius:16px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.inp:focus{outline:none;border-color:var(--brand)}
+.inp.good{border-color:var(--good)}.inp.bad{border-color:var(--bad)}
+.unit{font-weight:800;color:var(--ink2);flex:none}
+.opt{display:block;width:100%;text-align:start;padding:12px 14px;margin-bottom:10px;border-radius:16px;border:2px solid var(--line);background:var(--bg);font-weight:800;font-size:18px}
+.opt.sel{border-color:var(--brand)}
+.opt.good{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.go{display:block;width:100%;border:0;border-radius:16px;padding:13px;font-weight:900;font-size:18px;color:#fff;background:linear-gradient(135deg,#0B7A8F,#0051BA);box-shadow:0 6px 14px rgba(0,81,186,.25);margin-top:10px}
+.go.alt{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.go:disabled{opacity:.5}
+.hintb{border:0;background:none;color:var(--brand);font-weight:800;padding:6px 0;font-size:16px}
+.hint{background:color-mix(in srgb,var(--gold) 16%,var(--card));border-radius:14px;padding:10px 12px;font-weight:700;margin-top:4px}
+.fb{border-radius:16px;padding:12px 14px;margin-top:12px;font-weight:700}
+.fb.good{background:color-mix(in srgb,var(--good) 13%,var(--card));border:1px solid var(--good)}
+.fb.bad{background:color-mix(in srgb,var(--bad) 10%,var(--card));border:1px solid var(--bad)}
+.fb b{font-size:18px}
+.fine{font-size:14px;color:var(--ink2);font-weight:600}.center{text-align:center}
+.foot{margin-top:24px;text-align:center;color:var(--ink2);font-size:14px;font-weight:700}
+.linkb{border:0;background:none;color:var(--brand);font-weight:800;text-decoration:underline;font-size:14px;padding:4px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 18px;border-radius:999px;font-weight:800;z-index:99;max-width:90vw;text-align:center}
+#fs small{font-size:.7em}
+@media (max-width:420px){.bt{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-logo">🎓</div>
-      <div class="sidebar-title">مغامرة الرياضيات</div>
-      <div class="sidebar-subtitle">نسخة احترافية</div>
-    </div>
+<header class="top">
+  <button class="pill" id="back" onclick="back()" aria-label="رجوع">رجوع</button>
+  <div class="brand"><img src="icon.svg" alt=""><span class="bt">مغامرة الرياضيات ٥</span></div>
+  <button class="pill" id="fs" onclick="fontStep()" aria-label="تكبير الخط أو تصغيره">أ+</button>
+  <span class="pill" aria-label="النجوم"><span id="tk">0</span> ⭐</span>
+</header>
+<main id="app"></main>
+<script>
+/* تمارين مغامرة الرياضيات ٥ — ترتيبها ثابت لأن رقم كل تمرين يحفظ التقدّم (chapterNeK)
+   q: السؤال · x: تعبير رياضي يُعرض من اليسار إلى اليمين · t: i (إدخال) أو m (اختيار) · o: البدائل
+   a: الإجابة · u: الوحدة · d: e/m/h · h: الشرح */
+const CHAPTERS=[
+{id:"chapter1",t:"الأعداد الكبيرة والقيمة المكانية",e:"🔢",c:"#FF6B6B",ex:[
+ {hi:"ابدأ من اليمين: أول منزلة هي الآحاد.",q:"ما الرقم في منزلة الآحاد في العدد 5,234؟",t:"i",a:"4",d:"e",h:"منزلة الآحاد أول منزلة من اليمين، والرقم فيها 4."},
+ {hi:"اكتب رقمًا لكل منزلة: آلاف، مئات، عشرات، آحاد. لا عشرات هنا، فضع صفرًا.",q:"اكتب بالأرقام: سبعة آلاف وثلاثمائة وواحد.",t:"i",a:"7301",d:"m",h:"7 آلاف، و3 مئات، و0 عشرات، و1 آحاد: 7,301."},
+ {hi:"كل جزء يعطيك رقم منزلة: الآلاف، ثم المئات، ثم العشرات، ثم الآحاد.",q:"ما العدد الذي يساوي:",x:"9,000 + 500 + 20 + 3",t:"m",o:["9,523","9,352","9,325","9,532"],a:"9,523",d:"m",h:"9 آلاف و5 مئات و2 عشرات و3 آحاد = 9,523."},
+ {hi:"الآلاف متساوية في الأعداد الثلاثة، فقارن رقم المئات.",q:"رتّب الأعداد من الأصغر إلى الأكبر: 4,567 و4,657 و4,756",t:"m",o:["4,567 ثم 4,657 ثم 4,756","4,657 ثم 4,567 ثم 4,756","4,756 ثم 4,657 ثم 4,567"],a:"4,567 ثم 4,657 ثم 4,756",d:"h",h:"الآلاف متساوية (4)، فنقارن المئات: 5 أصغر من 6، و6 أصغر من 7."},
+ {hi:"حدّد منزلة الرقم 7 أولًا، ثم اضربه في قيمة تلك المنزلة.",q:"ما القيمة المكانية للرقم 7 في العدد 27,456؟",t:"m",o:["7","70","700","7,000"],a:"7,000",d:"m",h:"الرقم 7 في منزلة الآلاف، فقيمته 7 × 1,000 = 7,000."},
+ {hi:"انظر إلى الرقم في منزلة العشرات في 5,432.",q:"أكمل:",x:"5,000 + 400 + ___ + 2 = 5,432",t:"i",a:"30",d:"m",h:"الرقم 3 في منزلة العشرات، فقيمته 30."},
+ {hi:"عُدّ من اليمين: آحاد، عشرات، ثم المئات.",q:"ما الرقم في منزلة المئات في العدد 3,456؟",t:"i",a:"4",d:"e",h:"من اليمين: الآحاد (6)، ثم العشرات (5)، ثم المئات (4)."},
+ {hi:"كم يزيد كل عدد على الذي قبله؟",q:"أكمل النمط:",x:"1,000 , 2,000 , 3,000 , ___",t:"i",a:"4000",d:"e",h:"يزيد كل عدد 1,000 على الذي قبله: 3,000 + 1,000 = 4,000."},
+ {hi:"العدد السابق = العدد ناقص 1.",q:"ما العدد الذي يسبق 5,000 مباشرة؟",t:"i",a:"4999",d:"e",h:"نطرح واحدًا: 5,000 − 1 = 4,999."},
+ {hi:"عُدّ الأرقام في كل عدد: أيّهما أقل أرقامًا؟",q:"اختر الكلمة المناسبة:",x:"9,999 ___ 10,000",t:"m",o:["أصغر من","أكبر من","يساوي"],a:"أصغر من",d:"m",h:"العدد 9,999 فيه 4 أرقام، و10,000 فيه 5 أرقام، فالأول أصغر."}]},
+{id:"chapter2",t:"الكسور والعمليات عليها",e:"🍕",c:"#14B8A6",ex:[
+ {hi:"النصف: جزء واحد من جزأين متساويين.",q:"أيّ كسر يمثّل النصف؟",t:"m",o:["1/3","1/2","1/4","2/3"],a:"1/2",d:"e",h:"النصف جزء واحد من جزأين متساويين: 1/2."},
+ {hi:"بأيّ عدد ضربنا المقام 2 ليصبح 4؟ اضرب البسط في العدد نفسه.",q:"أكمل:",x:"1/2 = ___/4",t:"i",a:"2",d:"m",h:"نضرب البسط والمقام في 2: 1 × 2 = 2، و2 × 2 = 4، إذن 1/2 = 2/4."},
+ {hi:"حوّل الكسرين إلى مقام واحد هو 12، ثم قارن البسطين.",q:"اختر الكلمة المناسبة:",x:"2/3 ___ 3/4",t:"m",o:["أصغر من","أكبر من","يساوي"],a:"أصغر من",d:"h",h:"نوحّد المقامين إلى 12: 2/3 = 8/12، و3/4 = 9/12، و8/12 أصغر من 9/12."},
+ {hi:"كم ربعًا في الواحد الصحيح؟ ثم ضاعفه.",q:"كم ربعًا في العدد 2؟",t:"i",a:"8",d:"m",h:"في الواحد 4 أرباع، ففي 2: 2 × 4 = 8 أرباع."},
+ {hi:"المقامان متساويان: اجمع البسطين، واترك المقام، ثم بسّط.",q:"ما ناتج الجمع؟",x:"1/4 + 1/4 = ?",t:"m",o:["1/8","1/2","2/8","1/3"],a:"1/2",d:"m",h:"المقامان متساويان، فنجمع البسطين: 2/4، وأبسط صورة لها 1/2."},
+ {hi:"بأيّ عدد ضربنا المقام 3 ليصبح 6؟",q:"أكمل:",x:"1/3 = ___/6",t:"i",a:"2",d:"m",h:"نضرب البسط والمقام في 2: 1/3 = 2/6."},
+ {hi:"المقامان متساويان: اطرح البسطين، ثم بسّط الكسر.",q:"اكتب الناتج في أبسط صورة (مثل 1/3):",x:"3/4 − 1/4 = ?",t:"i",a:"1/2",d:"m",h:"3/4 − 1/4 = 2/4، وبقسمة البسط والمقام على 2 نحصل على 1/2."},
+ {hi:"تخيّل فطيرة: هل نصفها أكبر أم ثلثها؟",q:"أيّهما أكبر: 1/2 أم 1/3؟",t:"m",o:["1/2","1/3","متساويان"],a:"1/2",d:"e",h:"عندما يتساوى البسطان، فالكسر ذو المقام الأصغر أكبر: النصف أكبر من الثلث."},
+ {hi:"كم جزءًا متساويًا يتكوّن منها الواحد إذا قسمناه أثلاثًا؟",q:"كم ثلثًا في الواحد الصحيح؟",t:"i",a:"3",d:"e",h:"الواحد الصحيح = 3/3، أي 3 أثلاث."},
+ {hi:"بأيّ عدد نقسم البسط 5 ليصبح 1؟ اقسم المقام على العدد نفسه.",q:"أكمل:",x:"5/10 = 1/___",t:"i",a:"2",d:"m",h:"نقسم البسط والمقام على 5: 5 ÷ 5 = 1، و10 ÷ 5 = 2."}]},
+{id:"chapter3",t:"الأشكال الهندسية والقياس",e:"📐",c:"#3B82F6",ex:[
+ {hi:"تخيّل مربعًا وعُدّ أضلاعه.",q:"كم ضلعًا للمربع؟",t:"i",a:"4",d:"e",h:"للمربع 4 أضلاع متساوية في الطول."},
+ {hi:"محيط المربع = 4 × طول الضلع.",q:"ما محيط مربع طول ضلعه 5 سم؟",t:"i",a:"20",u:"سم",d:"m",h:"المحيط = 4 × طول الضلع = 4 × 5 = 20 سم."},
+ {hi:"محيط المستطيل = 2 × (الطول + العرض).",q:"ما محيط مستطيل طوله 6 سم وعرضه 4 سم؟",t:"i",a:"20",u:"سم",d:"m",h:"المحيط = 2 × (الطول + العرض) = 2 × (6 + 4) = 20 سم."},
+ {hi:"اسم الشكل يدلّك على عدد أضلاعه.",q:"كم ضلعًا للمثلث؟",t:"m",o:["2","3","4","5"],a:"3",d:"e",h:"كلمة «مثلث» من «ثلاثة»: له 3 أضلاع و3 زوايا."},
+ {hi:"مساحة المربع = طول الضلع × طول الضلع.",q:"ما مساحة مربع طول ضلعه 4 سم؟",t:"i",a:"16",u:"سم²",d:"m",h:"المساحة = الضلع × الضلع = 4 × 4 = 16 سم²."},
+ {hi:"مساحة المستطيل = الطول × العرض.",q:"ما مساحة مستطيل طوله 8 سم وعرضه 3 سم؟",t:"i",a:"24",u:"سم²",d:"m",h:"المساحة = الطول × العرض = 8 × 3 = 24 سم²."},
+ {hi:"للمربع 4 أضلاع متساوية: اقسم المحيط على 4.",q:"مربع محيطه 20 سم. ما طول ضلعه؟",t:"i",a:"5",u:"سم",d:"m",h:"أضلاع المربع الأربعة متساوية: 20 ÷ 4 = 5 سم."},
+ {hi:"اجمع أطوال الأضلاع الثلاثة.",q:"مثلث متطابق الأضلاع، طول كل ضلع فيه 6 سم. ما محيطه؟",t:"i",a:"18",u:"سم",d:"m",h:"المحيط = 6 + 6 + 6 = 18 سم."},
+ {hi:"الزاوية القائمة تشبه زاوية الكتاب. كم زاوية في المربع؟",q:"كم زاوية قائمة في المربع؟",t:"i",a:"4",d:"e",h:"زوايا المربع الأربع كلها قائمة، قياس كل منها 90°."},
+ {hi:"أيّ عدد إذا ضربته في نفسه كان الناتج 36؟",q:"مربع مساحته 36 سم². ما طول ضلعه؟",t:"i",a:"6",u:"سم",d:"h",h:"نبحث عن عدد إذا ضُرب في نفسه كان الناتج 36: 6 × 6 = 36، فطول الضلع 6 سم."}]},
+{id:"chapter4",t:"الضرب والقسمة",e:"✖️",c:"#F97316",ex:[
+ {hi:"7 × 8 = 7 × 4 × 2. ابدأ بـ 7 × 4 ثم ضاعف.",q:"أوجد الناتج:",x:"7 × 8 = ?",t:"i",a:"56",d:"e",h:"7 × 8 = 56. للتذكّر: 5، 6، 7، 8 ← 56 = 7 × 8."},
+ {hi:"أيّ عدد إذا ضربته في 6 كان 36؟",q:"أوجد الناتج:",x:"36 ÷ 6 = ?",t:"i",a:"6",d:"m",h:"نسأل: 6 × ؟ = 36. الجواب 6."},
+ {hi:"25 + 25 + 25 + 25، أو فكّر في أرباع المئة.",q:"أوجد الناتج:",x:"25 × 4 = ?",t:"i",a:"100",d:"m",h:"25 + 25 + 25 + 25 = 100، كما أن 4 أرباع الريال = ريال واحد."},
+ {hi:"أيّ عدد إذا ضربته في 12 كان 144؟",q:"أوجد الناتج:",x:"144 ÷ 12 = ?",t:"i",a:"12",d:"h",h:"12 × 12 = 144، إذن 144 ÷ 12 = 12."},
+ {hi:"أيّ عدد إذا ضربته في 9 كان 72؟",q:"أكمل:",x:"9 × ___ = 72",t:"i",a:"8",d:"m",h:"72 ÷ 9 = 8، لأن 9 × 8 = 72."},
+ {hi:"أيّ عدد إذا ضربته في 8 كان 48؟",q:"أوجد الناتج:",x:"48 ÷ 8 = ?",t:"m",o:["5","6","7","8"],a:"6",d:"e",h:"8 × 6 = 48، إذن 48 ÷ 8 = 6."},
+ {hi:"12 × 11 = 12 × 10 + 12 × 1.",q:"أوجد الناتج:",x:"12 × 11 = ?",t:"i",a:"132",d:"m",h:"12 × 10 + 12 × 1 = 120 + 12 = 132."},
+ {hi:"أيّ عدد إذا ضربته في 7 كان 63؟",q:"أوجد الناتج:",x:"63 ÷ 7 = ?",t:"i",a:"9",d:"e",h:"7 × 9 = 63، إذن 63 ÷ 7 = 9."},
+ {hi:"15 × 6 = 10 × 6 + 5 × 6.",q:"أوجد الناتج:",x:"15 × 6 = ?",t:"i",a:"90",d:"m",h:"10 × 6 + 5 × 6 = 60 + 30 = 90."},
+ {hi:"أيّ عدد إذا ضربته في 5 كان 100؟",q:"أوجد الناتج:",x:"100 ÷ 5 = ?",t:"i",a:"20",d:"m",h:"5 × 20 = 100، إذن 100 ÷ 5 = 20."}]},
+{id:"chapter5",t:"الأنماط والجبر",e:"🧮",c:"#8B5CF6",ex:[
+ {hi:"كم نضيف في كل مرة؟",q:"أكمل النمط:",x:"2 , 4 , 6 , 8 , ___",t:"i",a:"10",d:"e",h:"نضيف 2 في كل مرة: 8 + 2 = 10."},
+ {hi:"كم نضيف في كل مرة؟",q:"أكمل النمط:",x:"1 , 3 , 5 , 7 , ___",t:"i",a:"9",d:"e",h:"الأعداد الفردية، نضيف 2 في كل مرة: 7 + 2 = 9."},
+ {hi:"كم نضيف في كل مرة؟",q:"أكمل النمط:",x:"3 , 6 , 9 , 12 , ___",t:"i",a:"15",d:"e",h:"مضاعفات 3، نضيف 3 في كل مرة: 12 + 3 = 15."},
+ {hi:"1 = 1 × 1، و4 = 2 × 2، و9 = 3 × 3… ما التالي؟",q:"أكمل النمط:",x:"1 , 4 , 9 , 16 , ___",t:"i",a:"25",d:"h",h:"هذه مربعات الأعداد: 1×1، 2×2، 3×3، 4×4، ثم 5 × 5 = 25."},
+ {hi:"أيّ عدد إذا أضفت إليه 5 صار 12؟ اطرح 5 من 12.",q:"إذا كان:",x:"س + 5 = 12",q2:"فما قيمة س؟",t:"i",a:"7",d:"m",h:"س = 12 − 5 = 7. للتحقّق: 7 + 5 = 12."},
+ {hi:"أيّ عدد إذا ضربته في 2 صار 16؟ اقسم 16 على 2.",q:"إذا كان:",x:"2 × س = 16",q2:"فما قيمة س؟",t:"i",a:"8",d:"m",h:"س = 16 ÷ 2 = 8. للتحقّق: 2 × 8 = 16."},
+ {hi:"كم نضيف في كل مرة؟",q:"أكمل النمط:",x:"5 , 10 , 15 , 20 , ___",t:"i",a:"25",d:"e",h:"مضاعفات 5، نضيف 5 في كل مرة: 20 + 5 = 25."},
+ {hi:"أيّ عدد إذا طرحت منه 3 بقي 7؟ اجمع 7 و3.",q:"إذا كان:",x:"س − 3 = 7",q2:"فما قيمة س؟",t:"i",a:"10",d:"m",h:"س = 7 + 3 = 10. للتحقّق: 10 − 3 = 7."},
+ {hi:"انتبه: نضرب هنا ولا نجمع. في كم نضرب كل عدد؟",q:"أكمل النمط:",x:"2 , 6 , 18 , 54 , ___",t:"i",a:"162",d:"h",h:"نضرب في 3 في كل مرة: 54 × 3 = 162."},
+ {hi:"كم ينقص 4 ليصبح 10؟",q:"أكمل:",x:"4 + ___ = 10",t:"i",a:"6",d:"e",h:"10 − 4 = 6."}]},
+{id:"chapter6",t:"حل المسائل",e:"🧩",c:"#EAB308",ex:[
+ {hi:"الثمن الكلي = عدد العلب × ثمن العلبة.",q:"ثمن العلبة الواحدة 12 ريالًا. كم ثمن 3 علب؟",t:"i",a:"36",u:"ريالًا",d:"e",h:"3 × 12 = 36 ريالًا."},
+ {hi:"ما بقي = ما كان معها − ما أنفقته.",q:"كان مع سعاد 50 ريالًا، أنفقت منها 23 ريالًا. كم ريالًا بقي معها؟",t:"i",a:"27",u:"ريالًا",d:"e",h:"50 − 23 = 27 ريالًا."},
+ {hi:"وزّع بالتساوي: اقسم عدد الكتب على عدد الرفوف.",q:"وُزّع 25 كتابًا على 5 رفوف بالتساوي. كم كتابًا على كل رف؟",t:"i",a:"5",u:"كتب",d:"e",h:"25 ÷ 5 = 5 كتب."},
+ {hi:"اجمع مسافة اليومين.",q:"قطعت دراجة 8 كم يوم السبت و6 كم يوم الأحد. كم كيلومترًا قطعت في اليومين؟",t:"i",a:"14",u:"كم",d:"e",h:"8 + 6 = 14 كم."},
+ {hi:"ما بقي = عدد الكتب − ما أُعير منها.",q:"في مكتبة 120 كتابًا، أُعير منها 45 كتابًا. كم كتابًا بقي في المكتبة؟",t:"i",a:"75",u:"كتابًا",d:"m",h:"120 − 45 = 75 كتابًا."},
+ {hi:"الثمن الكلي = عدد الدفاتر × ثمن الدفتر.",q:"ثمن الدفتر 8 ريالات. كم ثمن 6 دفاتر؟",t:"i",a:"48",u:"ريالًا",d:"m",h:"6 × 8 = 48 ريالًا."},
+ {hi:"ما بقي = الطول الكلي − ما قُطع.",q:"حبل طوله 10 أمتار، قُطع منه 3 أمتار. كم مترًا بقي؟",t:"i",a:"7",u:"أمتار",d:"e",h:"10 − 3 = 7 أمتار."},
+ {hi:"«بكم يزيد» تعني: اطرح الأصغر من الأكبر.",q:"ثمن كتاب 25 ريالًا، وثمن دفتر 8 ريالات. بكم يزيد ثمن الكتاب على ثمن الدفتر؟",t:"i",a:"17",u:"ريالًا",d:"m",h:"25 − 8 = 17 ريالًا."},
+ {hi:"الثمن الكلي = عدد القطع × ثمن القطعة.",q:"ثمن قطعة المثلّجات ريالان. كم ثمن 10 قطع؟",t:"i",a:"20",u:"ريالًا",d:"e",h:"10 × 2 = 20 ريالًا."},
+ {hi:"الثلث = اقسم على 3.",q:"في حديقة 60 زهرة، ثلثها حمراء. كم زهرة حمراء فيها؟",t:"i",a:"20",u:"زهرة",d:"m",h:"ثلث 60 = 60 ÷ 3 = 20 زهرة."},
+ {hi:"«ضعف» تعني × 2. احسب ما لدى أخته، ثم اجمع الاثنين.",q:"لدى خالد 4 ألعاب، ولدى أخته ضعف ما لديه. كم لعبة لديهما معًا؟",t:"i",a:"12",u:"لعبة",d:"m",h:"ضعف 4 = 8، ومعًا: 4 + 8 = 12 لعبة."},
+ {hi:"احسب ثمن الدفاتر أولًا، ثم أضف ثمن القلم.",q:"ثمن الدفتر 5 ريالات، وثمن القلم ريالان. كم ثمن 3 دفاتر وقلم واحد؟",t:"i",a:"17",u:"ريالًا",d:"m",h:"3 × 5 = 15، ثم 15 + 2 = 17 ريالًا."},
+ {hi:"أضلاع المثلث متطابق الأضلاع متساوية: اقسم المحيط على 3.",q:"مثلث متطابق الأضلاع محيطه 15 سم. كم طول ضلعه؟",t:"i",a:"5",u:"سم",d:"m",h:"أضلاعه الثلاثة متساوية: 15 ÷ 3 = 5 سم."},
+ {hi:"الثمن بعد الخصم = الثمن − الخصم.",q:"ثمن حقيبة 85 ريالًا، وعليها خصم 15 ريالًا. كم ثمنها بعد الخصم؟",t:"i",a:"70",u:"ريالًا",d:"e",h:"85 − 15 = 70 ريالًا."},
+ {hi:"المسافة = السرعة × عدد الساعات.",q:"تسير سيارة بسرعة 60 كم في الساعة. كم كيلومترًا تقطع في ساعتين؟",t:"i",a:"120",u:"كم",d:"m",h:"60 × 2 = 120 كم."},
+ {hi:"الأجرة = عدد الكيلومترات × أجرة الكيلومتر.",q:"أجرة كل كيلومتر في سيارة الأجرة 3 ريالات. كم أجرة 4 كيلومترات؟",t:"i",a:"12",u:"ريالًا",d:"e",h:"4 × 3 = 12 ريالًا."}]}
+];
 
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">الفصول</div>
-      <button class="chapter-btn active" onclick="goToChapter('chapter1', this)">
-        <span class="chapter-number">1</span>
-        الأعداد الكبيرة
-      </button>
-      <button class="chapter-btn" onclick="goToChapter('chapter2', this)">
-        <span class="chapter-number">2</span>
-        الكسور
-      </button>
-      <button class="chapter-btn" onclick="goToChapter('chapter3', this)">
-        <span class="chapter-number">3</span>
-        الأشكال
-      </button>
-      <button class="chapter-btn" onclick="goToChapter('chapter4', this)">
-        <span class="chapter-number">4</span>
-        الضرب والقسمة
-      </button>
-      <button class="chapter-btn" onclick="goToChapter('chapter5', this)">
-        <span class="chapter-number">5</span>
-        الأنماط
-      </button>
-      <button class="chapter-btn" onclick="goToChapter('chapter6', this)">
-        <span class="chapter-number">6</span>
-        المسائل
-      </button>
-    </div>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+const LVL={e:["سهل",5],m:["متوسط",10],h:["صعب",15]};
+const ALL=CHAPTERS.flatMap(c=>c.ex.map((e,i)=>Object.assign({},e,{id:c.id+"e"+i,ch:c.id})));
+const TOTAL=ALL.length;
+const get=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
+let done=get("completedEx",{}),tokens=get("tokens",0),font=get("m5font",0);
+if(typeof done!=="object"||Array.isArray(done))done={};if(typeof tokens!=="number")tokens=0;
+function save(){try{localStorage.setItem("completedEx",JSON.stringify(done));localStorage.setItem("tokens",JSON.stringify(tokens));localStorage.setItem("m5font",JSON.stringify(font))}catch(e){}}
+const FS=[1.12,1.25,1.4],FSN=["عادي","كبير","كبير جدًّا"];
+function applyFont(){document.documentElement.style.zoom=FS[font]||1.12}
+function fontStep(){font=(font+1)%FS.length;save();applyFont();toast("حجم الخط: "+FSN[font])}
+applyFont();
+function toast(t){document.querySelectorAll(".toast").forEach(x=>x.remove());const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+let stack=[],cur=null;
+function show(h){$("#app").innerHTML=h;$("#back").style.display=stack.length?"inline-block":"none";$("#tk").textContent=tokens;scrollTo(0,0)}
+function go(fn,...a){if(cur)stack.push(cur);cur={fn,a};fn(...a)}
+function back(){const p=stack.pop();if(p){cur=p;p.fn(...p.a)}}
+const nDone=c=>c.ex.filter((_,i)=>done[c.id+"e"+i]).length;
+const BADGES=[["🌟","أول 5 تمارين",5],["🔥","منتصف الطريق",Math.ceil(TOTAL/2)],["👑","خبير",TOTAL-6],["💎","أنهيت الكل",TOTAL]];
 
-    <div class="stats-panel">
-      <div class="stat-mini">
-        <span class="stat-mini-label">التقدم</span>
-        <span class="stat-mini-value" id="sidebarProgress">0%</span>
-      </div>
-      <div class="stat-mini">
-        <span class="stat-mini-label">مكتمل</span>
-        <span class="stat-mini-value" id="sidebarCompleted">0/66</span>
-      </div>
-      <div class="stat-mini">
-        <span class="stat-mini-label">الرموز</span>
-        <span class="stat-mini-value" id="sidebarTokens">0⭐</span>
-      </div>
-    </div>
-  </aside>
-
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-    <header>
-      <h1>🎓 مغامرة الرياضيات ٥</h1>
-      <p>منصة تفاعلية شاملة لتعلم الرياضيات</p>
-      <div class="developer-credit">
-        طُورت بواسطة <strong>حالم فاروق عبدالرحيم</strong> | Math5 Expert Platform
-      </div>
-    </header>
-
-    <div class="token-badge">
-      <span class="token-icon">⭐</span>
-      <span>الرموز: <span id="tokenCount">0</span></span>
-    </div>
-
-    <div class="top-stats">
-      <div class="stat-card">
-        <div class="stat-icon">📚</div>
-        <div class="stat-value" id="totalExercises">0</div>
-        <div class="stat-label">تمارين كاملة</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">✓</div>
-        <div class="stat-value" id="completedCount">0</div>
-        <div class="stat-label">مكتملة</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🎯</div>
-        <div class="stat-value" id="successRate">0%</div>
-        <div class="stat-label">معدل النجاح</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🏆</div>
-        <div class="stat-value" id="tokensEarned">0</div>
-        <div class="stat-label">رموز مكتسبة</div>
-      </div>
-    </div>
-
-    <div class="progress-section">
-      <div class="progress-info">
-        <span>تقدمك في الدورة</span>
-        <span id="progressText">0%</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="achievements" id="achievementsBadges"></div>
-    </div>
-
-    <div id="chaptersContainer"></div>
-  </main>
-
-  <button class="floating-btn" onclick="resetProgress()" title="إعادة تعيين">🔄</button>
-
-  <script>
-    const chapters = {
-      chapter1: { title: 'الأعداد الكبيرة والقيمة المكانية', icon: '🔢', color: '#FF6B6B', exercises: [] },
-      chapter2: { title: 'الكسور والعمليات عليها', icon: '✂️', color: '#4ECDC4', exercises: [] },
-      chapter3: { title: 'الأشكال الهندسية والقياس', icon: '📐', color: '#45B7D1', exercises: [] },
-      chapter4: { title: 'الضرب والقسمة المتقدمة', icon: '✖️', color: '#FFA07A', exercises: [] },
-      chapter5: { title: 'الأنماط والجبر الأساسي', icon: '🎨', color: '#98D8C8', exercises: [] },
-      chapter6: { title: 'حل المسائل التطبيقية', icon: '🧩', color: '#F7DC6F', exercises: [] }
-    };
-
-    const exerciseData = {
-      chapter1: [
-        { q: 'كم عدد الآحاد في 5,234؟', t: 'i', a: '4', h: ['انظر الرقم الأخير'], d: 'e' },
-        { q: 'اكتب: سبعة آلاف وثلاثمائة وواحد', t: 'i', a: '7301', h: ['آلاف - مئات - عشرات - آحاد'], d: 'm' },
-        { q: 'أي يساوي 9,000 + 500 + 20 + 3؟', t: 'm', o: ['9,523', '9,352', '9,325', '9,532'], a: '9,523', h: ['اجمع الأرقام'], d: 'm' },
-        { q: 'رتب: 4,567 و 4,657 و 4,756', t: 'm', o: ['4,567-4,657-4,756', '4,657-4,567-4,756', '4,756-4,657-4,567'], a: '4,567-4,657-4,756', h: ['من الأصغر'], d: 'h' },
-        { q: 'قيمة 7 في 27,456؟', t: 'm', o: ['7', '70', '700', '7,000'], a: '7,000', h: ['منزلة الألوف'], d: 'm' },
-        { q: 'أكمل: 5,000 + 400 + ____ + 2 = 5,432', t: 'i', a: '30', h: ['منزلة العشرات'], d: 'm' },
-        { q: 'كم مئة في 3,456؟', t: 'i', a: '4', h: ['الرقم الثالث من اليمين'], d: 'e' },
-        { q: 'السلسلة: 1,000 - 2,000 - 3,000 - ____', t: 'i', a: '4,000', h: ['الفرق بين العددين'], d: 'e' },
-        { q: 'العدد قبل 5,000 مباشرة؟', t: 'i', a: '4,999', h: ['انقص واحد'], d: 'e' },
-        { q: 'قارن: 9,999 ____ 10,000', t: 'm', o: ['أصغر', 'أكبر', 'يساوي'], a: 'أصغر', h: ['9,999 أم 10,000'], d: 'm' }
-      ],
-      chapter2: [
-        { q: 'أي كسر يمثل النصف؟', t: 'm', o: ['1/3', '1/2', '1/4', '2/3'], a: '1/2', h: ['جزء من جزأين'], d: 'e' },
-        { q: '1/2 = __/4', t: 'i', a: '2', h: ['اضرب في 2/2'], d: 'm' },
-        { q: 'قارن: 2/3 ____ 3/4', t: 'm', o: ['أصغر', 'أكبر', 'متساوي'], a: 'أصغر', h: ['3/4=0.75, 2/3≈0.67'], d: 'h' },
-        { q: 'كم ربع في 2؟', t: 'i', a: '8', h: ['2 × 4'], d: 'm' },
-        { q: '1/4 + 1/4 = ؟', t: 'm', o: ['1/8', '1/2', '2/8', '1/4'], a: '1/2', h: ['1+1=2'], d: 'm' },
-        { q: '1/3 = __/6', t: 'i', a: '2', h: ['اضرب في 2/2'], d: 'm' },
-        { q: '3/4 - 1/4 = ؟', t: 'i', a: '1/2', h: ['3-1=2, يصبح 2/4=1/2'], d: 'm' },
-        { q: 'أي أكبر: 1/2 أم 1/3؟', t: 'm', o: ['1/2', '1/3', 'متساويان'], a: '1/2', h: ['كلما صغر المقام'], d: 'e' },
-        { q: 'كم ثلث في 1؟', t: 'i', a: '3', h: ['1 ÷ (1/3)'], d: 'e' },
-        { q: '5/10 = 1/__', t: 'i', a: '2', h: ['اقسم على 5'], d: 'm' }
-      ],
-      chapter3: [
-        { q: 'كم ضلع للمربع؟', t: 'i', a: '4', h: ['أضلاع متساوية'], d: 'e' },
-        { q: 'محيط مربع ضلعه 5 سم؟', t: 'i', a: '20', h: ['5+5+5+5'], d: 'm' },
-        { q: 'محيط مستطيل: 6 سم طول، 4 سم عرض؟', t: 'i', a: '20', h: ['2(6+4)'], d: 'm' },
-        { q: 'كم ضلع للمثلث؟', t: 'm', o: ['2', '3', '4', '5'], a: '3', h: ['ثلاثي الأضلاع'], d: 'e' },
-        { q: 'مساحة مربع ضلعه 4 سم؟', t: 'i', a: '16', h: ['4×4'], d: 'm' },
-        { q: 'مساحة مستطيل: 8 سم × 3 سم؟', t: 'i', a: '24', h: ['8×3'], d: 'm' },
-        { q: 'محيط 20 سم، طول الضلع = ؟', t: 'i', a: '5', h: ['20÷4'], d: 'm' },
-        { q: 'مثلث متساوي الأضلاع، كل ضلع 6 سم، المحيط؟', t: 'i', a: '18', h: ['6+6+6'], d: 'm' },
-        { q: 'كم زاوية قائمة في المربع؟', t: 'i', a: '4', h: ['كل زاوية 90'], d: 'e' },
-        { q: 'مساحة = 36 سم²، طول الضلع = ؟', t: 'i', a: '6', h: ['√36'], d: 'h' }
-      ],
-      chapter4: [
-        { q: '7 × 8 = ؟', t: 'i', a: '56', h: ['7 مجموعات من 8'], d: 'e' },
-        { q: '36 ÷ 6 = ؟', t: 'i', a: '6', h: ['كم مرة 6 في 36؟'], d: 'm' },
-        { q: '25 × 4 = ؟', t: 'i', a: '100', h: ['25×4'], d: 'm' },
-        { q: '144 ÷ 12 = ؟', t: 'i', a: '12', h: ['12×12'], d: 'h' },
-        { q: '9 × ____ = 72', t: 'i', a: '8', h: ['72÷9'], d: 'm' },
-        { q: '48 ÷ 8 = ؟', t: 'm', o: ['5', '6', '7', '8'], a: '6', h: ['8×6=48'], d: 'e' },
-        { q: '12 × 11 = ؟', t: 'i', a: '132', h: ['(10×12)+(1×12)'], d: 'm' },
-        { q: '63 ÷ 7 = ؟', t: 'i', a: '9', h: ['7×9=63'], d: 'e' },
-        { q: '15 × 6 = ؟', t: 'i', a: '90', h: ['15×6'], d: 'm' },
-        { q: '100 ÷ 5 = ؟', t: 'i', a: '20', h: ['5×20=100'], d: 'm' }
-      ],
-      chapter5: [
-        { q: '2, 4, 6, 8, ____', t: 'i', a: '10', h: ['أضف 2'], d: 'e' },
-        { q: '1, 3, 5, 7, ____', t: 'i', a: '9', h: ['أضف 2'], d: 'e' },
-        { q: '3, 6, 9, 12, ____', t: 'i', a: '15', h: ['أضف 3'], d: 'e' },
-        { q: '1, 4, 9, 16, ____', t: 'i', a: '25', h: ['مربعات: 1², 2², 3²...'], d: 'h' },
-        { q: 'إذا س + 5 = 12، قيمة س = ؟', t: 'i', a: '7', h: ['12-5=س'], d: 'm' },
-        { q: 'إذا 2س = 16، قيمة س = ؟', t: 'i', a: '8', h: ['16÷2'], d: 'm' },
-        { q: '5, 10, 15, 20, ____', t: 'i', a: '25', h: ['أضف 5'], d: 'e' },
-        { q: 'إذا س - 3 = 7، قيمة س = ؟', t: 'i', a: '10', h: ['7+3'], d: 'm' },
-        { q: '2, 6, 18, 54, ____', t: 'i', a: '162', h: ['اضرب في 3'], d: 'h' },
-        { q: '4 + ____ = 10', t: 'i', a: '6', h: ['10-4'], d: 'e' }
-      ],
-      chapter6: [
-        { q: '3 علب بـ 12 ريال، الإجمالي = ؟', t: 'i', a: '36', h: ['3×12'], d: 'e' },
-        { q: '50 ريال، أنفقت 23، الباقي = ؟', t: 'i', a: '27', h: ['50-23'], d: 'e' },
-        { q: '25 طالب في 5 صفوف، كل صف = ؟', t: 'i', a: '5', h: ['25÷5'], d: 'e' },
-        { q: 'ركض 8 كم السبت، 6 كم الأحد، الإجمالي = ؟', t: 'i', a: '14', h: ['8+6'], d: 'e' },
-        { q: '120 كتاب، أعيرت 45، الباقي = ؟', t: 'i', a: '75', h: ['120-45'], d: 'm' },
-        { q: '6 دفاتر بـ 8 ريال، الإجمالي = ؟', t: 'i', a: '48', h: ['6×8'], d: 'm' },
-        { q: 'حبل 10 م، قطعت 3 م، الباقي = ؟', t: 'i', a: '7', h: ['10-3'], d: 'e' },
-        { q: 'كتاب 25 ريال، دفتر 8 ريال، الفرق = ؟', t: 'i', a: '17', h: ['25-8'], d: 'm' },
-        { q: 'مثلجة 2 ريال، تشتري 10، الإجمالي = ؟', t: 'i', a: '20', h: ['10×2'], d: 'e' },
-        { q: '60 زهرة، 1/3 حمراء، عدد الحمراء = ؟', t: 'i', a: '20', h: ['60÷3'], d: 'm' },
-        { q: 'تومي 4 ألعاب، أخته ضعفها، المجموع = ؟', t: 'i', a: '12', h: ['4 + (4×2)'], d: 'm' },
-        { q: 'ثمن دفتر 5 ريال، 3 دفاتر + قلم 2 ريال؟', t: 'i', a: '17', h: ['(3×5)+2'], d: 'm' },
-        { q: 'مثلث محيطه 15 سم، ضلع = ؟', t: 'i', a: '5', h: ['متساوي الأضلاع: 15÷3'], d: 'm' },
-        { q: 'حقيبة بـ 85 ريال، خصم 15 ريال؟', t: 'i', a: '70', h: ['85-15'], d: 'e' },
-        { q: 'سرعة 60 كم/ساعة، في ساعتين؟', t: 'i', a: '120', h: ['60×2'], d: 'm' },
-        { q: 'أجرة تاكسي 3 ريال، مسافات، 4 مسافات = ؟', t: 'i', a: '12', h: ['4×3'], d: 'e' }
-      ]
-    };
-
-    let completedEx = JSON.parse(localStorage.getItem('completedEx')) || {};
-    let tokens = JSON.parse(localStorage.getItem('tokens')) || 0;
-    let currentChapter = 'chapter1';
-
-    function initChapters() {
-      Object.keys(chapters).forEach((ch, idx) => {
-        chapters[ch].exercises = exerciseData[ch].map((e, i) => ({ ...e, id: `${ch}e${i}`, chapter: ch }));
-      });
-      renderChapters();
-      updateStats();
-    }
-
-    function renderChapters() {
-      const container = document.getElementById('chaptersContainer');
-      container.innerHTML = '';
-
-      Object.keys(chapters).forEach(ch => {
-        const chapter = chapters[ch];
-        const isVisible = ch === currentChapter;
-        const chapterDiv = document.createElement('div');
-        chapterDiv.className = 'chapter' + (isVisible ? '' : ' hidden');
-        chapterDiv.id = ch;
-        chapterDiv.style.display = isVisible ? 'block' : 'none';
-
-        chapterDiv.innerHTML = `
-          <div class="chapter-header">
-            <div class="chapter-icon" style="background: linear-gradient(135deg, ${chapter.color}, ${chapter.color}dd);">
-              ${chapter.icon}
-            </div>
-            <div class="chapter-info">
-              <h2>${chapter.title}</h2>
-            </div>
-          </div>
-          <div class="exercises-grid" id="grid-${ch}"></div>
-        `;
-
-        container.appendChild(chapterDiv);
-
-        const grid = document.getElementById(`grid-${ch}`);
-        chapter.exercises.forEach((ex, i) => {
-          grid.appendChild(createCard(ex, i + 1));
-        });
-      });
-    }
-
-    function createCard(ex, num) {
-      const card = document.createElement('div');
-      card.className = 'exercise-card' + (completedEx[ex.id] ? ' completed' : '');
-      card.id = `ex-${ex.id}`;
-
-      const inp = ex.t === 'i'
-        ? `<div class="input-group"><input type="text" class="ex-in" data-id="${ex.id}"><button onclick="check('${ex.id}')">تحقق</button></div>`
-        : `<div class="multi-choice">${ex.o.map(o => `<button class="choice-button" data-id="${ex.id}" onclick="sel(this, '${o}')">${o}</button>`).join('')}<button style="width:100%;padding:12px;margin-top:10px;background:linear-gradient(135deg,var(--primary-teal),var(--primary-dark-blue));color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-family:'Cairo';" onclick="check('${ex.id}')">تحقق</button></div>`;
-
-      card.innerHTML = `
-        <div class="exercise-header">
-          <span class="exercise-number">سؤال ${num}</span>
-          <span class="difficulty ${ex.d === 'e' ? 'easy' : ex.d === 'm' ? 'medium' : 'hard'}">
-            ${ex.d === 'e' ? 'سهل' : ex.d === 'm' ? 'متوسط' : 'صعب'}
-          </span>
-        </div>
-        <div class="exercise-question">${ex.q}</div>
-        ${inp}
-        <div class="hint" onclick="tglHint('${ex.id}')">💡 تلميح</div>
-        <div class="hint-content" id="h-${ex.id}">${ex.h.map(x => `<div>• ${x}</div>`).join('')}</div>
-        <div class="feedback" id="fb-${ex.id}"></div>
-        <div class="button-group" id="btn-${ex.id}" style="display:none"><button class="secondary" onclick="rst('${ex.id}')">إعادة</button></div>
-      `;
-      return card;
-    }
-
-    function sel(btn, opt) {
-      const id = btn.dataset.id;
-      document.querySelectorAll(`[data-id="${id}"]`).forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      btn.dataset.ans = opt;
-    }
-
-    function check(id) {
-      let ex = null;
-      for (let ch in chapters) {
-        ex = chapters[ch].exercises.find(e => e.id === id);
-        if (ex) break;
-      }
-      if (!ex) { alert('تمرين غير موجود'); return; }
-
-      let ans;
-      const card = document.getElementById(`ex-${id}`);
-
-      if (ex.t === 'i') {
-        ans = card.querySelector('.ex-in')?.value.trim();
-      } else {
-        ans = card.querySelector('.choice-button.selected')?.textContent.trim();
-      }
-
-      if (!ans) { alert('أدخل إجابة'); return; }
-
-      const fb = document.getElementById(`fb-${id}`);
-      const correct = String(ans) === String(ex.a);
-
-      if (correct) {
-        fb.className = 'feedback correct';
-        const pts = ex.d === 'e' ? 5 : ex.d === 'm' ? 10 : 15;
-        fb.innerHTML = `✓ ممتاز! <div class="tokens-earned">${pts} رموز</div>`;
-        completedEx[id] = true;
-        tokens += pts;
-        card.classList.add('completed');
-      } else {
-        fb.className = 'feedback incorrect';
-        fb.innerHTML = `✗ الإجابة الصحيحة: <strong>${ex.a}</strong>`;
-      }
-
-      document.getElementById(`btn-${id}`).style.display = 'flex';
-      localStorage.setItem('completedEx', JSON.stringify(completedEx));
-      localStorage.setItem('tokens', JSON.stringify(tokens));
-      updateStats();
-    }
-
-    function rst(id) {
-      const card = document.getElementById(`ex-${id}`);
-      const inp = card.querySelector('.ex-in');
-      if (inp) inp.value = '';
-      card.querySelectorAll('.choice-button').forEach(b => b.classList.remove('selected'));
-      document.getElementById(`fb-${id}`).innerHTML = '';
-      document.getElementById(`fb-${id}`).className = 'feedback';
-      document.getElementById(`btn-${id}`).style.display = 'none';
-    }
-
-    function tglHint(id) {
-      document.getElementById(`h-${id}`).classList.toggle('show');
-    }
-
-    function goToChapter(ch, btn) {
-      currentChapter = ch;
-      document.querySelectorAll('.chapter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.chapter').forEach(c => c.style.display = 'none');
-      document.getElementById(ch).style.display = 'block';
-      updateStats();
-    }
-
-    function updateStats() {
-      const total = Object.values(exerciseData).flat().length;
-      const completed = Object.keys(completedEx).length;
-      const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-
-      document.getElementById('totalExercises').textContent = total;
-      document.getElementById('completedCount').textContent = completed;
-      document.getElementById('successRate').textContent = percent;
-      document.getElementById('tokensEarned').textContent = tokens;
-      document.getElementById('tokenCount').textContent = tokens;
-      document.getElementById('progressFill').style.width = percent + '%';
-      document.getElementById('progressText').textContent = percent + '%';
-
-      document.getElementById('sidebarProgress').textContent = percent + '%';
-      document.getElementById('sidebarCompleted').textContent = completed + '/' + total;
-      document.getElementById('sidebarTokens').textContent = tokens + '⭐';
-
-      updateBadges(completed);
-    }
-
-    function updateBadges(c) {
-      const badges = document.getElementById('achievementsBadges');
-      badges.innerHTML = '';
-      const ach = [
-        { e: '🌟', l: 'أول 5', t: 5 },
-        { e: '🔥', l: 'منتصف الطريق', t: 33 },
-        { e: '👑', l: 'خبير', t: 60 },
-        { e: '💎', l: 'الكمال', t: 66 }
-      ];
-      ach.forEach(a => {
-        const b = document.createElement('div');
-        b.className = 'badge' + (c < a.t ? ' locked' : ' unlocked');
-        b.textContent = a.e;
-        b.title = a.l;
-        badges.appendChild(b);
-      });
-    }
-
-    function resetProgress() {
-      if (confirm('إعادة تعيين كل التقدم؟')) {
-        completedEx = {};
-        tokens = 0;
-        localStorage.clear();
-        document.querySelectorAll('.exercise-card').forEach(c => {
-          c.classList.remove('completed');
-          const id = c.id.replace('ex-', '');
-          rst(id);
-        });
-        updateStats();
-      }
-    }
-
-    initChapters();
-
-    // PWA Service Worker Registration
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(registration => {
-            console.log('Service Worker registered successfully:', registration);
-            // Check for updates periodically
-            setInterval(() => {
-              registration.update();
-            }, 60000); // Check every minute
-          })
-          .catch(error => {
-            console.log('Service Worker registration failed:', error);
-          });
-      });
-
-      // Listen for controller change (update notification)
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        console.log('Service Worker controller changed - app updated');
-        // Optional: show update notification to user
-      });
-    }
-
-    // Request notification permission for future alerts
-    if ('Notification' in window && Notification.permission === 'default') {
-      // Don't auto-request, let user decide
-    }
-
-    // Detect when app goes online/offline
-    window.addEventListener('online', () => {
-      console.log('App is back online');
-      updateStats(); // Refresh stats when back online
-    });
-
-    window.addEventListener('offline', () => {
-      console.log('App is offline - using cached data');
-    });
-
-    // Add install prompt handler for PWA installation
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      console.log('Install prompt ready');
-      // You can store this and show install button when needed
-    });
-
-    // Page visibility - pause non-essential updates when hidden
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        console.log('App is hidden');
-      } else {
-        console.log('App is visible');
-        updateStats(); // Refresh when visible again
-      }
-    });
-  </script>
+function home(){const n=Object.keys(done).filter(k=>ALL.some(e=>e.id===k)).length,pct=Math.round(n/TOTAL*100);
+  show(`<section class="hero"><h1>🎓 مغامرة الرياضيات&nbsp;٥</h1><p>تدريب ممتع على رياضيات الصف الخامس، مع شرح لكل إجابة.</p>
+  <div class="stats"><div><b>${n}/${TOTAL}</b><small>أنجزتها</small></div><div><b>${pct}%</b><small>تقدّمي</small></div><div><b>${tokens}</b><small>نجومي ⭐</small></div></div>
+  <div class="bar"><i style="width:${pct}%"></i></div>
+  <div class="badges">${BADGES.map(b=>`<span class="${n>=b[2]?"":"off"}" title="${b[1]}">${b[0]} ${b[1]}</span>`).join("")}</div></section>
+  <h2>الفصول</h2>
+  ${CHAPTERS.map((c,k)=>{const d=nDone(c);return `<button class="ch" onclick="go(chapter,${k})"><span class="ic" style="background:${c.c}22">${c.e}</span>
+   <span style="flex:1;min-width:0"><b>${k+1}. ${c.t}</b><small>${d} من ${c.ex.length} تمارين</small><div class="bar mini"><i style="width:${d/c.ex.length*100}%"></i></div></span>${d===c.ex.length?`<span class="done">✓</span>`:""}</button>`}).join("")}
+  <div class="foot">تمارين تدريبية أصلية · بلا حساب وبلا إعلانات · يعمل دون إنترنت بعد أول فتح<br>طوّره: حالم فاروق عبدالرحيم<br><button class="linkb" onclick="resetMine()">مسح تقدّمي في هذا التطبيق</button></div>`);
+}
+let S=null;
+function chapter(k,i){const c=CHAPTERS[k];if(i===undefined){i=c.ex.findIndex((_,j)=>!done[c.id+"e"+j]);if(i<0)i=0}
+  S={k,i,ans:null,checked:false};const e=ALL.find(x=>x.id===c.id+"e"+i);
+  show(`<h2 style="margin-top:6px">${c.e} ${c.t}</h2>
+  <div class="dots" aria-label="التمارين">${c.ex.map((_,j)=>`<button class="${done[c.id+"e"+j]?"ok":""} ${j===i?"now":""}" onclick="chapter(${k},${j})" aria-label="التمرين ${j+1}">${j+1}</button>`).join("")}</div>
+  <div class="card"><div class="qtop"><span>التمرين ${i+1} من ${c.ex.length}${done[e.id]?" · أنجزته ✓":""}</span><span class="lvl ${e.d}">${LVL[e.d][0]} · ${LVL[e.d][1]} ⭐</span></div>
+  <div class="q">${e.q}</div>${e.x?`<div class="x">${e.x}</div>`:""}${e.q2?`<div class="q">${e.q2}</div>`:""}
+  ${e.t==="m"?e.o.map((o,j)=>`<button class="opt" id="o${j}" onclick="sel(${j})">${o}</button>`).join(""):
+   `<div class="row"><input id="inp" class="inp" ${/\//.test(e.a)?'inputmode="text"':'inputmode="decimal"'} autocomplete="off" aria-label="اكتب إجابتك" placeholder="؟" onkeydown="if(event.key==='Enter')check()">${e.u?`<span class="unit">${e.u}</span>`:""}</div>`}
+  <button class="hintb" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">💡 تلميح</button><div class="hint" hidden>${hintOf(e)}</div>
+  <button class="go" id="chk" onclick="check()">تحقّق</button><div id="fb"></div></div>`);
+}
+function hintOf(e){return e.hi}
+function sel(j){if(S.checked)return;S.ans=j;document.querySelectorAll(".opt").forEach((b,k)=>b.classList.toggle("sel",k===j))}
+function norm(s){return String(s).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[,٬،\s]/g,"").replace(/[٫]/g,".").replace(/[\\⁄∕]/g,"/")}
+function val(s){s=norm(s);const m=s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);if(m)return +m[2]?+m[1]/+m[2]:NaN;return s!==""&&!isNaN(+s)?+s:NaN}
+function check(){if(S.checked)return;const c=CHAPTERS[S.k],e=ALL.find(x=>x.id===c.id+"e"+S.i);let ok,note="";
+  if(e.t==="m"){if(S.ans===null){toast("اختر إجابة أولًا");return}ok=e.o[S.ans]===e.a}
+  else{const raw=$("#inp").value;if(!raw.trim()){toast("اكتب إجابتك أولًا");$("#inp").focus();return}
+    const v=val(raw);if(isNaN(v)){toast("اكتب رقمًا، أو كسرًا مثل 1/2");return}
+    ok=Math.abs(v-val(e.a))<1e-9;
+    if(ok&&/\//.test(e.a)&&norm(raw)!==norm(e.a)){note=`إجابتك <b dir="ltr">${esc(raw.trim())}</b> صحيحة، وأبسط صورة لها <b dir="ltr">${e.a}</b>.`}
+    $("#inp").disabled=true;$("#inp").classList.add(ok?"good":"bad")}
+  S.checked=true;
+  if(e.t==="m")e.o.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o===e.a)b.classList.add("good");else if(j===S.ans)b.classList.add("bad")});
+  let gain=0;if(ok&&!done[e.id]){gain=LVL[e.d][1];done[e.id]=true;tokens+=gain;save()}
+  $("#tk").textContent=tokens;$("#chk").remove();
+  const nextI=c.ex.findIndex((_,j)=>j>S.i&&!done[c.id+"e"+j]),nxt=nextI>=0?nextI:(S.i+1<c.ex.length?S.i+1:-1);
+  $("#fb").innerHTML=`<div class="fb ${ok?"good":"bad"}"><b>${ok?"✅ إجابة صحيحة!"+(gain?` +${gain} ⭐`:""):"❌ الإجابة الصحيحة: "+(e.t==="i"?`<span dir="ltr">${e.a}</span>`:e.a)+(e.u?" "+e.u:"")}</b>${note?"<br>"+note:""}<br>${e.h}</div>
+  ${ok?"":`<button class="go alt" onclick="chapter(${S.k},${S.i})">🔁 حاول مرة أخرى</button>`}
+  ${nxt>=0?`<button class="go" onclick="chapter(${S.k},${nxt})">التمرين التالي ←</button>`:`<button class="go" onclick="back()">${nDone(c)===c.ex.length?"🎉 أنهيت الفصل! العودة إلى الفصول":"العودة إلى الفصول"}</button>`}`;
+  if(ok&&nDone(c)===c.ex.length&&gain)toast("🎉 أحسنت! أنهيت فصل «"+c.t+"»");
+  $("#fb").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function resetMine(){if(!confirm("مسح تقدّمك ونجومك في «مغامرة الرياضيات» فقط؟ (لن يتأثر أيّ تطبيق آخر)"))return;
+  done={};tokens=0;try{localStorage.removeItem("completedEx");localStorage.removeItem("tokens")}catch(e){}stack=[];cur=null;go(home);toast("تم مسح التقدّم")}
+go(home);
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
 </body>
 </html>
