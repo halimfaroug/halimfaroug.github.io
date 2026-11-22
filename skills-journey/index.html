@@ -598,7 +598,7 @@ function home(){
     <button onclick="go(family)"><span>👨‍👩‍👧</span>ملخّص الأسرة</button>
   </div>
   <div class="hm-level"><span>${TR[lv]} مرحلة «${LEVELS[lv][1]}»</span><span class="hm-gbar"><i style="width:${lvPct}%"></i></span><small>${next?`تبقّى ${next[0]-P.xp} نقطة للانتقال إلى ${TR[lv+1]} مرحلة «${next[1]}»`:"اكتملت كل المراحل! 🏆"}</small></div>
-  <footer>أسئلة تدريبية أصلية مستوحاة من المهارات العامة للاختبارات الوطنية «نافس» وليست أسئلة رسمية · بدون حساب وبدون إعلانات<br><button class="linkbtn" onclick="go(settings)">⚙️ تخصيص</button> · <button class="linkbtn" onclick="go(about)">عن التطبيق · الخصوصية</button></footer>`);
+  <footer>أسئلة تدريبية أصلية مستوحاة من المهارات العامة للاختبارات الوطنية «نافس» وليست أسئلة رسمية · بدون حساب وبدون إعلانات<br><button class="linkbtn" onclick="go(settings)">⚙️ تخصيص</button> · <button class="linkbtn" onclick="go(about)">عن التطبيق · الخصوصية</button><br><a class="linkbtn" href="../">🏠 كل التطبيقات: رحلات تعليمية</a></footer>`);
 }
 function books(g){
   const bs=BOOKS.filter(b=>b.g===g);

@@ -194,7 +194,7 @@ function home(){const n=Object.keys(done).filter(k=>ALL.some(e=>e.id===k)).lengt
   <h2>الفصول</h2>
   ${CHAPTERS.map((c,k)=>{const d=nDone(c);return `<button class="ch" onclick="go(chapter,${k})"><span class="ic" style="background:${c.c}22">${c.e}</span>
    <span style="flex:1;min-width:0"><b>${k+1}. ${c.t}</b><small>${d} من ${c.ex.length} تمارين</small><div class="bar mini"><i style="width:${d/c.ex.length*100}%"></i></div></span>${d===c.ex.length?`<span class="done">✓</span>`:""}</button>`}).join("")}
-  <div class="foot">تمارين تدريبية أصلية · بلا حساب وبلا إعلانات · يعمل دون إنترنت بعد أول فتح<br>طوّره: حالم فاروق عبدالرحيم<br><button class="linkb" onclick="resetMine()">مسح تقدّمي في هذا التطبيق</button></div>`);
+  <div class="foot">تمارين تدريبية أصلية · بلا حساب وبلا إعلانات · يعمل دون إنترنت بعد أول فتح<br>طوّره: حالم فاروق عبدالرحيم<br><a class="linkb" href="../">🏠 كل التطبيقات: رحلات تعليمية</a> · <button class="linkb" onclick="resetMine()">مسح تقدّمي في هذا التطبيق</button></div>`);
 }
 let S=null;
 function chapter(k,i){const c=CHAPTERS[k];if(i===undefined){i=c.ex.findIndex((_,j)=>!done[c.id+"e"+j]);if(i<0)i=0}

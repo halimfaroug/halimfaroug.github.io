@@ -9,6 +9,9 @@
 <meta property="og:title" content="رحلات تعليمية · Learning Journeys">
 <meta property="og:description" content="من حالمٍ بتعلّمٍ أجمل — تطبيقات تعليمية مجانية للطلاب والأسر.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230B67D1'/><path d='M14 44 L28 26 L36 36 L44 22 L50 44 Z' fill='%23FFD566'/><circle cx='44' cy='18' r='5' fill='%23fff'/></svg>">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-title" content="رحلات تعليمية">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <style>
@@ -53,6 +56,13 @@ h2{font-size:24px;font-weight:900;margin:0 0 14px}
 .principles i{font-style:normal;font-size:26px}
 .about{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;margin-bottom:30px}
 .about p{margin:6px 0 0;color:var(--ink2)}
+.acts{display:flex;gap:8px;align-items:center}
+.inst{position:relative;z-index:1;display:block;width:100%;margin-top:18px;font:inherit;font-weight:900;font-size:16px;line-height:1.5;border:0;border-radius:16px;padding:12px 14px;background:#FFD566;color:#0E2A47;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.18)}.inst:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(5,15,30,.55);display:flex;align-items:flex-end;justify-content:center}
+.sheet>div{background:var(--card);color:var(--ink);width:min(560px,100%);border-radius:24px 24px 0 0;padding:20px 20px 28px;box-shadow:0 -10px 30px rgba(0,0,0,.25)}
+.sheet h3{margin:0 0 6px;font-size:20px}.sheet ol{margin:8px 0 14px;padding-inline-start:22px}.sheet li{margin:6px 0;font-weight:700}
+.sheet button{width:100%;font:inherit;font-weight:900;border:0;border-radius:14px;padding:12px;background:var(--brand);color:#fff;cursor:pointer}
+@media (max-width:420px){.logo span{font-size:16px}.lang{padding:6px 12px;font-size:14px}}
 footer{text-align:center;color:var(--ink2);font-size:14px;padding:10px 0 34px}
 @media (max-width:520px){.hero{padding:28px 20px 24px;border-radius:22px}.hero p{font-size:16px}}
 </style>
@@ -70,6 +80,7 @@ footer{text-align:center;color:var(--ink2);font-size:14px;padding:10px 0 34px}
   <div class="dream" data-t="dream">من حالمٍ بتعلّمٍ أجمل ✨</div>
   <p data-t="lead">تطبيقات صُمّمت لتجعل التعلّم في البيت ممتعًا وواضحًا: مرتبطة بالمنهج، تعمل على الجوال، ويستطيع الطالب أن يتدرّب فيها وحده أو مع أسرته.</p>
   <div class="badges"><span data-t="b1">✓ مجانية بالكامل</span><span data-t="b2">✓ بلا حساب</span><span data-t="b3">✓ بلا إعلانات</span><span data-t="b4">✓ التقدّم محفوظ على جهازك</span></div>
+  <button class="inst" id="inst" onclick="install()" hidden><span data-t="inst">📲 ثبّت «رحلات تعليمية» على جوالك: أيقونة واحدة لكل التطبيقات</span></button>
 </section>
 
 <h2 data-t="apps">التطبيقات</h2>
@@ -89,7 +100,7 @@ footer{text-align:center;color:var(--ink2);font-size:14px;padding:10px 0 34px}
   <article class="app violet">
     <div class="top"><div class="icon" aria-hidden="true">٥</div><h3><span data-t="m5">مغامرة الرياضيات ٥</span><span class="en" data-t="m5s">Math5 Expert</span></h3></div>
     <div class="tags"><span data-t="m5g">الصف الخامس الابتدائي</span><span data-t="m5c">الرياضيات</span></div>
-    <p data-t="m5d">66 تمرينًا تفاعليًّا في 6 فصول: الأعداد الكبيرة، والكسور، والهندسة، والضرب والقسمة، والأنماط والجبر، وحل المسائل.</p>
+    <p data-t="m5d">66 تمرينًا تفاعليًّا في 6 فصول، مع تلميح وشرح لكل تمرين: الأعداد الكبيرة، والكسور، والهندسة، والضرب والقسمة، والأنماط والجبر، وحل المسائل.</p>
     <a class="open" href="./math5/"><span data-t="open">افتح التطبيق</span> <span class="arr">←</span></a>
   </article>
   <article class="app green">
@@ -124,14 +135,14 @@ sjd:"Practice for the skills in Saudi Arabia's national Nafes tests: more than 3
 ka:"Kalimati",kas:"كلماتي",kag:"Primary school",kac:"English vocabulary",
 kad:"More than 20 picture books of English words with Arabic meanings and pronunciation, plus matching, spelling and sentence-building games and reward stickers.",
 m5:"Math5 Expert",m5s:"مغامرة الرياضيات ٥",m5g:"Grade 5",m5c:"Mathematics",
-m5d:"66 interactive exercises in 6 chapters: large numbers, fractions, geometry, multiplication and division, patterns and algebra, and problem solving.",
+m5d:"66 interactive exercises in 6 chapters, each with a hint and an explanation: large numbers, fractions, geometry, multiplication and division, patterns and algebra, and problem solving.",
 qn:"Quantum Nexus",qns:"منصة العلوم التفاعلية",qng:"Intermediate school",qnc:"Science",
 qnd:"Science essentials for intermediate school: an interactive periodic table of all 118 elements, 27 lessons across four strands with 335 explained questions (multiple choice, ordering, matching, calculating and finding elements on the table), and a live lab: build an atom, spin a 3D DNA helix, watch the planets orbit.",
 open:"Open the app",how:"Why these apps?",p1:"Tied to the curriculum",p1d:"Built on textbook lessons, with a simple explanation for every question.",
 p2:"Phone first",p2d:"Open straight from the link, and add to the home screen.",p3:"Fully private",p3d:"No accounts and no data collection; progress stays on the family's device.",
 p4:"Made for families too",p4d:"Helps parents follow their children's learning without fuss.",who:"Who is behind these apps?",
 whod:"I am Halim Faroug Abdulraheem Elhag, a lecturer in English language and translation at the University of Hafr Al-Batin. I build these apps voluntarily, because technology can bring learning closer to every student and family. The questions and content are for practice and do not replace the teacher or the textbook.",
-foot:"© 2026 Learning Journeys · Halim Faroug",dream:"From a dreamer of better learning ✨"};
+foot:"© 2026 Learning Journeys · Halim Faroug",inst:"📲 Install Learning Journeys on your phone: one icon for all the apps",dream:"From a dreamer of better learning ✨"};
 const AR={};document.querySelectorAll("[data-t]").forEach(e=>AR[e.dataset.t]=e.textContent);
 function apply(l){const d=l==="en"?EN:AR;document.querySelectorAll("[data-t]").forEach(e=>{if(d[e.dataset.t])e.textContent=d[e.dataset.t]});
 document.documentElement.lang=l==="en"?"en":"ar";document.documentElement.dir=l==="en"?"ltr":"rtl";
@@ -139,6 +150,20 @@ const b=document.getElementById("lang");b.textContent=l==="en"?"العربية":
 document.querySelectorAll('.open .arr').forEach(a=>a.textContent=l==="en"?"→":"←");document.title=l==="en"?"Learning Journeys · رحلات تعليمية":"رحلات تعليمية · Learning Journeys";try{localStorage.setItem("lj-lang",l)}catch(e){}}
 function toggle(){apply(document.documentElement.lang==="ar"?"en":"ar")}
 try{if(localStorage.getItem("lj-lang")==="en")apply("en")}catch(e){}
+
+/* التثبيت: أيقونة واحدة لكل التطبيقات */
+let deferred=null;const isStandalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+function instShow(){document.getElementById("inst").hidden=isStandalone()||!(deferred||isIOS)}
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;instShow()});
+addEventListener("appinstalled",()=>{deferred=null;instShow()});
+function install(){if(deferred){deferred.prompt();deferred.userChoice.finally(()=>{deferred=null;instShow()});return}
+  const en=document.documentElement.lang==="en",d=document.createElement("div");d.className="sheet";d.onclick=e=>{if(e.target===d)d.remove()};
+  d.innerHTML=en?`<div role="dialog" aria-modal="true" aria-label="Install"><h3>📲 Add to your Home Screen</h3><ol><li>Tap the Share button <b>⎋</b> at the bottom of Safari.</li><li>Choose <b>“Add to Home Screen”</b>.</li><li>Tap <b>“Add”</b>. One icon opens all the apps.</li></ol><button onclick="this.closest('.sheet').remove()">OK</button></div>`
+   :`<div role="dialog" aria-modal="true" aria-label="التثبيت"><h3>📲 أضِف «رحلات تعليمية» إلى شاشتك</h3><ol><li>اضغط زر المشاركة <b>⎋</b> أسفل متصفح سفاري.</li><li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b>.</li><li>اضغط <b>«إضافة»</b>، فتظهر أيقونة واحدة تفتح التطبيقات كلها.</li></ol><button onclick="this.closest('.sheet').remove()">حسنًا</button></div>`;
+  document.body.appendChild(d);d.querySelector("button").focus()}
+instShow();
+if("serviceWorker" in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(()=>{}));
 </script>
 </body>
 </html>
