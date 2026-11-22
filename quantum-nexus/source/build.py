@@ -2,9 +2,13 @@ import json,sys,os
 sys.path.insert(0,'/home/claude/qn')
 from matter import LESSONS as M
 from life import LESSONS as LF
+from energy import LESSONS as EN
+from earth import LESSONS as EA
 for l in M: l['s']='matter'
 for l in LF: l['s']='life'
-LESSONS=M+LF
+for l in EN: l['s']='energy'
+for l in EA: l['s']='earth'
+LESSONS=M+LF+EN+EA
 E=json.load(open('/home/claude/qn/elements.json'))
 for l in LESSONS:
     for p,o,x in l['q']:
