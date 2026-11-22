@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>منصة العلوم التفاعلية · Quantum Nexus</title>
+<meta name="description" content="أساسيات العلوم للمرحلة المتوسطة: الجدول الدوري التفاعلي ودروس وأسئلة مع التفسير.">
+<meta name="theme-color" content="#2B1B6B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%232B1B6B'/><g fill='none' stroke='%2367E8F9' stroke-width='3'><ellipse cx='32' cy='32' rx='22' ry='9'/><ellipse cx='32' cy='32' rx='22' ry='9' transform='rotate(60 32 32)'/><ellipse cx='32' cy='32' rx='22' ry='9' transform='rotate(120 32 32)'/></g><circle cx='32' cy='32' r='5' fill='%23FFD566'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16123A;--ink2:#5B5A7E;--bg:#F3F1FF;--card:#fff;--line:#E0DCF5;--brand:#5B3FD9;--cyan:#0FB5CE;--good:#16A34A;--bad:#E5484D;--gold:#F5B800}
+@media (prefers-color-scheme:dark){:root{--ink:#EEEAFF;--ink2:#B3AFD6;--bg:#0D0A24;--card:#1A1540;--line:#2E2860}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Tajawal,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:10px 14px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .brand{font-weight:900;font-size:17px;flex:1;display:flex;align-items:center;gap:8px}
+.top .brand svg{width:30px;height:30px}
+.pill{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-weight:800;font-size:14px}
+#back{display:none}
+main{max-width:980px;margin:0 auto;padding:14px 14px 40px}
+.hero{position:relative;overflow:hidden;border-radius:26px;color:#fff;padding:22px 20px;margin:4px 0 18px;background:radial-gradient(110% 120% at 100% 0%,#0FB5CE 0%,rgba(15,181,206,0) 50%),linear-gradient(135deg,#2B1B6B 0%,#4B2BC4 55%,#7A3FE0 100%);box-shadow:0 12px 30px rgba(75,43,196,.35)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.hero>*{position:relative}
+.kick{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:2px 12px;font-size:13px;font-weight:800}
+.hero h1{margin:8px 0 2px;font-size:30px;line-height:1.25;font-weight:900}
+.hero .en{font-size:15px;font-weight:700;opacity:.85}
+.hero p{margin:8px 0 0;font-weight:600;color:rgba(255,255,255,.92)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stats div{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:6px;text-align:center}
+.stats b{display:block;font-size:20px;font-weight:900}.stats small{font-size:12px;font-weight:700;opacity:.9}
+h2{font-size:19px;font-weight:900;margin:18px 2px 10px}
+.big{display:flex;align-items:center;gap:14px;width:100%;text-align:start;padding:16px;border-radius:22px;border:0;color:#fff;background:linear-gradient(135deg,#0FB5CE,#4B2BC4);box-shadow:0 10px 22px rgba(15,181,206,.3)}
+.big .ic{font-size:38px;flex:none}.big b{display:block;font-size:20px;font-weight:900}.big small{font-weight:700;opacity:.92}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (min-width:720px){.grid2{grid-template-columns:repeat(4,1fr)}}
+.strand{display:flex;flex-direction:column;gap:6px;text-align:start;padding:14px;border-radius:20px;border:1px solid var(--line);background:var(--card);box-shadow:0 4px 12px rgba(43,27,107,.07);min-height:130px}
+.strand .ic{font-size:30px}.strand b{font-size:16px;font-weight:900;line-height:1.35}.strand small{color:var(--ink2);font-weight:700;font-size:13px}
+.strand.soon{opacity:.65;cursor:default}
+.bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#0FB5CE,#5B3FD9);border-radius:999px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tool{display:flex;align-items:center;gap:10px;padding:12px;border-radius:18px;border:1px solid var(--line);background:var(--card);font-weight:800;text-align:start}
+.tool span{font-size:24px}.tool em{font-style:normal;background:var(--bad);color:#fff;border-radius:999px;padding:0 7px;font-size:12px;margin-inline-start:auto}
+.lesson{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:12px 14px;border-radius:18px;border:1px solid var(--line);background:var(--card);margin-bottom:10px}
+.lesson .ic{font-size:28px;flex:none}.lesson b{display:block;font-size:17px}.lesson small{color:var(--ink2);font-weight:700}
+.stars{margin-inline-start:auto;color:var(--gold);font-size:16px;letter-spacing:1px;flex:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px}
+.card ul{margin:0;padding-inline-start:20px}.card li{margin:4px 0}
+.go{display:block;width:100%;border:0;border-radius:16px;padding:13px;font-weight:900;font-size:17px;color:#fff;background:linear-gradient(135deg,#5B3FD9,#7A3FE0);box-shadow:0 6px 14px rgba(91,63,217,.3);margin-top:10px}
+.go.alt{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.qhead{display:flex;justify-content:space-between;color:var(--ink2);font-weight:800;font-size:14px;margin-bottom:6px}
+.q{font-size:19px;font-weight:800;line-height:1.7;margin:6px 0 12px}
+.opt{display:block;width:100%;text-align:start;padding:12px 14px;margin-bottom:10px;border-radius:16px;border:2px solid var(--line);background:var(--card);font-weight:700;font-size:17px}
+.opt.good{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.fb{border-radius:16px;padding:12px 14px;margin-top:4px;font-weight:600}
+.fb.good{background:color-mix(in srgb,var(--good) 12%,var(--card));border:1px solid var(--good)}
+.fb.bad{background:color-mix(in srgb,var(--bad) 10%,var(--card));border:1px solid var(--bad)}
+.score{font-size:46px;font-weight:900;text-align:center;margin:6px 0}
+.center{text-align:center}
+.muted{color:var(--ink2)}
+.fine{color:var(--ink2);font-size:14px}
+/* الجدول الدوري */
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px}
+.legend button{border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:800;background:var(--card);display:flex;align-items:center;gap:5px}
+.legend button i{width:12px;height:12px;border-radius:4px;display:inline-block}
+.legend button.on{outline:2px solid var(--brand)}
+.search{width:100%;font:inherit;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.ptwrap{overflow-x:auto;padding-bottom:8px;margin:0 -14px;padding-inline:14px;direction:ltr}
+.pt{display:grid;grid-template-columns:repeat(18,46px);gap:3px;width:max-content}
+.el{width:46px;height:52px;border-radius:8px;border:0;padding:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;color:#14102E;position:relative}
+.el .n{font-size:9px;font-weight:700;position:absolute;top:2px;left:4px}
+.el .s{font-size:17px;font-weight:900;font-family:system-ui,sans-serif}
+.el .a{font-size:8.5px;font-weight:700;max-width:44px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;direction:rtl}
+.el.dim{opacity:.18}
+.el.gap{background:transparent!important;font-size:10px;color:var(--ink2);font-weight:800}
+.c-alkali{background:#FF9AA2}.c-alkaline{background:#FFC48C}.c-trans{background:#FFE08A}.c-post{background:#B5EAD7}.c-metalloid{background:#9DE0E6}.c-nonmetal{background:#A0C4FF}.c-halogen{background:#C3B1FF}.c-noble{background:#FFB3E6}.c-lanth{background:#D4F29A}.c-act{background:#E8C7A0}
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(10,8,30,.55);display:flex;align-items:flex-end;justify-content:center}
+.sheet>div{background:var(--card);width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:18px 18px 26px;max-height:85vh;overflow:auto}
+.elhead{display:flex;align-items:center;gap:14px}
+.elbig{width:86px;height:96px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#14102E;flex:none}
+.elbig .s{font-size:36px;font-weight:900;font-family:system-ui,sans-serif;line-height:1}.elbig .n{font-weight:800}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.facts div{border:1px solid var(--line);border-radius:12px;padding:8px}.facts small{display:block;color:var(--ink2);font-weight:700;font-size:12px}.facts b{font-size:16px}
+footer{text-align:center;color:var(--ink2);font-size:13px;margin-top:22px}
+footer a{color:inherit}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#16123A;color:#fff;padding:10px 16px;border-radius:14px;font-weight:800;z-index:60}
+@media (prefers-reduced-motion:reduce){.hero canvas{display:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="pill" id="back" onclick="back()">رجوع</button>
+  <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2B1B6B"/><g fill="none" stroke="#67E8F9" stroke-width="3"><ellipse cx="32" cy="32" rx="22" ry="9"/><ellipse cx="32" cy="32" rx="22" ry="9" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="22" ry="9" transform="rotate(120 32 32)"/></g><circle cx="32" cy="32" r="5" fill="#FFD566"/></svg>Quantum Nexus</div>
+  <span class="pill" aria-label="النقاط">⭐ <span id="pts">0</span></span>
+</header>
+<main id="app"></main>
+<script>
+const ELEMENTS=__ELEMENTS__;
+const LESSONS=__LESSONS__;
+const CAT={alkali:"فلزات قلوية",alkaline:"فلزات قلوية أرضية",trans:"فلزات انتقالية",post:"فلزات أخرى",metalloid:"أشباه فلزات",nonmetal:"لافلزات",halogen:"هالوجينات",noble:"غازات نبيلة",lanth:"لانثانيدات",act:"أكتينيدات"};
+const STATE={solid:"صلب",liquid:"سائل",gas:"غاز",unknown:"غير معروف (عنصر مُصنَّع)"};
+const STRANDS=[
+ {id:"matter",t:"المادة والكيمياء",e:"⚗️",d:"الذرة، والجدول الدوري، والتفاعلات",ready:true},
+ {id:"life",t:"الحياة",e:"🧬",d:"الخلية، وأجهزة الجسم، والوراثة، والبيئة",ready:false},
+ {id:"energy",t:"الطاقة والحركة",e:"⚡",d:"القوى، والطاقة، والكهرباء، والموجات",ready:false},
+ {id:"earth",t:"الأرض والفضاء",e:"🌍",d:"الصخور، والطقس، والنظام الشمسي",ready:false}];
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let P;try{P=JSON.parse(localStorage.getItem("qn2")||"{}")}catch(e){P={}}
+P.pts=P.pts||0;P.stars=P.stars||{};P.mist=P.mist||{};P.seen=P.seen||{};
+const save=()=>{try{localStorage.setItem("qn2",JSON.stringify(P))}catch(e){}$("#pts").textContent=P.pts};
+let stack=[],cur=null;
+function show(html){$("#app").innerHTML=html;$("#back").style.display=stack.length?"inline-block":"none";$("#pts").textContent=P.pts;scrollTo(0,0);if(cur&&cur.fn===home)stars()}
+function go(fn,...a){if(cur)stack.push(cur);cur={fn,a};fn(...a)}
+function back(){const p=stack.pop();if(!p)return home();cur=p;p.fn(...p.a)}
+function swap(fn,...a){cur={fn,a};fn(...a)}
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+const starStr=n=>"★".repeat(n)+"☆".repeat(3-n);
+const qn=n=>n<=10&&n>=3?n+" أسئلة":n+" سؤالًا";
+const mistN=()=>Object.keys(P.mist).length;
+
+/* ===== الرئيسية ===== */
+function home(){
+  const L=LESSONS.length,got=LESSONS.reduce((a,l)=>a+(P.stars[l.id]||0),0),pct=Math.round(got/(L*3)*100);
+  show(`<section class="hero"><canvas id="sky" aria-hidden="true"></canvas>
+    <span class="kick">أساسيات العلوم للمرحلة المتوسطة</span>
+    <h1>منصة العلوم التفاعلية</h1><div class="en">Quantum Nexus</div>
+    <p>أهم أفكار العلوم في المرحلة المتوسطة، مع جدول دوري تفاعلي وأسئلة لكل منها تفسير.</p>
+    <div class="stats"><div><b>118</b><small>عنصرًا</small></div><div><b>${LESSONS.reduce((a,l)=>a+l.q.length,0)}</b><small>سؤالًا</small></div><div><b>${pct}%</b><small>الإنجاز</small></div></div></section>
+  <button class="big" onclick="go(table)"><span class="ic">🧪</span><span><b>الجدول الدوري التفاعلي</b><small>العناصر الـ118 كلها: اضغط أيّ عنصر لتعرف عنه</small></span></button>
+  <h2>محاور العلوم</h2>
+  <div class="grid2">${STRANDS.map(s=>s.ready?`<button class="strand" onclick="go(strand,'${s.id}')"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><span class="bar"><i style="width:${pct}%"></i></span></button>`:`<div class="strand soon" aria-disabled="true"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><small>🛠️ قيد الإعداد</small></div>`).join("")}</div>
+  <h2>أدوات</h2>
+  <div class="tools"><button class="tool" onclick="go(symbolQuiz)"><span>🔤</span>تحدّي الرموز</button><button class="tool" onclick="go(review)"><span>📒</span>مراجعة أخطائي${mistN()?`<em>${mistN()}</em>`:""}</button></div>
+  <footer>أسئلة تدريبية أصلية لأساسيات العلوم، وليست بديلًا عن الكتاب المدرسي أو المعلّم · بلا حساب وبلا إعلانات<br><a href="../">← رحلات تعليمية</a></footer>`);
+}
+function stars(){const c=$("#sky");if(!c||matchMedia("(prefers-reduced-motion: reduce)").matches)return;const x=c.getContext("2d"),r=devicePixelRatio||1;c.width=c.offsetWidth*r;c.height=c.offsetHeight*r;
+  const pts=Array.from({length:40},()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.3*r,vy:(Math.random()-.5)*.3*r}));
+  (function draw(){if(!document.body.contains(c))return;x.clearRect(0,0,c.width,c.height);x.fillStyle="#fff";x.strokeStyle="rgba(255,255,255,.18)";
+   pts.forEach(p=>{p.x=(p.x+p.vx+c.width)%c.width;p.y=(p.y+p.vy+c.height)%c.height;x.beginPath();x.arc(p.x,p.y,1.6*r,0,7);x.fill()});
+   for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<70*r){x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.stroke()}}
+   requestAnimationFrame(draw)})()}
+
+/* ===== المحور والدروس ===== */
+function strand(){
+  show(`<h1 style="font-size:24px;margin:6px 2px">⚗️ المادة والكيمياء</h1><p class="muted" style="margin:0 2px 12px">${LESSONS.length} دروس. ابدأ بالترتيب، أو اختر ما تحتاج إليه.</p>
+  ${LESSONS.map((l,i)=>`<button class="lesson" onclick="go(lesson,'${l.id}')"><span class="ic">${l.e}</span><span><b>${i+1}. ${l.t}</b><small>${qn(l.q.length)}</small></span><span class="stars" aria-label="${P.stars[l.id]||0} من 3 نجوم">${starStr(P.stars[l.id]||0)}</span></button>`).join("")}`);
+}
+const LX=id=>LESSONS.find(l=>l.id===id);
+function lesson(id){const l=LX(id);
+  show(`<h1 style="font-size:24px;margin:6px 2px">${l.e} ${l.t}</h1>
+  <div class="card"><b>💡 أهم الأفكار</b><ul>${l.sum.map(s=>`<li>${s}</li>`).join("")}</ul></div>
+  <button class="go" onclick="swap(quiz,{id:'${id}'})">ابدأ الأسئلة (${l.q.length})</button>
+  ${id==="table"?`<button class="go alt" onclick="go(table)">🧪 افتح الجدول الدوري</button>`:""}`);
+}
+
+/* ===== الأسئلة ===== */
+let Q=null;
+function mk(lid,i){const l=LX(lid),[p,o,x]=l.q[i];return {key:lid+"#"+i,lid,p,ans:o[0],opts:sh(o),x}}
+function quiz(cfg){
+  let list;
+  if(cfg.review){list=Object.keys(P.mist).map(k=>{const [lid,i]=k.split("#");return LX(lid)&&LX(lid).q[+i]?mk(lid,+i):null}).filter(Boolean);list=sh(list).slice(0,10)}
+  else if(cfg.symbols){list=cfg.list}
+  else{const l=LX(cfg.id);list=sh(l.q.map((_,i)=>mk(cfg.id,i)))}
+  if(!list.length){show(`<div class="card center"><p>لا توجد أخطاء للمراجعة 🎉</p></div><button class="go" onclick="swap(home)">الرئيسية</button>`);return}
+  Q={cfg,list,i:0,score:0};step();
+}
+function step(){const t=Q.list[Q.i];Q.done=false;
+  show(`<div class="qhead"><span>${Q.cfg.review?"📒 مراجعة الأخطاء":Q.cfg.symbols?"🔤 تحدّي الرموز":esc(LX(Q.cfg.id).t)}</span><span>${Q.i+1} / ${Q.list.length}</span></div>
+  <div class="bar"><i style="width:${Q.i/Q.list.length*100}%"></i></div>
+  <div class="q">${t.p}</div>
+  ${t.opts.map((o,k)=>`<button class="opt" id="o${k}" onclick="pick(${k})">${o}</button>`).join("")}
+  <div id="fb"></div>`);
+}
+function pick(k){if(Q.done)return;Q.done=true;const t=Q.list[Q.i],ok=t.opts[k]===t.ans;
+  t.opts.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o===t.ans)b.classList.add("good");else if(j===k)b.classList.add("bad")});
+  if(ok){Q.score++;P.pts+=10;if(t.key)delete P.mist[t.key]}else if(t.key)P.mist[t.key]=Date.now();save();
+  $("#fb").innerHTML=`<div class="fb ${ok?"good":"bad"}"><b>${ok?"✅ إجابة صحيحة!":"❌ الإجابة الصحيحة: "+t.ans}</b><br>${t.x}</div>
+  <button class="go" onclick="next()">${Q.i+1<Q.list.length?"التالي":"النتيجة"}</button>`;
+  $("#fb").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function next(){Q.i++;if(Q.i<Q.list.length)step();else finish()}
+function finish(){const n=Q.list.length,s=Q.score,r=s/n,st=r>=.9?3:r>=.7?2:r>=.5?1:0;
+  if(Q.cfg.id){P.stars[Q.cfg.id]=Math.max(P.stars[Q.cfg.id]||0,st);P.pts+=st*10}save();
+  show(`<div class="card center"><div class="score">${s} / ${n}</div>${Q.cfg.id?`<div class="stars" style="font-size:30px;margin:0">${starStr(st)}</div>`:""}
+  <p>${r>=.9?"ممتاز! أتقنت هذا الدرس 🌟":r>=.7?"عمل جيد! راجع الأخطاء لتصل إلى الإتقان 👍":r>=.5?"بداية طيبة؛ اقرأ «أهم الأفكار» ثم حاول مرة أخرى 💪":"لا بأس؛ اقرأ «أهم الأفكار» بهدوء، ثم أعد المحاولة 🤝"}</p></div>
+  <button class="go" onclick="swap(quiz,Q.cfg.symbols?{symbols:true,list:symbolList()}:Q.cfg)">محاولة جديدة</button>
+  ${mistN()?`<button class="go alt" onclick="swap(quiz,{review:true})">📒 مراجعة أخطائي (${mistN()})</button>`:""}
+  <button class="go alt" onclick="stack=[];swap(home)">الرئيسية</button>`);
+}
+function review(){quiz({review:true})}
+
+/* ===== تحدّي الرموز ===== */
+const COMMON=[1,2,3,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,26,29,30,47,50,53,79,80,82,92];
+function symbolList(){return sh(COMMON).slice(0,10).map((z,i)=>{const e=ELEMENTS[z-1],others=sh(COMMON.filter(y=>y!==z)).slice(0,3).map(y=>ELEMENTS[y-1]);
+  return i%2?{p:`ما العنصر الذي رمزه <b dir="ltr">${e.s}</b>؟`,ans:e.ar,opts:sh([e.ar,...others.map(o=>o.ar)]),x:`<b dir="ltr">${e.s}</b> رمز ${e.ar} (${e.en})، وعدده الذري ${e.z}.`}
+   :{p:`ما رمز عنصر <b>${e.ar}</b>؟`,ans:e.s,opts:sh([e.s,...others.map(o=>o.s)]),x:`رمز ${e.ar} هو <b dir="ltr">${e.s}</b>${e.s[0]!==e.en[0]?` (من اسمه اللاتيني أو القديم)`:""}، وعدده الذري ${e.z}.`}})}
+function symbolQuiz(){quiz({symbols:true,list:symbolList()})}
+
+/* ===== الجدول الدوري ===== */
+let filt="",term="";
+function cell(e){const dim=(filt&&e.c!==filt)||(term&&!(e.ar.includes(term)||e.en.toLowerCase().includes(term.toLowerCase())||e.s.toLowerCase()===term.toLowerCase()||String(e.z)===term));
+  return `<button class="el c-${e.c}${dim?" dim":""}" style="grid-column:${e.g};grid-row:${e.p==="la"?9:e.p==="ac"?10:e.p}" onclick="elem(${e.z})" aria-label="${e.ar} ${e.s} العدد الذري ${e.z}"><span class="n">${e.z}</span><span class="s">${e.s}</span><span class="a">${e.ar}</span></button>`}
+function table(){
+  show(`<h1 style="font-size:24px;margin:6px 2px">🧪 الجدول الدوري التفاعلي</h1>
+  <input class="search" id="term" placeholder="ابحث باسم العنصر أو رمزه أو عدده الذري" value="${esc(term)}" oninput="term=this.value.trim();drawPT()">
+  <div class="legend">${Object.entries(CAT).map(([k,v])=>`<button class="${filt===k?"on":""}" onclick="filt=filt==='${k}'?'':'${k}';table()"><i class="c-${k}"></i>${v}</button>`).join("")}</div>
+  <p class="fine" style="margin:0 2px 6px">↔️ اسحب الجدول جانبيًّا لرؤيته كاملًا، واضغط أيّ عنصر لتعرف عنه.</p>
+  <div class="ptwrap"><div class="pt" id="pt"></div></div>
+  <p class="fine">الصفّان السفليّان: اللانثانيدات (57–71) والأكتينيدات (89–103)، ومكانهما في الدورتين السادسة والسابعة.</p>`);
+  drawPT();const t=$("#term");if(term&&t){t.focus();t.setSelectionRange(term.length,term.length)}
+}
+function drawPT(){const el=$("#pt");if(!el)return;
+  el.innerHTML=ELEMENTS.map(cell).join("")+`<div class="el gap" style="grid-column:3;grid-row:6">57–71</div><div class="el gap" style="grid-column:3;grid-row:7">89–103</div><div style="grid-row:8;height:10px"></div>`;
+  if(term){const hit=ELEMENTS.filter(e=>e.ar.includes(term)||e.en.toLowerCase().includes(term.toLowerCase())||e.s.toLowerCase()===term.toLowerCase()||String(e.z)===term);if(hit.length===1){const b=el.children[hit[0].z-1];b&&b.scrollIntoView({block:"nearest",inline:"center"})}}
+}
+function elem(z){const e=ELEMENTS[z-1];P.seen[z]=1;save();
+  const d=document.createElement("div");d.className="sheet";d.onclick=ev=>{if(ev.target===d)d.remove()};
+  d.innerHTML=`<div role="dialog" aria-label="${e.ar}"><div class="elhead"><div class="elbig c-${e.c}"><span class="n">${e.z}</span><span class="s">${e.s}</span></div>
+  <div><b style="font-size:24px">${e.ar}</b><div class="muted" dir="ltr" style="text-align:right">${e.en}</div><div class="muted">${CAT[e.c]}</div></div></div>
+  ${e.f?`<div class="card" style="margin:12px 0 0">💡 ${e.f}</div>`:""}
+  <div class="facts"><div><small>العدد الذري (عدد البروتونات)</small><b>${e.z}</b></div><div><small>الكتلة الذرية</small><b dir="ltr">${e.m}</b></div>
+  <div><small>الدورة</small><b>${e.p==="la"?6:e.p==="ac"?7:e.p}</b></div><div><small>المجموعة</small><b>${e.p==="la"||e.p==="ac"?"3 (سلسلة "+(e.p==="la"?"اللانثانيدات":"الأكتينيدات")+")":e.g}</b></div>
+  <div><small>الحالة في درجة حرارة الغرفة</small><b>${STATE[e.st]}</b></div><div><small>مشعّ؟</small><b>${e.r?"نعم ☢️":"لا"}</b></div></div>
+  <p class="fine">في الذرة المتعادلة من ${e.ar}: عدد البروتونات = عدد الإلكترونات = ${e.z}.</p>
+  <button class="go alt" onclick="this.closest('.sheet').remove()">إغلاق</button></div>`;
+  document.body.appendChild(d);
+}
+addEventListener("keydown",e=>{if(e.key==="Escape"){const s=$(".sheet");if(s)s.remove()}});
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+swap(home);
+</script>
+</body>
+</html>

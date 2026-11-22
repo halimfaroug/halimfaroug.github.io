@@ -18,5 +18,6 @@ GitHub Pages publishes this repository automatically.
 
 - `skills-journey/` is now the main copy of Skills Journey. Raise the cache version in `skills-journey/sw.js` with every change. `tools/check-bank.js` checks the question bank on every push.
 - `kalimati/` is a static build of the `kalimati-crafter` repository (TanStack Start SPA mode, base `/kalimati/`). Rebuild and copy it after changes there.
-- `math5/` comes from `Math5-Expert`; `quantum-nexus/` comes from `Quantum-Nexus_Modern_Academy-Schools`.
+- `math5/` comes from `Math5-Expert`.
+- `quantum-nexus/` is built from the files in `quantum-nexus/source/` (elements data from the `periodictable` library, lessons in `matter.py`); the old placeholder version is kept in the `Quantum-Nexus_Modern_Academy-Schools` repository as `quantum-nexus-app.html`.
 - Each app keeps its saved progress under its own storage keys, so the apps do not interfere with each other.

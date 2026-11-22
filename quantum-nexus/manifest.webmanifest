@@ -1,0 +1,20 @@
+{
+ "name": "منصة العلوم التفاعلية · Quantum Nexus",
+ "short_name": "Quantum Nexus",
+ "lang": "ar",
+ "dir": "rtl",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#F3F1FF",
+ "theme_color": "#2B1B6B",
+ "description": "أساسيات العلوم للمرحلة المتوسطة: الجدول الدوري التفاعلي ودروس وأسئلة مع التفسير.",
+ "icons": [
+  {
+   "src": "icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any"
+  }
+ ]
+}

@@ -1,1983 +1,240 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<script>(function(){var h=location.hash,ok=["elementsExplored", "hasVisited", "unlockedAchievements", "userPoints"];if(h.indexOf("#carry=")===0){try{var d=JSON.parse(decodeURIComponent(escape(atob(h.slice(7).replace(/-/g,"+").replace(/_/g,"/")))));ok.forEach(function(k){if(d[k]!=null&&localStorage.getItem(k)===null)localStorage.setItem(k,d[k])})}catch(e){}try{history.replaceState(null,"",location.pathname)}catch(e){}}})();</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة العلوم التفاعلية - Quantum Nexus</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>منصة العلوم التفاعلية · Quantum Nexus</title>
+<meta name="description" content="أساسيات العلوم للمرحلة المتوسطة: الجدول الدوري التفاعلي ودروس وأسئلة مع التفسير.">
+<meta name="theme-color" content="#2B1B6B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%232B1B6B'/><g fill='none' stroke='%2367E8F9' stroke-width='3'><ellipse cx='32' cy='32' rx='22' ry='9'/><ellipse cx='32' cy='32' rx='22' ry='9' transform='rotate(60 32 32)'/><ellipse cx='32' cy='32' rx='22' ry='9' transform='rotate(120 32 32)'/></g><circle cx='32' cy='32' r='5' fill='%23FFD566'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ============================================
-   ROOT VARIABLES & GLOBAL STYLES
-   ============================================ */
-:root {
-    --primary-color: #2563eb;
-    --secondary-color: #7c3aed;
-    --success-color: #10b981;
-    --warning-color: #f59e0b;
-    --danger-color: #ef4444;
-    --dark-color: #1e293b;
-    --light-color: #f8fafc;
-    --text-color: #334155;
-    --border-color: #e2e8f0;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-    --border-radius: 12px;
-    --transition: all 0.3s ease;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Tajawal', Arial, sans-serif;
-    background-color: transparent; /* شفاف لإظهار الخلفية المتحركة */
-    color: var(--text-color);
-    line-height: 1.6;
-    direction: rtl;
-    min-height: 100vh;
-}
-
-/* الخلفية المتحركة */
-#bgCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(135deg, #0a0f1e, #1a1f2f);
-    display: block;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    position: relative;
-    z-index: 1;
-}
-
-/* ============================================
-   HEADER
-   ============================================ */
-.main-header {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
-    color: white;
-    padding: 1rem 0;
-    box-shadow: var(--shadow-lg);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    animation: logoFloat 3s ease-in-out infinite;
-}
-
-@keyframes logoFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-.logo i {
-    font-size: 2rem;
-}
-
-.logo h1 {
-    font-size: 1.5rem;
-    font-weight: 900;
-}
-
-.main-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.main-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-}
-
-.main-nav a:hover,
-.main-nav a.active {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.user-points {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
-.music-control {
-    background-color: rgba(255,255,255,0.2);
-    border: none;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: var(--transition);
-}
-.music-control:hover {
-    background-color: rgba(255,255,255,0.3);
-    transform: scale(1.05);
-}
-
-/* ============================================
-   PAGE SECTIONS
-   ============================================ */
-.page-section {
-    display: none;
-    min-height: calc(100vh - 200px);
-}
-
-.page-section.active {
-    display: block;
-}
-
-.page-header {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
-    color: white;
-    padding: 2rem 0;
-    text-align: center;
-    backdrop-filter: blur(5px);
-}
-
-.page-header h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.page-header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-.section-title {
-    font-size: 1.75rem;
-    color: var(--dark-color);
-    text-align: center;
-    margin: 2rem 0;
-    text-shadow: 0 2px 4px rgba(255,255,255,0.5);
-}
-
-/* ============================================
-   HERO SECTION
-   ============================================ */
-.hero {
-    background: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(124,58,237,0.95));
-    color: white;
-    padding: 4rem 0;
-    text-align: center;
-    backdrop-filter: blur(5px);
-}
-
-.hero h2 {
-    font-size: 3rem;
-    font-weight: 900;
-    margin-bottom: 1rem;
-}
-
-.hero .subtitle {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 0 auto 2rem;
-    opacity: 0.95;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.btn {
-    padding: 0.75rem 2rem;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: none;
-}
-
-.btn-primary {
-    background-color: white;
-    color: var(--primary-color);
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-}
-
-.btn-secondary:hover {
-    background-color: white;
-    color: var(--primary-color);
-}
-
-/* ============================================
-   QUICK ACCESS CARDS
-   ============================================ */
-.quick-access {
-    padding: 3rem 0;
-}
-
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.card {
-    background: rgba(255,255,255,0.9);
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    backdrop-filter: blur(5px);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-lg);
-    background: rgba(255,255,255,0.95);
-}
-
-.card i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.card h3 {
-    font-size: 1.25rem;
-    color: var(--dark-color);
-    margin-bottom: 0.5rem;
-}
-
-.card p {
-    color: var(--text-color);
-}
-
-/* ============================================
-   FOOTER
-   ============================================ */
-.main-footer {
-    background-color: rgba(30,41,59,0.95);
-    color: white;
-    padding: 2rem 0 1rem;
-    margin-top: 4rem;
-    backdrop-filter: blur(5px);
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-section h3, .footer-section h4 {
-    margin-bottom: 1rem;
-}
-
-.footer-section p {
-    opacity: 0.9;
-    margin-bottom: 0.5rem;
-}
-
-.school-name {
-    color: var(--warning-color);
-    font-weight: 600;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0.8;
-}
-
-/* ============================================
-   PERIODIC TABLE STYLES
-   ============================================ */
-.periodic-table {
-    display: grid;
-    grid-template-columns: repeat(18, 60px);
-    grid-gap: 4px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: rgba(255,255,255,0.9);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-lg);
-    overflow-x: auto;
-    backdrop-filter: blur(5px);
-}
-
-.element {
-    width: 60px;
-    height: 70px;
-    border-radius: 4px;
-    padding: 4px;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 600;
-    position: relative;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.element:hover {
-    transform: scale(1.15);
-    box-shadow: var(--shadow-lg);
-    z-index: 10;
-}
-
-.element .atomic-number {
-    font-size: 0.7rem;
-    position: absolute;
-    top: 2px;
-    right: 4px;
-}
-
-.element .symbol {
-    font-size: 1.25rem;
-    font-weight: 700;
-}
-
-.element .name {
-    font-size: 0.65rem;
-    text-align: center;
-}
-
-.metal { background-color: #3b82f6; }
-.nonmetal { background-color: #ef4444; }
-.metalloid { background-color: #f59e0b; }
-.noble-gas { background-color: #8b5cf6; }
-.alkali-metal { background-color: #06b6d4; }
-.alkaline-earth { background-color: #10b981; }
-.transition-metal { background-color: #6366f1; }
-.halogen { background-color: #ec4899; }
-
-/* ============================================
-   MODAL
-   ============================================ */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation: fadeIn 0.3s;
-}
-
-.modal-content {
-    background-color: rgba(255,255,255,0.95);
-    margin: 5% auto;
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    width: 90%;
-    max-width: 600px;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    animation: slideIn 0.3s;
-    backdrop-filter: blur(10px);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.close {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.close:hover {
-    color: var(--danger-color);
-}
-
-/* ============================================
-   GRADE SELECTOR
-   ============================================ */
-.grade-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin: 2rem 0;
-}
-
-.grade-btn {
-    background: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(124,58,237,0.95));
-    color: white;
-    border: none;
-    padding: 1.5rem 2.5rem;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 1.1rem;
-    font-weight: 600;
-    box-shadow: var(--shadow);
-    min-width: 250px;
-    backdrop-filter: blur(5px);
-}
-
-.grade-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.grade-btn.active {
-    background: linear-gradient(135deg, rgba(16,185,129,0.95), #059669);
-}
-
-/* ============================================
-   UNITS GRID
-   ============================================ */
-.units-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.unit-card {
-    background: rgba(255,255,255,0.9);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: var(--transition);
-    backdrop-filter: blur(5px);
-}
-
-.unit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    background: rgba(255,255,255,0.95);
-}
-
-.unit-header {
-    background: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(124,58,237,0.95));
-    color: white;
-    padding: 1.5rem;
-    text-align: center;
-}
-
-.unit-header h4 {
-    font-size: 1.25rem;
-    font-weight: 700;
-}
-
-.unit-description {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.lessons-list {
-    padding: 1.5rem;
-}
-
-.lesson-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
-    background-color: rgba(241,245,249,0.8);
-    border-radius: 8px;
-}
-
-.lesson-item i {
-    color: var(--success-color);
-}
-
-/* ============================================
-   EXPERIMENTS
-   ============================================ */
-.experiments-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.experiment-card {
-    background: rgba(255,255,255,0.9);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: var(--transition);
-    backdrop-filter: blur(5px);
-}
-
-.experiment-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    background: rgba(255,255,255,0.95);
-}
-
-.experiment-image {
-    background: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(124,58,237,0.95));
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 4rem;
-}
-
-.experiment-content {
-    padding: 1.5rem;
-}
-
-.experiment-meta {
-    display: flex;
-    gap: 1.5rem;
-    margin: 1rem 0;
-    font-size: 0.9rem;
-}
-
-/* ============================================
-   QUIZZES
-   ============================================ */
-.quizzes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.quiz-card {
-    background: rgba(255,255,255,0.9);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    padding: 2rem;
-    text-align: center;
-    transition: var(--transition);
-    backdrop-filter: blur(5px);
-}
-
-.quiz-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    background: rgba(255,255,255,0.95);
-}
-
-.quiz-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(124,58,237,0.95));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2.5rem;
-}
-
-/* ============================================
-   ACHIEVEMENTS
-   ============================================ */
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.achievement-card {
-    background: rgba(255,255,255,0.9);
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    box-shadow: var(--shadow);
-    text-align: center;
-    transition: var(--transition);
-    position: relative;
-    backdrop-filter: blur(5px);
-}
-
-.achievement-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-}
-
-.achievement-card.locked {
-    opacity: 0.6;
-}
-
-.achievement-badge {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-}
-
-.achievement-card.unlocked .achievement-badge {
-    background: linear-gradient(135deg, rgba(16,185,129,0.95), #059669);
-    color: white;
-}
-
-.achievement-card.locked .achievement-badge {
-    background-color: var(--border-color);
-    color: var(--text-color);
-}
-
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
-@media (max-width: 768px) {
-    .hero h2 { font-size: 2rem; }
-    .hero .subtitle { font-size: 1.2rem; }
-    
-    .main-nav ul {
-        flex-direction: column;
-        gap: 0.25rem;
-    }
-    
-    .cards-grid,
-    .units-grid,
-    .experiments-grid,
-    .quizzes-grid,
-    .achievements-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .periodic-table {
-        grid-template-columns: repeat(18, 45px);
-    }
-    
-    .element {
-        width: 45px;
-        height: 55px;
-    }
-}
-
-/* ============================================
-   NOTIFICATION
-   ============================================ */
-.notification {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, rgba(16,185,129,0.95), #059669);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-lg);
-    z-index: 3000;
-    animation: slideDown 0.5s ease-out;
-    backdrop-filter: blur(5px);
-}
-
-@keyframes slideDown {
-    from {
-        transform: translate(-50%, -100px);
-        opacity: 0;
-    }
-    to {
-        transform: translate(-50%, 0);
-        opacity: 1;
-    }
-}
-
-/* Loading State */
-.loading {
-    text-align: center;
-    padding: 3rem;
-    color: var(--text-color);
-}
-
-.loading i {
-    font-size: 3rem;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+:root{--ink:#16123A;--ink2:#5B5A7E;--bg:#F3F1FF;--card:#fff;--line:#E0DCF5;--brand:#5B3FD9;--cyan:#0FB5CE;--good:#16A34A;--bad:#E5484D;--gold:#F5B800}
+@media (prefers-color-scheme:dark){:root{--ink:#EEEAFF;--ink2:#B3AFD6;--bg:#0D0A24;--card:#1A1540;--line:#2E2860}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Tajawal,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:10px 14px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .brand{font-weight:900;font-size:17px;flex:1;display:flex;align-items:center;gap:8px}
+.top .brand svg{width:30px;height:30px}
+.pill{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-weight:800;font-size:14px}
+#back{display:none}
+main{max-width:980px;margin:0 auto;padding:14px 14px 40px}
+.hero{position:relative;overflow:hidden;border-radius:26px;color:#fff;padding:22px 20px;margin:4px 0 18px;background:radial-gradient(110% 120% at 100% 0%,#0FB5CE 0%,rgba(15,181,206,0) 50%),linear-gradient(135deg,#2B1B6B 0%,#4B2BC4 55%,#7A3FE0 100%);box-shadow:0 12px 30px rgba(75,43,196,.35)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.hero>*{position:relative}
+.kick{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:2px 12px;font-size:13px;font-weight:800}
+.hero h1{margin:8px 0 2px;font-size:30px;line-height:1.25;font-weight:900}
+.hero .en{font-size:15px;font-weight:700;opacity:.85}
+.hero p{margin:8px 0 0;font-weight:600;color:rgba(255,255,255,.92)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stats div{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:6px;text-align:center}
+.stats b{display:block;font-size:20px;font-weight:900}.stats small{font-size:12px;font-weight:700;opacity:.9}
+h2{font-size:19px;font-weight:900;margin:18px 2px 10px}
+.big{display:flex;align-items:center;gap:14px;width:100%;text-align:start;padding:16px;border-radius:22px;border:0;color:#fff;background:linear-gradient(135deg,#0FB5CE,#4B2BC4);box-shadow:0 10px 22px rgba(15,181,206,.3)}
+.big .ic{font-size:38px;flex:none}.big b{display:block;font-size:20px;font-weight:900}.big small{font-weight:700;opacity:.92}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (min-width:720px){.grid2{grid-template-columns:repeat(4,1fr)}}
+.strand{display:flex;flex-direction:column;gap:6px;text-align:start;padding:14px;border-radius:20px;border:1px solid var(--line);background:var(--card);box-shadow:0 4px 12px rgba(43,27,107,.07);min-height:130px}
+.strand .ic{font-size:30px}.strand b{font-size:16px;font-weight:900;line-height:1.35}.strand small{color:var(--ink2);font-weight:700;font-size:13px}
+.strand.soon{opacity:.65;cursor:default}
+.bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#0FB5CE,#5B3FD9);border-radius:999px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tool{display:flex;align-items:center;gap:10px;padding:12px;border-radius:18px;border:1px solid var(--line);background:var(--card);font-weight:800;text-align:start}
+.tool span{font-size:24px}.tool em{font-style:normal;background:var(--bad);color:#fff;border-radius:999px;padding:0 7px;font-size:12px;margin-inline-start:auto}
+.lesson{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:12px 14px;border-radius:18px;border:1px solid var(--line);background:var(--card);margin-bottom:10px}
+.lesson .ic{font-size:28px;flex:none}.lesson b{display:block;font-size:17px}.lesson small{color:var(--ink2);font-weight:700}
+.stars{margin-inline-start:auto;color:var(--gold);font-size:16px;letter-spacing:1px;flex:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px}
+.card ul{margin:0;padding-inline-start:20px}.card li{margin:4px 0}
+.go{display:block;width:100%;border:0;border-radius:16px;padding:13px;font-weight:900;font-size:17px;color:#fff;background:linear-gradient(135deg,#5B3FD9,#7A3FE0);box-shadow:0 6px 14px rgba(91,63,217,.3);margin-top:10px}
+.go.alt{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.qhead{display:flex;justify-content:space-between;color:var(--ink2);font-weight:800;font-size:14px;margin-bottom:6px}
+.q{font-size:19px;font-weight:800;line-height:1.7;margin:6px 0 12px}
+.opt{display:block;width:100%;text-align:start;padding:12px 14px;margin-bottom:10px;border-radius:16px;border:2px solid var(--line);background:var(--card);font-weight:700;font-size:17px}
+.opt.good{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.fb{border-radius:16px;padding:12px 14px;margin-top:4px;font-weight:600}
+.fb.good{background:color-mix(in srgb,var(--good) 12%,var(--card));border:1px solid var(--good)}
+.fb.bad{background:color-mix(in srgb,var(--bad) 10%,var(--card));border:1px solid var(--bad)}
+.score{font-size:46px;font-weight:900;text-align:center;margin:6px 0}
+.center{text-align:center}
+.muted{color:var(--ink2)}
+.fine{color:var(--ink2);font-size:14px}
+/* الجدول الدوري */
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px}
+.legend button{border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:800;background:var(--card);display:flex;align-items:center;gap:5px}
+.legend button i{width:12px;height:12px;border-radius:4px;display:inline-block}
+.legend button.on{outline:2px solid var(--brand)}
+.search{width:100%;font:inherit;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.ptwrap{overflow-x:auto;padding-bottom:8px;margin:0 -14px;padding-inline:14px;direction:ltr}
+.pt{display:grid;grid-template-columns:repeat(18,46px);gap:3px;width:max-content}
+.el{width:46px;height:52px;border-radius:8px;border:0;padding:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;color:#14102E;position:relative}
+.el .n{font-size:9px;font-weight:700;position:absolute;top:2px;left:4px}
+.el .s{font-size:17px;font-weight:900;font-family:system-ui,sans-serif}
+.el .a{font-size:8.5px;font-weight:700;max-width:44px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;direction:rtl}
+.el.dim{opacity:.18}
+.el.gap{background:transparent!important;font-size:10px;color:var(--ink2);font-weight:800}
+.c-alkali{background:#FF9AA2}.c-alkaline{background:#FFC48C}.c-trans{background:#FFE08A}.c-post{background:#B5EAD7}.c-metalloid{background:#9DE0E6}.c-nonmetal{background:#A0C4FF}.c-halogen{background:#C3B1FF}.c-noble{background:#FFB3E6}.c-lanth{background:#D4F29A}.c-act{background:#E8C7A0}
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(10,8,30,.55);display:flex;align-items:flex-end;justify-content:center}
+.sheet>div{background:var(--card);width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:18px 18px 26px;max-height:85vh;overflow:auto}
+.elhead{display:flex;align-items:center;gap:14px}
+.elbig{width:86px;height:96px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#14102E;flex:none}
+.elbig .s{font-size:36px;font-weight:900;font-family:system-ui,sans-serif;line-height:1}.elbig .n{font-weight:800}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.facts div{border:1px solid var(--line);border-radius:12px;padding:8px}.facts small{display:block;color:var(--ink2);font-weight:700;font-size:12px}.facts b{font-size:16px}
+footer{text-align:center;color:var(--ink2);font-size:13px;margin-top:22px}
+footer a{color:inherit}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#16123A;color:#fff;padding:10px 16px;border-radius:14px;font-weight:800;z-index:60}
+@media (prefers-reduced-motion:reduce){.hero canvas{display:none}}
 </style>
 </head>
 <body>
-
-<!-- خلفية متحركة -->
-<canvas id="bgCanvas"></canvas>
-
-<!-- موسيقى خلفية (تبدأ صامتة لتجنب حظر المتصفح) -->
-<audio id="bgMusic" loop preload="none">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    متصفحك لا يدعم تشغيل الصوت.
-</audio>
-
-<!-- Header -->
-<header class="main-header">
-    <div class="container">
-        <div class="header-content">
-            <div class="logo">
-                <i class="fas fa-atom"></i>
-                <h1>منصة العلوم التفاعلية</h1>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#" onclick="showPage('home')" class="nav-link active"><i class="fas fa-home"></i> الرئيسية</a></li>
-                    <li><a href="#" onclick="showPage('curriculum')" class="nav-link"><i class="fas fa-book"></i> المنهج</a></li>
-                    <li><a href="#" onclick="showPage('periodic-table')" class="nav-link"><i class="fas fa-flask"></i> الجدول الدوري</a></li>
-                    <li><a href="#" onclick="showPage('experiments')" class="nav-link"><i class="fas fa-microscope"></i> التجارب</a></li>
-                    <li><a href="#" onclick="showPage('quizzes')" class="nav-link"><i class="fas fa-brain"></i> الاختبارات</a></li>
-                    <li><a href="#" onclick="showPage('achievements')" class="nav-link"><i class="fas fa-trophy"></i> الإنجازات</a></li>
-                </ul>
-            </nav>
-            <div style="display: flex; gap: 0.5rem;">
-                <div class="user-points">
-                    <i class="fas fa-star"></i>
-                    <span id="userPoints">0</span> نقطة
-                </div>
-                <button class="music-control" id="musicToggle" onclick="toggleMusic()">
-                    <i class="fas fa-volume-mute" id="musicIcon"></i> تشغيل الموسيقى
-                </button>
-            </div>
-        </div>
-    </div>
+<header class="top">
+  <button class="pill" id="back" onclick="back()">رجوع</button>
+  <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2B1B6B"/><g fill="none" stroke="#67E8F9" stroke-width="3"><ellipse cx="32" cy="32" rx="22" ry="9"/><ellipse cx="32" cy="32" rx="22" ry="9" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="22" ry="9" transform="rotate(120 32 32)"/></g><circle cx="32" cy="32" r="5" fill="#FFD566"/></svg>Quantum Nexus</div>
+  <span class="pill" aria-label="النقاط">⭐ <span id="pts">0</span></span>
 </header>
-
-<!-- HOME PAGE -->
-<section id="home" class="page-section active">
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="container">
-            <h2>مرحباً بك في منصة العلوم التفاعلية</h2>
-            <p class="subtitle">تعلم العلوم بطريقة ممتعة وتفاعلية</p>
-            <p>منصة تعليمية متكاملة للمرحلة المتوسطة تحتوي على دروس تفاعلية، جدول دوري تفاعلي، تجارب افتراضية، واختبارات ذكية</p>
-            <div class="hero-buttons">
-                <a href="#" onclick="showPage('curriculum')" class="btn btn-primary">
-                    <i class="fas fa-arrow-left"></i> ابدأ التعلم
-                </a>
-                <a href="#about" class="btn btn-secondary">
-                    <i class="fas fa-info-circle"></i> اعرف المزيد
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quick Access -->
-    <section class="quick-access">
-        <div class="container">
-            <h3 class="section-title">الوصول السريع</h3>
-            <div class="cards-grid">
-                <div class="card" onclick="showPage('curriculum')">
-                    <i class="fas fa-book-reader"></i>
-                    <h3>منهج الصف الأول</h3>
-                    <p>استكشف دروس الصف الأول المتوسط</p>
-                </div>
-                <div class="card" onclick="showPage('curriculum')">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>منهج الصف الثالث</h3>
-                    <p>استكشف دروس الصف الثالث المتوسط</p>
-                </div>
-                <div class="card" onclick="showPage('periodic-table')">
-                    <i class="fas fa-flask"></i>
-                    <h3>الجدول الدوري التفاعلي</h3>
-                    <p>اكتشف عناصر الجدول الدوري</p>
-                </div>
-                <div class="card" onclick="showPage('experiments')">
-                    <i class="fas fa-microscope"></i>
-                    <h3>التجارب الافتراضية</h3>
-                    <p>جرّب التجارب العلمية بأمان</p>
-                </div>
-                <div class="card" onclick="showPage('quizzes')">
-                    <i class="fas fa-brain"></i>
-                    <h3>الاختبارات الذكية</h3>
-                    <p>اختبر معلوماتك واكسب النقاط</p>
-                </div>
-            </div>
-        </div>
-    </section>
-</section>
-
-<!-- CURRICULUM PAGE -->
-<section id="curriculum" class="page-section">
-    <div class="page-header">
-        <div class="container">
-            <h2><i class="fas fa-book"></i> المنهج الدراسي</h2>
-            <p>استكشف جميع وحدات ودروس المرحلة المتوسطة</p>
-        </div>
-    </div>
-    
-    <div class="container" style="padding: 2rem 0;">
-        <h3 class="section-title">اختر الصف الدراسي</h3>
-        <div class="grade-buttons">
-            <button class="grade-btn active" onclick="selectGrade(1)">
-                <i class="fas fa-book-reader"></i><br>
-                الصف الأول المتوسط
-            </button>
-            <button class="grade-btn" onclick="selectGrade(3)">
-                <i class="fas fa-graduation-cap"></i><br>
-                الصف الثالث المتوسط
-            </button>
-        </div>
-        
-        <!-- Grade 1 Content -->
-        <div id="grade1-content" class="grade-content" style="display: block;">
-            <h3 class="section-title">الصف الأول المتوسط - الفصل الدراسي الأول</h3>
-            <div class="units-grid">
-                <div class="unit-card">
-                    <div class="unit-header">
-                        <h4>الوحدة 1: العلم وتفاعلات الأجسام</h4>
-                    </div>
-                    <div class="unit-description">
-                        <p>مقدمة في علم الفيزياء والقوى والحركة</p>
-                    </div>
-                    <div class="lessons-list">
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>العلم وعملياته</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الحركة</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>قوانين نيوتن للحركة</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الشغل والطاقة</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="unit-card">
-                    <div class="unit-header">
-                        <h4>الوحدة 2: طبيعة المادة</h4>
-                    </div>
-                    <div class="unit-description">
-                        <p>تركيب المادة وخواصها وحالاتها</p>
-                    </div>
-                    <div class="lessons-list">
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الخواص والتغيرات الفيزيائية</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الخواص والتغيرات الكيميائية</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الذرة والعناصر</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>المركبات والصيغ الكيميائية</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="unit-card">
-                    <div class="unit-header">
-                        <h4>الوحدة 3: الأنظمة البيئية والتنوع الحيوي</h4>
-                    </div>
-                    <div class="unit-description">
-                        <p>تفاعل الكائنات الحية مع البيئة</p>
-                    </div>
-                    <div class="lessons-list">
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>مبادئ علم البيئة</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>المخلوقات الحية والطاقة</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>التنوع الحيوي والمحافظة عليه</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>علم البيئة التطبيقي</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="unit-card">
-                    <div class="unit-header">
-                        <h4>الوحدة 4: الطاقة الحرارية والموجات</h4>
-                    </div>
-                    <div class="unit-description">
-                        <p>دراسة الحرارة والطاقة والموجات</p>
-                    </div>
-                    <div class="lessons-list">
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>درجة الحرارة والطاقة الحرارية</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>تحولات الطاقة والحرارة</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الموجات</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الموجات الكهرومغناطيسية</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Grade 3 Content -->
-        <div id="grade3-content" class="grade-content" style="display: none;">
-            <h3 class="section-title">الصف الثالث المتوسط - الفصل الدراسي الأول</h3>
-            <div class="units-grid">
-                <div class="unit-card">
-                    <div class="unit-header">
-                        <h4>الوحدة 1: طبيعة العلم والتغيرات الكيميائية</h4>
-                    </div>
-                    <div class="unit-description">
-                        <p>التفاعلات الكيميائية والمعادلات</p>
-                    </div>
-                    <div class="lessons-list">
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>طبيعة العلم</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>التفاعلات الكيميائية</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>المعادلات الكيميائية</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>أنواع التفاعلات الكيميائية</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="unit-card">
-                    <div class="unit-header">
-                        <h4>الوحدة 2: الجدول الدوري والروابط الكيميائية</h4>
-                    </div>
-                    <div class="unit-description">
-                        <p>تنظيم العناصر والروابط بينها</p>
-                    </div>
-                    <div class="lessons-list">
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الجدول الدوري</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>العناصر والمركبات</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الروابط الأيونية</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الروابط التساهمية</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="unit-card">
-                    <div class="unit-header">
-                        <h4>الوحدة 3: الحركة والقوة والآلات البسيطة</h4>
-                    </div>
-                    <div class="unit-description">
-                        <p>الحركة والسرعة والتسارع والقوى</p>
-                    </div>
-                    <div class="lessons-list">
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الحركة</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>التسارع</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>القوة والحركة</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الآلات البسيطة</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="unit-card">
-                    <div class="unit-header">
-                        <h4>الوحدة 4: الكهرباء والمغناطيسية</h4>
-                    </div>
-                    <div class="unit-description">
-                        <p>التيار الكهربائي والمجال المغناطيسي</p>
-                    </div>
-                    <div class="lessons-list">
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الكهرباء</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>التيار الكهربائي والدوائر</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>المغناطيسية</span>
-                        </div>
-                        <div class="lesson-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>الكهرومغناطيسية</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- PERIODIC TABLE PAGE -->
-<section id="periodic-table" class="page-section">
-    <div class="page-header">
-        <div class="container">
-            <h2><i class="fas fa-flask"></i> الجدول الدوري التفاعلي</h2>
-            <p>اكتشف خصائص 118 عنصراً كيميائياً</p>
-        </div>
-    </div>
-    
-    <div class="container" style="padding: 2rem 0;">
-        <div id="periodic-table-container" class="loading">
-            <i class="fas fa-spinner fa-spin"></i>
-            <p>جاري تحميل الجدول الدوري...</p>
-        </div>
-    </div>
-</section>
-
-<!-- EXPERIMENTS PAGE -->
-<section id="experiments" class="page-section">
-    <div class="page-header">
-        <div class="container">
-            <h2><i class="fas fa-microscope"></i> التجارب العلمية التفاعلية</h2>
-            <p>تعلم بالتجربة والممارسة</p>
-        </div>
-    </div>
-    
-    <div class="container" style="padding: 2rem 0;">
-        <h3 class="section-title">التجارب المتاحة</h3>
-        <div class="experiments-grid">
-            <div class="experiment-card">
-                <div class="experiment-image">
-                    <i class="fas fa-vial"></i>
-                </div>
-                <div class="experiment-content">
-                    <h4>قياس كثافة المواد</h4>
-                    <p>تجربة لقياس كثافة المواد الصلبة والسائلة</p>
-                    <div class="experiment-meta">
-                        <span><i class="fas fa-clock"></i> 20 دقيقة</span>
-                        <span><i class="fas fa-signal"></i> سهل</span>
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="viewExperiment(1)">
-                        <i class="fas fa-play"></i> ابدأ التجربة
-                    </button>
-                </div>
-            </div>
-            
-            <div class="experiment-card">
-                <div class="experiment-image">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <div class="experiment-content">
-                    <h4>الدائرة الكهربائية البسيطة</h4>
-                    <p>بناء دائرة كهربائية وفهم مكوناتها</p>
-                    <div class="experiment-meta">
-                        <span><i class="fas fa-clock"></i> 25 دقيقة</span>
-                        <span><i class="fas fa-signal"></i> متوسط</span>
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="viewExperiment(2)">
-                        <i class="fas fa-play"></i> ابدأ التجربة
-                    </button>
-                </div>
-            </div>
-            
-            <div class="experiment-card">
-                <div class="experiment-image">
-                    <i class="fas fa-seedling"></i>
-                </div>
-                <div class="experiment-content">
-                    <h4>التركيب الضوئي في النباتات</h4>
-                    <p>دراسة عملية التركيب الضوئي وشروطها</p>
-                    <div class="experiment-meta">
-                        <span><i class="fas fa-clock"></i> 30 دقيقة</span>
-                        <span><i class="fas fa-signal"></i> متوسط</span>
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="viewExperiment(3)">
-                        <i class="fas fa-play"></i> ابدأ التجربة
-                    </button>
-                </div>
-            </div>
-            
-            <div class="experiment-card">
-                <div class="experiment-image">
-                    <i class="fas fa-magnet"></i>
-                </div>
-                <div class="experiment-content">
-                    <h4>خصائص المغناطيس</h4>
-                    <p>استكشاف خصائص المغناطيس والمجال المغناطيسي</p>
-                    <div class="experiment-meta">
-                        <span><i class="fas fa-clock"></i> 15 دقيقة</span>
-                        <span><i class="fas fa-signal"></i> سهل</span>
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="viewExperiment(4)">
-                        <i class="fas fa-play"></i> ابدأ التجربة
-                    </button>
-                </div>
-            </div>
-            
-            <div class="experiment-card">
-                <div class="experiment-image">
-                    <i class="fas fa-fire"></i>
-                </div>
-                <div class="experiment-content">
-                    <h4>الاحتراق والأكسدة</h4>
-                    <p>دراسة عملية الاحتراق كتفاعل كيميائي</p>
-                    <div class="experiment-meta">
-                        <span><i class="fas fa-clock"></i> 20 دقيقة</span>
-                        <span><i class="fas fa-signal"></i> متوسط</span>
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="viewExperiment(5)">
-                        <i class="fas fa-play"></i> ابدأ التجربة
-                    </button>
-                </div>
-            </div>
-            
-            <div class="experiment-card">
-                <div class="experiment-image">
-                    <i class="fas fa-thermometer-half"></i>
-                </div>
-                <div class="experiment-content">
-                    <h4>حالات المادة وتحولاتها</h4>
-                    <p>مشاهدة تحولات المادة بين الحالات الثلاث</p>
-                    <div class="experiment-meta">
-                        <span><i class="fas fa-clock"></i> 25 دقيقة</span>
-                        <span><i class="fas fa-signal"></i> سهل</span>
-                    </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="viewExperiment(6)">
-                        <i class="fas fa-play"></i> ابدأ التجربة
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- QUIZZES PAGE -->
-<section id="quizzes" class="page-section">
-    <div class="page-header">
-        <div class="container">
-            <h2><i class="fas fa-brain"></i> الاختبارات التفاعلية</h2>
-            <p>اختبر معلوماتك واحصل على نقاط</p>
-        </div>
-    </div>
-    
-    <div class="container" style="padding: 2rem 0;">
-        <h3 class="section-title">اختر الاختبار</h3>
-        <div class="quizzes-grid">
-            <div class="quiz-card">
-                <div class="quiz-icon">
-                    <i class="fas fa-flask"></i>
-                </div>
-                <h4>الجدول الدوري والعناصر</h4>
-                <div class="experiment-meta" style="justify-content: center;">
-                    <span><i class="fas fa-question"></i> 10 أسئلة</span>
-                    <span><i class="fas fa-clock"></i> 15 دقيقة</span>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="startQuiz(1)">
-                    ابدأ الاختبار
-                </button>
-            </div>
-            
-            <div class="quiz-card">
-                <div class="quiz-icon">
-                    <i class="fas fa-atom"></i>
-                </div>
-                <h4>تركيب المادة</h4>
-                <div class="experiment-meta" style="justify-content: center;">
-                    <span><i class="fas fa-question"></i> 12 أسئلة</span>
-                    <span><i class="fas fa-clock"></i> 20 دقيقة</span>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="startQuiz(2)">
-                    ابدأ الاختبار
-                </button>
-            </div>
-            
-            <div class="quiz-card">
-                <div class="quiz-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h4>الكهرباء والمغناطيسية</h4>
-                <div class="experiment-meta" style="justify-content: center;">
-                    <span><i class="fas fa-question"></i> 15 أسئلة</span>
-                    <span><i class="fas fa-clock"></i> 25 دقيقة</span>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="startQuiz(3)">
-                    ابدأ الاختبار
-                </button>
-            </div>
-            
-            <div class="quiz-card">
-                <div class="quiz-icon">
-                    <i class="fas fa-tree"></i>
-                </div>
-                <h4>الأنظمة البيئية</h4>
-                <div class="experiment-meta" style="justify-content: center;">
-                    <span><i class="fas fa-question"></i> 10 أسئلة</span>
-                    <span><i class="fas fa-clock"></i> 15 دقيقة</span>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="startQuiz(4)">
-                    ابدأ الاختبار
-                </button>
-            </div>
-            
-            <div class="quiz-card">
-                <div class="quiz-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <h4>الفضاء والنظام الشمسي</h4>
-                <div class="experiment-meta" style="justify-content: center;">
-                    <span><i class="fas fa-question"></i> 12 أسئلة</span>
-                    <span><i class="fas fa-clock"></i> 18 دقيقة</span>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="startQuiz(5)">
-                    ابدأ الاختبار
-                </button>
-            </div>
-            
-            <div class="quiz-card">
-                <div class="quiz-icon">
-                    <i class="fas fa-fire"></i>
-                </div>
-                <h4>التفاعلات الكيميائية</h4>
-                <div class="experiment-meta" style="justify-content: center;">
-                    <span><i class="fas fa-question"></i> 15 أسئلة</span>
-                    <span><i class="fas fa-clock"></i> 25 دقيقة</span>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="startQuiz(6)">
-                    ابدأ الاختبار
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ACHIEVEMENTS PAGE -->
-<section id="achievements" class="page-section">
-    <div class="page-header">
-        <div class="container">
-            <h2><i class="fas fa-trophy"></i> الإنجازات والنقاط</h2>
-            <p>تابع تقدمك واجمع الإنجازات</p>
-        </div>
-    </div>
-    
-    <div class="container" style="padding: 2rem 0;">
-        <h3 class="section-title">إحصائياتك</h3>
-        <div class="cards-grid" style="margin-bottom: 3rem;">
-            <div class="card">
-                <i class="fas fa-star" style="color: var(--warning-color);"></i>
-                <h3 id="totalPointsDisplay">0</h3>
-                <p>إجمالي النقاط</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-trophy" style="color: var(--success-color);"></i>
-                <h3 id="achievementsCount">0/6</h3>
-                <p>الإنجازات المفتوحة</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-medal" style="color: var(--primary-color);"></i>
-                <h3 id="userRankDisplay">مبتدئ</h3>
-                <p>رتبتك الحالية</p>
-            </div>
-        </div>
-        
-        <h3 class="section-title">الإنجازات</h3>
-        <div id="achievementsGrid" class="achievements-grid"></div>
-    </div>
-</section>
-
-<!-- Modal for Element Details -->
-<div id="elementModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeElementModal()">&times;</span>
-        <div id="elementDetails"></div>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer class="main-footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3><i class="fas fa-atom"></i> منصة العلوم التفاعلية</h3>
-                <p>منصة تعليمية متكاملة لمادة العلوم للمرحلة المتوسطة</p>
-                <p>تحتوي على دروس تفاعلية، جدول دوري، تجارب افتراضية، واختبارات ذكية</p>
-            </div>
-            <div class="footer-section">
-                <h4>المطورون</h4>
-                <p>حمدي داؤد ساغه محمد</p>
-                <p>أحمد القدال داؤد ساغة محمد</p>
-                <p class="school-name">متوسطة الأكاديمية العصرية - بحفر الباطن</p>
-            </div>
-            <div class="footer-section">
-                <h4>معلومات المشروع</h4>
-                <p><i class="fas fa-graduation-cap"></i> صفان دراسيان (الأول والثالث متوسط)</p>
-                <p><i class="fas fa-book"></i> 8 وحدات دراسية - 32 درساً</p>
-                <p><i class="fas fa-flask"></i> 118 عنصراً كيميائياً</p>
-                <p><i class="fas fa-microscope"></i> 6 تجارب افتراضية</p>
-                <p><i class="fas fa-brain"></i> 6 اختبارات تفاعلية</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 منصة العلوم التفاعلية - Quantum Nexus. جميع الحقوق محفوظة.</p>
-            <p>تم التطوير بواسطة: حمدي داؤد ساغه محمد و أحمد القدال داؤد ساغة محمد</p>
-        </div>
-    </div>
-</footer>
-
+<main id="app"></main>
 <script>
-// ============================================
-// GLOBAL STATE & DATA
-// ============================================
-let userPoints = parseInt(localStorage.getItem('userPoints') || '0');
-let unlockedAchievements = JSON.parse(localStorage.getItem('unlockedAchievements') || '[]');
-let elementsExplored = parseInt(localStorage.getItem('elementsExplored') || '0');
+const ELEMENTS=[{"z":1,"s":"H","en":"Hydrogen","ar":"هيدروجين","m":1.008,"p":1,"g":1,"c":"nonmetal","st":"gas","r":0,"f":"أخفّ العناصر وأكثرها انتشارًا في الكون، ويدخل في تركيب الماء."},{"z":2,"s":"He","en":"Helium","ar":"هيليوم","m":4.003,"p":1,"g":18,"c":"noble","st":"gas","r":0,"f":"غاز خفيف لا يتفاعل، تُملأ به البالونات الطائرة."},{"z":3,"s":"Li","en":"Lithium","ar":"ليثيوم","m":6.94,"p":2,"g":1,"c":"alkali","st":"solid","r":0,"f":"يُستعمل في بطاريات الجوالات والسيارات الكهربائية."},{"z":4,"s":"Be","en":"Beryllium","ar":"بيريليوم","m":9.012,"p":2,"g":2,"c":"alkaline","st":"solid","r":0,"f":""},{"z":5,"s":"B","en":"Boron","ar":"بورون","m":10.81,"p":2,"g":13,"c":"metalloid","st":"solid","r":0,"f":""},{"z":6,"s":"C","en":"Carbon","ar":"كربون","m":12.011,"p":2,"g":14,"c":"nonmetal","st":"solid","r":0,"f":"أساس مركّبات الكائنات الحية، ومن صوره الألماس والجرافيت."},{"z":7,"s":"N","en":"Nitrogen","ar":"نيتروجين","m":14.007,"p":2,"g":15,"c":"nonmetal","st":"gas","r":0,"f":"يشكّل نحو 78% من الهواء."},{"z":8,"s":"O","en":"Oxygen","ar":"أكسجين","m":15.999,"p":2,"g":16,"c":"nonmetal","st":"gas","r":0,"f":"يشكّل نحو 21% من الهواء، وتحتاجه الكائنات الحية في التنفّس."},{"z":9,"s":"F","en":"Fluorine","ar":"فلور","m":18.998,"p":2,"g":17,"c":"halogen","st":"gas","r":0,"f":"يُضاف مركّب منه (الفلوريد) إلى معاجين الأسنان لحمايتها من التسوّس."},{"z":10,"s":"Ne","en":"Neon","ar":"نيون","m":20.18,"p":2,"g":18,"c":"noble","st":"gas","r":0,"f":"يُستعمل في لافتات الإضاءة الحمراء البرّاقة."},{"z":11,"s":"Na","en":"Sodium","ar":"صوديوم","m":22.99,"p":3,"g":1,"c":"alkali","st":"solid","r":0,"f":"فلز ليّن يتفاعل بشدّة مع الماء، ويكوّن مع الكلور ملح الطعام."},{"z":12,"s":"Mg","en":"Magnesium","ar":"مغنيسيوم","m":24.305,"p":3,"g":2,"c":"alkaline","st":"solid","r":0,"f":"يحترق بلهب أبيض ساطع، ويدخل في تركيب الكلوروفيل في النباتات."},{"z":13,"s":"Al","en":"Aluminum","ar":"ألومنيوم","m":26.982,"p":3,"g":13,"c":"post","st":"solid","r":0,"f":"فلز خفيف يقاوم التآكل، تُصنع منه العلب وأجزاء الطائرات."},{"z":14,"s":"Si","en":"Silicon","ar":"سيليكون","m":28.085,"p":3,"g":14,"c":"metalloid","st":"solid","r":0,"f":"ثاني أكثر العناصر وفرة في القشرة الأرضية، ويُستعمل في رقائق الحواسيب."},{"z":15,"s":"P","en":"Phosphorus","ar":"فوسفور","m":30.974,"p":3,"g":15,"c":"nonmetal","st":"solid","r":0,"f":"يوجد في العظام والأسنان، ويدخل في صناعة الأسمدة وأعواد الثقاب."},{"z":16,"s":"S","en":"Sulfur","ar":"كبريت","m":32.06,"p":3,"g":16,"c":"nonmetal","st":"solid","r":0,"f":"مادة صلبة صفراء، تدخل في صناعة حمض الكبريتيك."},{"z":17,"s":"Cl","en":"Chlorine","ar":"كلور","m":35.45,"p":3,"g":17,"c":"halogen","st":"gas","r":0,"f":"غاز سامّ أصفر مخضرّ، تُستعمل مركّباته في تعقيم مياه الشرب والمسابح."},{"z":18,"s":"Ar","en":"Argon","ar":"أرغون","m":39.95,"p":3,"g":18,"c":"noble","st":"gas","r":0,"f":"أكثر الغازات النبيلة وفرة في الهواء، ويُملأ به بعض المصابيح."},{"z":19,"s":"K","en":"Potassium","ar":"بوتاسيوم","m":39.098,"p":4,"g":1,"c":"alkali","st":"solid","r":0,"f":"ضروري لعمل العضلات والأعصاب، ويوجد في الموز."},{"z":20,"s":"Ca","en":"Calcium","ar":"كالسيوم","m":40.078,"p":4,"g":2,"c":"alkaline","st":"solid","r":0,"f":"يقوّي العظام والأسنان، ويوجد في الحليب ومنتجاته."},{"z":21,"s":"Sc","en":"Scandium","ar":"سكانديوم","m":44.956,"p":4,"g":3,"c":"trans","st":"solid","r":0,"f":""},{"z":22,"s":"Ti","en":"Titanium","ar":"تيتانيوم","m":47.867,"p":4,"g":4,"c":"trans","st":"solid","r":0,"f":"فلز قوي وخفيف، يُستعمل في الطائرات والمفاصل الصناعية."},{"z":23,"s":"V","en":"Vanadium","ar":"فاناديوم","m":50.941,"p":4,"g":5,"c":"trans","st":"solid","r":0,"f":""},{"z":24,"s":"Cr","en":"Chromium","ar":"كروم","m":51.996,"p":4,"g":6,"c":"trans","st":"solid","r":0,"f":""},{"z":25,"s":"Mn","en":"Manganese","ar":"منغنيز","m":54.938,"p":4,"g":7,"c":"trans","st":"solid","r":0,"f":""},{"z":26,"s":"Fe","en":"Iron","ar":"حديد","m":55.845,"p":4,"g":8,"c":"trans","st":"solid","r":0,"f":"أكثر الفلزات استعمالًا، يُصنع منه الفولاذ، ويوجد في هيموجلوبين الدم."},{"z":27,"s":"Co","en":"Cobalt","ar":"كوبالت","m":58.933,"p":4,"g":9,"c":"trans","st":"solid","r":0,"f":""},{"z":28,"s":"Ni","en":"Nickel","ar":"نيكل","m":58.693,"p":4,"g":10,"c":"trans","st":"solid","r":0,"f":"يدخل في صناعة الفولاذ المقاوم للصدأ وبعض العملات المعدنية."},{"z":29,"s":"Cu","en":"Copper","ar":"نحاس","m":63.546,"p":4,"g":11,"c":"trans","st":"solid","r":0,"f":"موصل جيد جدًّا للكهرباء، تُصنع منه الأسلاك الكهربائية."},{"z":30,"s":"Zn","en":"Zinc","ar":"خارصين","m":65.38,"p":4,"g":12,"c":"trans","st":"solid","r":0,"f":"يُغلَّف به الحديد لحمايته من الصدأ، وتُسمّى هذه العملية الجلفنة."},{"z":31,"s":"Ga","en":"Gallium","ar":"غاليوم","m":69.723,"p":4,"g":13,"c":"post","st":"solid","r":0,"f":"ينصهر عند نحو 30 °س، أي يمكن أن يذوب في راحة اليد."},{"z":32,"s":"Ge","en":"Germanium","ar":"جرمانيوم","m":72.63,"p":4,"g":14,"c":"metalloid","st":"solid","r":0,"f":""},{"z":33,"s":"As","en":"Arsenic","ar":"زرنيخ","m":74.922,"p":4,"g":15,"c":"metalloid","st":"solid","r":0,"f":""},{"z":34,"s":"Se","en":"Selenium","ar":"سيلينيوم","m":78.971,"p":4,"g":16,"c":"nonmetal","st":"solid","r":0,"f":""},{"z":35,"s":"Br","en":"Bromine","ar":"بروم","m":79.904,"p":4,"g":17,"c":"halogen","st":"liquid","r":0,"f":"أحد عنصرين فقط يكونان سائلين في درجة حرارة الغرفة."},{"z":36,"s":"Kr","en":"Krypton","ar":"كريبتون","m":83.798,"p":4,"g":18,"c":"noble","st":"gas","r":0,"f":""},{"z":37,"s":"Rb","en":"Rubidium","ar":"روبيديوم","m":85.468,"p":5,"g":1,"c":"alkali","st":"solid","r":0,"f":""},{"z":38,"s":"Sr","en":"Strontium","ar":"سترونشيوم","m":87.62,"p":5,"g":2,"c":"alkaline","st":"solid","r":0,"f":""},{"z":39,"s":"Y","en":"Yttrium","ar":"إتريوم","m":88.906,"p":5,"g":3,"c":"trans","st":"solid","r":0,"f":""},{"z":40,"s":"Zr","en":"Zirconium","ar":"زركونيوم","m":91.224,"p":5,"g":4,"c":"trans","st":"solid","r":0,"f":""},{"z":41,"s":"Nb","en":"Niobium","ar":"نيوبيوم","m":92.906,"p":5,"g":5,"c":"trans","st":"solid","r":0,"f":""},{"z":42,"s":"Mo","en":"Molybdenum","ar":"موليبدنوم","m":95.95,"p":5,"g":6,"c":"trans","st":"solid","r":0,"f":""},{"z":43,"s":"Tc","en":"Technetium","ar":"تكنيشيوم","m":98.0,"p":5,"g":7,"c":"trans","st":"solid","r":1,"f":""},{"z":44,"s":"Ru","en":"Ruthenium","ar":"روثينيوم","m":101.07,"p":5,"g":8,"c":"trans","st":"solid","r":0,"f":""},{"z":45,"s":"Rh","en":"Rhodium","ar":"روديوم","m":102.905,"p":5,"g":9,"c":"trans","st":"solid","r":0,"f":""},{"z":46,"s":"Pd","en":"Palladium","ar":"بلاديوم","m":106.42,"p":5,"g":10,"c":"trans","st":"solid","r":0,"f":""},{"z":47,"s":"Ag","en":"Silver","ar":"فضة","m":107.868,"p":5,"g":11,"c":"trans","st":"solid","r":0,"f":"أفضل العناصر توصيلًا للكهرباء، تُصنع منه الحلي."},{"z":48,"s":"Cd","en":"Cadmium","ar":"كادميوم","m":112.414,"p":5,"g":12,"c":"trans","st":"solid","r":0,"f":""},{"z":49,"s":"In","en":"Indium","ar":"إنديوم","m":114.818,"p":5,"g":13,"c":"post","st":"solid","r":0,"f":""},{"z":50,"s":"Sn","en":"Tin","ar":"قصدير","m":118.71,"p":5,"g":14,"c":"post","st":"solid","r":0,"f":"يُطلى به الحديد في صناعة العلب، ويدخل في سبيكة البرونز."},{"z":51,"s":"Sb","en":"Antimony","ar":"أنتيمون","m":121.76,"p":5,"g":15,"c":"metalloid","st":"solid","r":0,"f":""},{"z":52,"s":"Te","en":"Tellurium","ar":"تيلوريوم","m":127.6,"p":5,"g":16,"c":"metalloid","st":"solid","r":0,"f":""},{"z":53,"s":"I","en":"Iodine","ar":"يود","m":126.904,"p":5,"g":17,"c":"halogen","st":"solid","r":0,"f":"ضروري لعمل الغدة الدرقية، ولذلك يُضاف إلى ملح الطعام."},{"z":54,"s":"Xe","en":"Xenon","ar":"زينون","m":131.293,"p":5,"g":18,"c":"noble","st":"gas","r":0,"f":""},{"z":55,"s":"Cs","en":"Cesium","ar":"سيزيوم","m":132.905,"p":6,"g":1,"c":"alkali","st":"solid","r":0,"f":""},{"z":56,"s":"Ba","en":"Barium","ar":"باريوم","m":137.327,"p":6,"g":2,"c":"alkaline","st":"solid","r":0,"f":""},{"z":57,"s":"La","en":"Lanthanum","ar":"لانثانوم","m":138.905,"p":"la","g":3,"c":"lanth","st":"solid","r":0,"f":""},{"z":58,"s":"Ce","en":"Cerium","ar":"سيريوم","m":140.116,"p":"la","g":4,"c":"lanth","st":"solid","r":0,"f":""},{"z":59,"s":"Pr","en":"Praseodymium","ar":"براسيوديميوم","m":140.908,"p":"la","g":5,"c":"lanth","st":"solid","r":0,"f":""},{"z":60,"s":"Nd","en":"Neodymium","ar":"نيوديميوم","m":144.242,"p":"la","g":6,"c":"lanth","st":"solid","r":0,"f":""},{"z":61,"s":"Pm","en":"Promethium","ar":"بروميثيوم","m":145.0,"p":"la","g":7,"c":"lanth","st":"solid","r":1,"f":""},{"z":62,"s":"Sm","en":"Samarium","ar":"ساماريوم","m":150.36,"p":"la","g":8,"c":"lanth","st":"solid","r":0,"f":""},{"z":63,"s":"Eu","en":"Europium","ar":"يوروبيوم","m":151.964,"p":"la","g":9,"c":"lanth","st":"solid","r":0,"f":""},{"z":64,"s":"Gd","en":"Gadolinium","ar":"غادولينيوم","m":157.25,"p":"la","g":10,"c":"lanth","st":"solid","r":0,"f":""},{"z":65,"s":"Tb","en":"Terbium","ar":"تيربيوم","m":158.925,"p":"la","g":11,"c":"lanth","st":"solid","r":0,"f":""},{"z":66,"s":"Dy","en":"Dysprosium","ar":"ديسبروسيوم","m":162.5,"p":"la","g":12,"c":"lanth","st":"solid","r":0,"f":""},{"z":67,"s":"Ho","en":"Holmium","ar":"هولميوم","m":164.93,"p":"la","g":13,"c":"lanth","st":"solid","r":0,"f":""},{"z":68,"s":"Er","en":"Erbium","ar":"إربيوم","m":167.259,"p":"la","g":14,"c":"lanth","st":"solid","r":0,"f":""},{"z":69,"s":"Tm","en":"Thulium","ar":"ثوليوم","m":168.934,"p":"la","g":15,"c":"lanth","st":"solid","r":0,"f":""},{"z":70,"s":"Yb","en":"Ytterbium","ar":"إتربيوم","m":173.045,"p":"la","g":16,"c":"lanth","st":"solid","r":0,"f":""},{"z":71,"s":"Lu","en":"Lutetium","ar":"لوتيتيوم","m":174.967,"p":"la","g":17,"c":"lanth","st":"solid","r":0,"f":""},{"z":72,"s":"Hf","en":"Hafnium","ar":"هافنيوم","m":178.486,"p":6,"g":4,"c":"trans","st":"solid","r":0,"f":""},{"z":73,"s":"Ta","en":"Tantalum","ar":"تانتالوم","m":180.948,"p":6,"g":5,"c":"trans","st":"solid","r":0,"f":""},{"z":74,"s":"W","en":"Tungsten","ar":"تنغستن","m":183.84,"p":6,"g":6,"c":"trans","st":"solid","r":0,"f":"أعلى الفلزات درجة انصهار، واستُعمل في فتائل المصابيح."},{"z":75,"s":"Re","en":"Rhenium","ar":"رينيوم","m":186.207,"p":6,"g":7,"c":"trans","st":"solid","r":0,"f":""},{"z":76,"s":"Os","en":"Osmium","ar":"أوزميوم","m":190.23,"p":6,"g":8,"c":"trans","st":"solid","r":0,"f":""},{"z":77,"s":"Ir","en":"Iridium","ar":"إيريديوم","m":192.217,"p":6,"g":9,"c":"trans","st":"solid","r":0,"f":""},{"z":78,"s":"Pt","en":"Platinum","ar":"بلاتين","m":195.084,"p":6,"g":10,"c":"trans","st":"solid","r":0,"f":"فلز ثمين يُستعمل في المحوّلات الحفّازة في السيارات."},{"z":79,"s":"Au","en":"Gold","ar":"ذهب","m":196.967,"p":6,"g":11,"c":"trans","st":"solid","r":0,"f":"فلز لا يصدأ، تُصنع منه الحلي والعملات."},{"z":80,"s":"Hg","en":"Mercury","ar":"زئبق","m":200.592,"p":6,"g":12,"c":"trans","st":"liquid","r":0,"f":"الفلز الوحيد السائل في درجة حرارة الغرفة، وهو سامّ."},{"z":81,"s":"Tl","en":"Thallium","ar":"ثاليوم","m":204.38,"p":6,"g":13,"c":"post","st":"solid","r":0,"f":""},{"z":82,"s":"Pb","en":"Lead","ar":"رصاص","m":207.2,"p":6,"g":14,"c":"post","st":"solid","r":0,"f":"فلز ثقيل سامّ، استُعمل قديمًا في الأنابيب والدهانات."},{"z":83,"s":"Bi","en":"Bismuth","ar":"بزموت","m":208.98,"p":6,"g":15,"c":"post","st":"solid","r":0,"f":""},{"z":84,"s":"Po","en":"Polonium","ar":"بولونيوم","m":209.0,"p":6,"g":16,"c":"post","st":"solid","r":1,"f":""},{"z":85,"s":"At","en":"Astatine","ar":"أستاتين","m":210.0,"p":6,"g":17,"c":"halogen","st":"solid","r":1,"f":""},{"z":86,"s":"Rn","en":"Radon","ar":"رادون","m":222.0,"p":6,"g":18,"c":"noble","st":"gas","r":1,"f":"غاز نبيل مشعّ يتسرّب طبيعيًّا من بعض الصخور."},{"z":87,"s":"Fr","en":"Francium","ar":"فرانسيوم","m":223.0,"p":7,"g":1,"c":"alkali","st":"solid","r":1,"f":""},{"z":88,"s":"Ra","en":"Radium","ar":"راديوم","m":226.0,"p":7,"g":2,"c":"alkaline","st":"solid","r":1,"f":""},{"z":89,"s":"Ac","en":"Actinium","ar":"أكتينيوم","m":227.0,"p":"ac","g":3,"c":"act","st":"solid","r":1,"f":""},{"z":90,"s":"Th","en":"Thorium","ar":"ثوريوم","m":232.038,"p":"ac","g":4,"c":"act","st":"solid","r":1,"f":""},{"z":91,"s":"Pa","en":"Protactinium","ar":"بروتكتينيوم","m":231.036,"p":"ac","g":5,"c":"act","st":"solid","r":1,"f":""},{"z":92,"s":"U","en":"Uranium","ar":"يورانيوم","m":238.029,"p":"ac","g":6,"c":"act","st":"solid","r":1,"f":"عنصر مشعّ يُستعمل وقودًا في محطات الطاقة النووية."},{"z":93,"s":"Np","en":"Neptunium","ar":"نبتونيوم","m":237.0,"p":"ac","g":7,"c":"act","st":"solid","r":1,"f":""},{"z":94,"s":"Pu","en":"Plutonium","ar":"بلوتونيوم","m":244.0,"p":"ac","g":8,"c":"act","st":"solid","r":1,"f":""},{"z":95,"s":"Am","en":"Americium","ar":"أمريسيوم","m":243,"p":"ac","g":9,"c":"act","st":"solid","r":1,"f":""},{"z":96,"s":"Cm","en":"Curium","ar":"كوريوم","m":247,"p":"ac","g":10,"c":"act","st":"solid","r":1,"f":""},{"z":97,"s":"Bk","en":"Berkelium","ar":"بركيليوم","m":247,"p":"ac","g":11,"c":"act","st":"solid","r":1,"f":""},{"z":98,"s":"Cf","en":"Californium","ar":"كاليفورنيوم","m":251,"p":"ac","g":12,"c":"act","st":"solid","r":1,"f":""},{"z":99,"s":"Es","en":"Einsteinium","ar":"أينشتاينيوم","m":252,"p":"ac","g":13,"c":"act","st":"solid","r":1,"f":""},{"z":100,"s":"Fm","en":"Fermium","ar":"فيرميوم","m":257,"p":"ac","g":14,"c":"act","st":"solid","r":1,"f":""},{"z":101,"s":"Md","en":"Mendelevium","ar":"مندليفيوم","m":258,"p":"ac","g":15,"c":"act","st":"solid","r":1,"f":""},{"z":102,"s":"No","en":"Nobelium","ar":"نوبليوم","m":259,"p":"ac","g":16,"c":"act","st":"solid","r":1,"f":""},{"z":103,"s":"Lr","en":"Lawrencium","ar":"لورنسيوم","m":262,"p":"ac","g":17,"c":"act","st":"solid","r":1,"f":""},{"z":104,"s":"Rf","en":"Rutherfordium","ar":"رذرفورديوم","m":261,"p":7,"g":4,"c":"trans","st":"unknown","r":1,"f":""},{"z":105,"s":"Db","en":"Dubnium","ar":"دوبنيوم","m":262,"p":7,"g":5,"c":"trans","st":"unknown","r":1,"f":""},{"z":106,"s":"Sg","en":"Seaborgium","ar":"سيبورغيوم","m":266,"p":7,"g":6,"c":"trans","st":"unknown","r":1,"f":""},{"z":107,"s":"Bh","en":"Bohrium","ar":"بوريوم","m":264,"p":7,"g":7,"c":"trans","st":"unknown","r":1,"f":""},{"z":108,"s":"Hs","en":"Hassium","ar":"هاسيوم","m":277,"p":7,"g":8,"c":"trans","st":"unknown","r":1,"f":""},{"z":109,"s":"Mt","en":"Meitnerium","ar":"مايتنريوم","m":268,"p":7,"g":9,"c":"trans","st":"unknown","r":1,"f":""},{"z":110,"s":"Ds","en":"Darmstadtium","ar":"دارمشتاتيوم","m":281,"p":7,"g":10,"c":"trans","st":"unknown","r":1,"f":""},{"z":111,"s":"Rg","en":"Roentgenium","ar":"رونتجينيوم","m":272,"p":7,"g":11,"c":"trans","st":"unknown","r":1,"f":""},{"z":112,"s":"Cn","en":"Copernicium","ar":"كوبرنيسيوم","m":285,"p":7,"g":12,"c":"trans","st":"unknown","r":1,"f":""},{"z":113,"s":"Nh","en":"Nihonium","ar":"نيهونيوم","m":286,"p":7,"g":13,"c":"post","st":"unknown","r":1,"f":""},{"z":114,"s":"Fl","en":"Flerovium","ar":"فليروفيوم","m":289,"p":7,"g":14,"c":"post","st":"unknown","r":1,"f":""},{"z":115,"s":"Mc","en":"Moscovium","ar":"موسكوفيوم","m":289,"p":7,"g":15,"c":"post","st":"unknown","r":1,"f":""},{"z":116,"s":"Lv","en":"Livermorium","ar":"ليفرموريوم","m":293,"p":7,"g":16,"c":"post","st":"unknown","r":1,"f":""},{"z":117,"s":"Ts","en":"Tennessine","ar":"تينيسين","m":294,"p":7,"g":17,"c":"halogen","st":"unknown","r":1,"f":""},{"z":118,"s":"Og","en":"Oganesson","ar":"أوغانيسون","m":294,"p":7,"g":18,"c":"noble","st":"unknown","r":1,"f":""}];
+const LESSONS=[{"id":"atom","t":"الذرة ومكوّناتها","e":"⚛️","sum":["الذرة أصغر جزء من العنصر يحمل خصائصه.","تتكوّن الذرة من نواة في المركز، وحولها إلكترونات تتحرك في سحابة إلكترونية.","في النواة بروتونات موجبة الشحنة ونيوترونات متعادلة؛ والإلكترونات سالبة الشحنة.","العدد الذري = عدد البروتونات، وهو الذي يميّز كل عنصر عن غيره.","العدد الكتلي = عدد البروتونات + عدد النيوترونات.","الذرة متعادلة لأن عدد إلكتروناتها يساوي عدد بروتوناتها."],"q":[["ما الجسيم الموجب الشحنة في الذرة؟",["البروتون","الإلكترون","النيوترون","الجزيء"],"البروتون موجب، والإلكترون سالب، والنيوترون متعادل لا شحنة له."],["أين توجد البروتونات والنيوترونات؟",["في النواة","في السحابة الإلكترونية","خارج الذرة","بين الذرات"],"تتجمّع البروتونات والنيوترونات في النواة في مركز الذرة."],["ما شحنة النيوترون؟",["متعادل (لا شحنة له)","موجبة","سالبة","موجبة مرة وسالبة مرة"],"اسمه يدل عليه: النيوترون «محايد» بلا شحنة."],["العدد الذري لعنصر يساوي عدد:",["البروتونات في نواته","النيوترونات في نواته","الذرات في الجزيء","البروتونات والنيوترونات معًا"],"العدد الذري هو عدد البروتونات، ولكل عنصر عدد ذري خاص به."],["ذرة فيها 6 بروتونات و6 نيوترونات. ما عددها الكتلي؟",["12","6","18","0"],"العدد الكتلي = البروتونات + النيوترونات = 6 + 6 = 12."],["ذرة متعادلة فيها 8 بروتونات. كم إلكترونًا فيها؟",["8","16","4","0"],"الذرة المتعادلة: عدد الإلكترونات = عدد البروتونات."],["ذرة عددها الذري 11 وعددها الكتلي 23. كم نيوترونًا في نواتها؟",["12","11","23","34"],"النيوترونات = العدد الكتلي − العدد الذري = 23 − 11 = 12."],["أيّ الجسيمات الآتية أخفّ كتلة بكثير من غيرها؟",["الإلكترون","البروتون","النيوترون","النواة"],"كتلة الإلكترون أصغر بنحو 1800 مرة من كتلة البروتون، لذلك تتركّز كتلة الذرة في النواة."],["ما الذي يميّز ذرة الأكسجين عن ذرة الكربون؟",["عدد البروتونات في النواة","حجم الإلكترون","لون النواة","عدد السحب الإلكترونية"],"لكل عنصر عدد بروتونات خاص به: الكربون 6، والأكسجين 8."],["لماذا تكون الذرة متعادلة كهربائيًّا؟",["لأن عدد إلكتروناتها يساوي عدد بروتوناتها","لأنها لا تحتوي شحنات","لأن النيوترونات تلغي الشحنات","لأن النواة سالبة"],"الشحنات الموجبة (البروتونات) تساوي الشحنات السالبة (الإلكترونات)، فتتعادل."],["ذرتان لهما العدد الذري نفسه وعددان كتليان مختلفان. ماذا تُسمّيان؟",["نظيرين للعنصر نفسه","عنصرين مختلفين","مركّبين","أيونين موجبين"],"النظائر: ذرات العنصر نفسه تختلف في عدد النيوترونات، فيختلف العدد الكتلي."],["الكربون-14 والكربون-12 يختلفان في عدد:",["النيوترونات","البروتونات","الإلكترونات في الذرة المتعادلة","العدد الذري"],"كلاهما كربون (6 بروتونات)، لكن في الكربون-14 ثمانية نيوترونات وفي الكربون-12 ستة."]]},{"id":"table","t":"العناصر والجدول الدوري","e":"🧪","sum":["العنصر مادة نقية تتكوّن من نوع واحد من الذرات، ولا يمكن تجزئتها إلى مواد أبسط بالطرائق الكيميائية.","يُرتَّب الجدول الدوري الحديث بحسب العدد الذري تصاعديًّا.","الصفوف الأفقية تُسمّى الدورات (7 دورات)، والأعمدة الرأسية تُسمّى المجموعات (18 مجموعة).","عناصر المجموعة الواحدة متشابهة في خصائصها الكيميائية.","لكل عنصر رمز من حرف أو حرفين، الأول كبير دائمًا: O للأكسجين، Na للصوديوم."],"q":[["على أيّ أساس رُتّبت العناصر في الجدول الدوري الحديث؟",["العدد الذري تصاعديًّا","الكتلة تنازليًّا","الحروف الهجائية","تاريخ الاكتشاف"],"رُتّبت بحسب العدد الذري؛ وكان مندليف قد رتّبها قبل ذلك بحسب الكتلة الذرية."],["ماذا تُسمّى الصفوف الأفقية في الجدول الدوري؟",["الدورات","المجموعات","العائلات","الفئات"],"الأفقية دورات، والرأسية مجموعات أو عائلات."],["كم مجموعة في الجدول الدوري الحديث؟",["18","7","8","118"],"في الجدول 18 مجموعة (عمودًا) و7 دورات (صفوف)."],["بماذا تتشابه عناصر المجموعة الواحدة؟",["خصائصها الكيميائية","كتلتها الذرية","لونها دائمًا","عدد نيوتروناتها"],"عناصر المجموعة الواحدة لها سلوك كيميائي متشابه."],["ما رمز عنصر الصوديوم؟",["Na","S","So","Sd"],"Na من اسمه اللاتيني Natrium."],["ما رمز عنصر الحديد؟",["Fe","I","Ir","H"],"Fe من اسمه اللاتيني Ferrum. أما I فرمز اليود."],["أيّ رمز مكتوب بطريقة صحيحة؟",["Ca","CA","ca","cA"],"الحرف الأول كبير والثاني صغير دائمًا."],["ما العنصر الذي عدده الذري 1؟",["الهيدروجين","الهيليوم","الأكسجين","الكربون"],"الهيدروجين أول عناصر الجدول وأخفّها."],["أيّ مما يأتي عنصر؟",["النحاس","الماء","ملح الطعام","الهواء"],"النحاس عنصر؛ الماء والملح مركّبان، والهواء مخلوط."],["من العالِم الذي وضع أول جدول دوري ناجح وترك فيه فراغات لعناصر لم تُكتشف بعد؟",["مندليف","نيوتن","دالتون","أينشتاين"],"رتّب مندليف العناصر عام 1869م وتنبّأ بخصائص عناصر لم تكن معروفة."],["إلى أيّ مجموعة ينتمي الهيليوم والنيون والأرغون؟",["الغازات النبيلة","الفلزات القلوية","الهالوجينات","الفلزات الانتقالية"],"الغازات النبيلة في المجموعة 18، وهي لا تكاد تتفاعل."],["أيّ الهالوجينات الآتية سائل في درجة حرارة الغرفة؟",["البروم","الكلور","الفلور","اليود"],"البروم سائل بنّي محمرّ؛ الفلور والكلور غازان، واليود صلب."]]},{"id":"metals","t":"الفلزات واللافلزات وأشباه الفلزات","e":"🔩","sum":["الفلزات لامعة، جيدة التوصيل للحرارة والكهرباء، قابلة للطرق والسحب، ومعظمها صلب.","تقع الفلزات في يسار الجدول ووسطه، وهي أكثر العناصر عددًا.","اللافلزات غالبًا غير لامعة، رديئة التوصيل، والصلبة منها هشّة؛ وتقع في يمين الجدول.","أشباه الفلزات لها خصائص بين الفلزات واللافلزات، مثل السيليكون المستعمل في الإلكترونيات.","الزئبق فلز سائل في درجة حرارة الغرفة."],"q":[["أيّ الخصائص الآتية من خصائص الفلزات؟",["جيدة التوصيل للكهرباء","هشّة تتكسّر بسهولة","رديئة التوصيل للحرارة","غير لامعة"],"الفلزات موصلة جيدة للحرارة والكهرباء ولامعة وقابلة للطرق."],["لماذا تُصنع الأسلاك الكهربائية من النحاس؟",["لأنه موصل جيد للكهرباء ويمكن سحبه أسلاكًا","لأنه عازل للكهرباء","لأنه هشّ","لأنه غاز"],"النحاس فلز جيد التوصيل وقابل للسحب."],["ما معنى أن الفلز «قابل للطرق»؟",["يمكن تشكيله صفائح بالطرق دون أن ينكسر","ينكسر عند طرقه","يذوب في الماء","يصدر صوتًا"],"قابلية الطرق: تشكيل الفلز صفائح رقيقة، مثل ورق الألومنيوم."],["أين تقع معظم اللافلزات في الجدول الدوري؟",["في الجهة اليمنى","في الجهة اليسرى","في الوسط","أسفل الجدول"],"اللافلزات في الجهة اليمنى العليا، والفلزات يسار الجدول ووسطه."],["أيّ العناصر الآتية لافلز؟",["الكبريت","الحديد","الذهب","الصوديوم"],"الكبريت لافلز أصفر هشّ؛ والبقية فلزات."],["أيّ الفلزات الآتية سائل في درجة حرارة الغرفة؟",["الزئبق","الحديد","النحاس","الألومنيوم"],"الزئبق الفلز الوحيد السائل في درجة حرارة الغرفة."],["أيّ العناصر الآتية من أشباه الفلزات؟",["السيليكون","الأكسجين","الفضة","الكالسيوم"],"السيليكون شبه فلز، ويُستعمل في رقائق الحواسيب والخلايا الشمسية."],["لماذا يُستعمل السيليكون في صناعة الإلكترونيات؟",["لأنه شبه موصل يمكن التحكم في توصيله","لأنه أفضل موصل للكهرباء","لأنه عازل تمامًا","لأنه سائل"],"أشباه الفلزات توصل الكهرباء توصيلًا متوسطًا يمكن التحكم فيه."],["قطعة كبريت صفراء ضُربت بالمطرقة فتفتّتت. ماذا تدلّ هذه الخاصية؟",["أن الكبريت لافلز هشّ","أن الكبريت فلز","أن الكبريت قابل للطرق","أن الكبريت موصل جيد"],"الهشاشة من خصائص اللافلزات الصلبة."],["ما أكثر أنواع العناصر عددًا في الجدول الدوري؟",["الفلزات","اللافلزات","أشباه الفلزات","الغازات النبيلة"],"الفلزات تشغل معظم الجدول الدوري."]]},{"id":"mix","t":"المركّبات والمخاليط","e":"🥤","sum":["المركّب مادة نقية تتكوّن من عنصرين أو أكثر متّحدين كيميائيًّا بنسب ثابتة، مثل الماء H₂O.","خصائص المركّب تختلف عن خصائص العناصر المكوّنة له.","المخلوط مادتان أو أكثر ممتزجتان دون اتحاد كيميائي، ويمكن فصلهما بطرائق فيزيائية.","المخلوط المتجانس (المحلول) مكوّناته لا تُرى منفصلة، مثل ماء السكر.","المخلوط غير المتجانس مكوّناته تُرى منفصلة، مثل الرمل والحصى.","من طرائق الفصل: الترشيح، والتبخير، والتقطير، والجذب بالمغناطيس."],"q":[["أيّ مما يأتي مركّب؟",["الماء","الأكسجين","الهواء","ماء البحر"],"الماء مركّب من الهيدروجين والأكسجين متّحدين كيميائيًّا."],["أيّ مما يأتي مخلوط؟",["الهواء","ثاني أكسيد الكربون","الحديد","ملح الطعام"],"الهواء مخلوط من غازات أهمها النيتروجين والأكسجين."],["كم ذرة هيدروجين في جزيء الماء H₂O؟",["2","1","3","0"],"الرقم الصغير 2 بعد H يعني ذرتين من الهيدروجين، مع ذرة أكسجين واحدة."],["الصوديوم فلز نشط، والكلور غاز سامّ؛ واتحادهما ينتج ملح الطعام. ماذا نستنتج؟",["خصائص المركّب تختلف عن خصائص عناصره","المركّب له خصائص عناصره نفسها","ملح الطعام سامّ","ملح الطعام مخلوط"],"عند الاتحاد الكيميائي تنتج مادة جديدة بخصائص جديدة."],["ماء مذاب فيه سكر حتى لم يعد السكر يُرى. ما نوع هذا المخلوط؟",["مخلوط متجانس (محلول)","مخلوط غير متجانس","مركّب","عنصر"],"المحلول مخلوط متجانس لا تُرى مكوّناته منفصلة."],["أيّ مما يأتي مخلوط غير متجانس؟",["الرمل والحصى","ماء السكر","الهواء النقي","الخلّ"],"في الرمل والحصى يمكن رؤية المكوّنات منفصلة."],["ما أنسب طريقة لفصل برادة الحديد عن الرمل؟",["المغناطيس","الترشيح","التبخير","التقطير"],"المغناطيس يجذب الحديد ولا يجذب الرمل."],["كيف نحصل على الملح من ماء مالح؟",["بالتبخير","بالمغناطيس","بالغربال","بالترشيح فقط"],"عند تبخير الماء يبقى الملح."],["ما أنسب طريقة لفصل الرمل عن الماء؟",["الترشيح","التبخير فقط","المغناطيس","الطرق"],"ورقة الترشيح تحجز الرمل ويمرّ الماء."],["ما الفرق الأساسي بين المركّب والمخلوط؟",["مكوّنات المركّب متّحدة كيميائيًّا بنسب ثابتة","المخلوط له صيغة كيميائية ثابتة","المركّب يُفصل بالترشيح","لا فرق بينهما"],"المركّب اتحاد كيميائي بنسب ثابتة، والمخلوط امتزاج فيزيائي بنسب متغيّرة."],["ما الطريقة المستعملة للحصول على ماء نقي من ماء البحر بتسخينه ثم تكثيف بخاره؟",["التقطير","الترشيح","المغناطيس","الترسيب"],"التقطير: تبخير السائل ثم تكثيف البخار في وعاء آخر."],["صيغة ثاني أكسيد الكربون CO₂. ما العناصر المكوّنة له؟",["الكربون والأكسجين","الكالسيوم والأكسجين","الكوبالت فقط","الكربون والكلور"],"C للكربون وO للأكسجين: ذرة كربون وذرتا أكسجين."]]},{"id":"states","t":"حالات المادة وتحوّلاتها","e":"🧊","sum":["للمادة ثلاث حالات شائعة: صلبة، وسائلة، وغازية.","الصلب له شكل وحجم ثابتان؛ والسائل حجمه ثابت ويأخذ شكل الإناء؛ والغاز يملأ الإناء كله.","تتحرك الجسيمات أسرع كلما ارتفعت درجة الحرارة.","الانصهار: صلب ← سائل. التجمّد: سائل ← صلب. التبخّر: سائل ← غاز. التكثّف: غاز ← سائل.","يغلي الماء النقي عند 100 °س ويتجمّد عند 0 °س عند مستوى سطح البحر."],"q":[["أيّ حالة للمادة لها شكل ثابت وحجم ثابت؟",["الصلبة","السائلة","الغازية","كل الحالات"],"جسيمات الصلب متقاربة جدًّا وتهتز في أماكنها، فيبقى شكله وحجمه ثابتين."],["ماذا يحدث للسائل عند نقله من كأس إلى صحن؟",["يأخذ شكل الصحن ويبقى حجمه ثابتًا","يتغيّر حجمه وشكله","يبقى شكله ثابتًا","يتحوّل إلى غاز"],"السائل حجمه ثابت، لكنه يأخذ شكل الإناء."],["ما الحالة التي تنتشر فيها الجسيمات لتملأ الإناء كله؟",["الغازية","الصلبة","السائلة","لا توجد"],"جسيمات الغاز متباعدة وسريعة، فتملأ أيّ إناء توضع فيه."],["ما اسم تحوّل الماء من سائل إلى بخار؟",["التبخّر","التكثّف","التجمّد","الانصهار"],"التبخّر: تحوّل السائل إلى غاز."],["قطرات ماء تتكوّن على كأس عصير بارد. ما اسم هذا التحوّل؟",["التكثّف","التبخّر","الانصهار","التسامي"],"بخار الماء في الهواء يبرد عند الكأس فيتكثّف قطرات."],["قطعة جليد تُركت في الشمس فصارت ماءً. ما اسم هذا التحوّل؟",["الانصهار","التجمّد","التكثّف","التبخّر"],"الانصهار تحوّل الصلب إلى سائل بالتسخين."],["ماذا يحدث لحركة الجسيمات عند تسخين المادة؟",["تزداد سرعتها","تقلّ سرعتها","تتوقّف","لا تتغيّر"],"الحرارة تزيد طاقة الجسيمات فتتحرك أسرع."],["عند أيّ درجة حرارة يغلي الماء النقي عند مستوى سطح البحر؟",["100 °س","0 °س","50 °س","37 °س"],"درجة غليان الماء النقي 100 °س عند مستوى سطح البحر."],["ما الحالة التي تكون فيها الجسيمات أكثر تقاربًا؟",["الصلبة","السائلة","الغازية","كلها متساوية"],"في الصلب الجسيمات متراصّة؛ وفي الغاز متباعدة جدًّا."],["ما اسم تحوّل السائل إلى صلب عند التبريد؟",["التجمّد","الانصهار","التبخّر","الغليان"],"التجمّد عكس الانصهار."],["مكعّب ثلج جافّ (ثاني أكسيد الكربون الصلب) يتحوّل مباشرة إلى غاز. ما اسم هذا التحوّل؟",["التسامي","الانصهار","التكثّف","التجمّد"],"التسامي: تحوّل الصلب إلى غاز مباشرة دون المرور بالحالة السائلة."],["لماذا يمكن ضغط الغاز في أسطوانة، ولا يمكن ضغط الصلب بسهولة؟",["لأن بين جسيمات الغاز فراغات كبيرة","لأن الغاز أثقل","لأن جسيمات الصلب متباعدة","لأن الغاز ليس مادة"],"الفراغات الكبيرة بين جسيمات الغاز تسمح بتقريبها بالضغط."]]},{"id":"changes","t":"التغيّرات الفيزيائية والكيميائية","e":"🔥","sum":["التغيّر الفيزيائي يغيّر شكل المادة أو حالتها دون أن تتكوّن مادة جديدة، مثل تقطيع الورق وانصهار الجليد.","التغيّر الكيميائي تنتج عنه مادة جديدة بخصائص جديدة، مثل احتراق الخشب وصدأ الحديد.","من علامات التغيّر الكيميائي: تغيّر اللون، أو تصاعد غاز، أو انطلاق ضوء أو حرارة، أو تكوّن راسب.","الخاصية الفيزيائية تُقاس دون تغيير المادة (اللون، الكثافة، درجة الغليان)؛ والخاصية الكيميائية تظهر عند تفاعلها (القابلية للاشتعال، الصدأ)."],"q":[["أيّ مما يأتي تغيّر كيميائي؟",["احتراق الخشب","انصهار الجليد","تقطيع الورق","ذوبان السكر في الماء"],"الاحتراق ينتج رمادًا وغازات جديدة."],["أيّ مما يأتي تغيّر فيزيائي؟",["تكسير الزجاج","صدأ الحديد","طهي البيض","تعفّن الفاكهة"],"الزجاج المكسور ما زال زجاجًا؛ لم تتكوّن مادة جديدة."],["ما الذي يدلّ على حدوث تغيّر كيميائي؟",["تصاعد غاز وتغيّر في اللون","تغيّر شكل المادة فقط","تغيّر حجمها فقط","انتقالها من مكان إلى آخر"],"تصاعد الغاز وتغيّر اللون من علامات تكوّن مادة جديدة."],["صدأ الحديد تغيّر:",["كيميائي، لأن مادة جديدة (الصدأ) تكوّنت","فيزيائي، لأن الحديد بقي حديدًا","فيزيائي، لأنه تغيّر في اللون فقط","لا يُعدّ تغيّرًا"],"الصدأ مادة جديدة تتكوّن من تفاعل الحديد مع الأكسجين والماء."],["أيّ مما يأتي خاصية كيميائية؟",["قابلية الاشتعال","اللون","الكثافة","درجة الغليان"],"قابلية الاشتعال لا تظهر إلا عند تفاعل المادة."],["أيّ مما يأتي خاصية فيزيائية؟",["درجة الانصهار","القابلية للصدأ","القابلية للاحتراق","التفاعل مع الحمض"],"درجة الانصهار تُقاس دون أن تتكوّن مادة جديدة."],["خُلط الخلّ بصودا الخبز فظهرت فقاعات كثيرة. ماذا تدلّ الفقاعات؟",["تكوّن غاز جديد في تغيّر كيميائي","تبخّر الخلّ","ذوبان الصودا فقط","تغيّر فيزيائي"],"الفقاعات غاز ثاني أكسيد الكربون الناتج عن التفاعل."],["لماذا يُعدّ ذوبان الملح في الماء تغيّرًا فيزيائيًّا؟",["لأن الملح يمكن استرجاعه بتبخير الماء","لأن مادة جديدة تتكوّن","لأن الماء يشتعل","لأن اللون يتغيّر"],"لم تتكوّن مادة جديدة، والملح يعود بالتبخير."],["أيّ مما يأتي تغيّر كيميائي يحدث في المطبخ؟",["خَبز الكعكة","تقطيع الخضار","غليان الماء","تجميد العصير"],"الخَبز يكوّن مواد جديدة لا يمكن إرجاعها إلى مكوّناتها."],["انطلاق ضوء وحرارة عند إشعال عود الثقاب يدلّ على:",["تغيّر كيميائي","تغيّر فيزيائي","تغيّر في الحالة فقط","لا شيء"],"انطلاق الضوء والحرارة من علامات التفاعل الكيميائي."]]},{"id":"reactions","t":"التفاعلات الكيميائية والمعادلات","e":"⚗️","sum":["التفاعل الكيميائي: مواد متفاعلة تتحوّل إلى مواد ناتجة جديدة.","تُكتب المعادلة الكيميائية: المتفاعلات ← النواتج، مثل: 2H₂ + O₂ ← 2H₂O.","قانون حفظ الكتلة: كتلة المواد المتفاعلة = كتلة المواد الناتجة؛ فالذرات لا تُفنى ولا تُستحدث، بل يُعاد ترتيبها.","التفاعل الطارد للحرارة يطلق حرارة (مثل الاحتراق)، والماص للحرارة يمتصّها (مثل كمادات التبريد الفورية).","تزداد سرعة التفاعل برفع درجة الحرارة، وزيادة التركيز، وتجزئة المادة، واستعمال العامل المحفّز."],"q":[["ماذا تُسمّى المواد التي نبدأ بها التفاعل؟",["المتفاعلات","النواتج","المحفّزات","المخاليط"],"المتفاعلات تُكتب يسار السهم في المعادلة، والنواتج بعده."],["في المعادلة: C + O₂ ← CO₂ ، ما الناتج؟",["CO₂","C","O₂","C و O₂"],"الناتج ما يأتي بعد السهم."],["تفاعلت 10 غرامات من مواد، فكم غرامًا كتلة النواتج في وعاء مغلق؟",["10 غرامات","أقل من 10 غرامات","أكثر من 10 غرامات","صفر"],"قانون حفظ الكتلة: كتلة النواتج = كتلة المتفاعلات."],["ما الذي يحدث للذرات في التفاعل الكيميائي؟",["يُعاد ترتيبها لتكوّن مواد جديدة","تُفنى","تُستحدث ذرات جديدة","تتحوّل إلى عناصر أخرى"],"الذرات نفسها تبقى، لكنها ترتبط بطريقة جديدة."],["احتراق الوقود يطلق حرارة. ما نوع هذا التفاعل؟",["طارد للحرارة","ماص للحرارة","فيزيائي","لا يُعدّ تفاعلًا"],"التفاعل الطارد يطلق الحرارة إلى المحيط."],["كمّادة تبريد فورية تبرد عند الضغط عليها. ما نوع التفاعل داخلها؟",["ماص للحرارة","طارد للحرارة","احتراق","تكثّف"],"التفاعل يمتصّ الحرارة من المحيط فنشعر بالبرودة."],["لماذا يذوب قرص فوّار مطحون أسرع من قرص كامل؟",["لأن تجزئة المادة تزيد مساحة السطح فتزيد سرعة التفاعل","لأن المطحون أثقل","لأن القرص الكامل لا يتفاعل","لأن الماء يبرد"],"كلما زادت مساحة السطح المعرّضة للتفاعل زادت سرعته."],["ما دور العامل المحفّز في التفاعل؟",["يزيد سرعة التفاعل دون أن يُستهلك","يُبطئ التفاعل دائمًا","يتحوّل إلى ناتج","يوقف التفاعل"],"المحفّز يسرّع التفاعل ويبقى في نهايته كما هو."],["لماذا نحفظ الطعام في الثلاجة؟",["لأن خفض الحرارة يُبطئ التفاعلات التي تفسده","لأن البرودة تزيد التفاعلات","لأن الثلاجة تقتل كل الجراثيم","لأن الطعام يصبح عنصرًا"],"انخفاض درجة الحرارة يقلّل سرعة التفاعلات الكيميائية."],["في المعادلة الموزونة 2H₂ + O₂ ← 2H₂O ، كم ذرة أكسجين في النواتج؟",["2","1","4","3"],"2H₂O فيها جزيئان، في كل منهما ذرة أكسجين واحدة: المجموع 2، وهو يساوي ما في O₂."]]},{"id":"acids","t":"الأحماض والقواعد","e":"🍋","sum":["الأحماض طعمها لاذع، وتُحمّر ورق تبّاع الشمس الأزرق، مثل الخلّ وعصير الليمون.","القواعد طعمها مرّ وملمسها زلق، وتُزرّق ورق تبّاع الشمس الأحمر، مثل الصابون.","مقياس pH من 0 إلى 14: أقل من 7 حمضي، و7 متعادل، وأكثر من 7 قاعدي.","التعادل: يتفاعل الحمض مع القاعدة فينتج ملح وماء.","تنبيه: لا نتذوّق ولا نلمس المواد في المختبر؛ فالأحماض والقواعد القوية تحرق الجلد."],"q":[["أيّ المواد الآتية حمضية؟",["عصير الليمون","الصابون","معجون الأسنان","مسحوق الغسيل"],"عصير الليمون فيه حمض الستريك."],["أيّ المواد الآتية قاعدية؟",["الصابون","الخلّ","عصير البرتقال","الحليب الحامض"],"الصابون مادة قاعدية ملمسها زلق."],["ماذا يحدث لورق تبّاع الشمس الأزرق في محلول حمضي؟",["يتحوّل إلى اللون الأحمر","يبقى أزرق","يتحوّل إلى الأخضر","يذوب"],"الأحماض تُحمّر ورق تبّاع الشمس الأزرق."],["محلول قيمة pH له 7. ما نوعه؟",["متعادل","حمضي","قاعدي","حمضي قوي"],"القيمة 7 تعني التعادل، مثل الماء النقي."],["محلول قيمة pH له 2. ما نوعه؟",["حمضي","قاعدي","متعادل","لا يمكن معرفته"],"أقل من 7 حمضي، وكلما صغر الرقم زادت الحمضية."],["أيّ قيمة pH تدلّ على أقوى قاعدة؟",["13","8","7","3"],"أكثر من 7 قاعدي، وكلما كبر الرقم زادت القاعدية."],["ماذا ينتج عن تفاعل حمض مع قاعدة؟",["ملح وماء","غاز الأكسجين فقط","حمض أقوى","فلز"],"تفاعل التعادل ينتج ملحًا وماءً."],["لماذا يتناول بعض الناس مضادّ الحموضة عند حرقة المعدة؟",["لأنه قاعدة تعادل حمض المعدة الزائد","لأنه حمض يزيد الحموضة","لأنه يقتل البكتيريا","لأنه سكّر"],"مضادّ الحموضة قاعدة ضعيفة تعادل جزءًا من الحمض."],["ما الطريقة الآمنة لمعرفة هل المحلول حمضي أو قاعدي في المختبر؟",["استعمال كاشف مثل ورق تبّاع الشمس","تذوّقه","لمسه باليد","شمّه عن قرب"],"لا نتذوّق ولا نلمس مواد المختبر؛ نستعمل الكواشف."],["أيّ مما يأتي من صفات القواعد؟",["ملمسها زلق وتُزرّق ورق تبّاع الشمس الأحمر","طعمها لاذع وتُحمّر ورق تبّاع الشمس الأزرق","قيمة pH لها أقل من 7","توجد في الليمون"],"هذه صفات القواعد؛ والبقية صفات الأحماض."],["قيمة pH للماء النقي تساوي تقريبًا:",["7","0","14","1"],"الماء النقي متعادل، وقيمة pH له نحو 7."],["الخلّ يحتوي على:",["حمض الأسيتيك","حمض الكبريتيك","هيدروكسيد الصوديوم","الأمونيا"],"الخلّ محلول مخفّف من حمض الأسيتيك (الخليك)."]]}];
+const CAT={alkali:"فلزات قلوية",alkaline:"فلزات قلوية أرضية",trans:"فلزات انتقالية",post:"فلزات أخرى",metalloid:"أشباه فلزات",nonmetal:"لافلزات",halogen:"هالوجينات",noble:"غازات نبيلة",lanth:"لانثانيدات",act:"أكتينيدات"};
+const STATE={solid:"صلب",liquid:"سائل",gas:"غاز",unknown:"غير معروف (عنصر مُصنَّع)"};
+const STRANDS=[
+ {id:"matter",t:"المادة والكيمياء",e:"⚗️",d:"الذرة، والجدول الدوري، والتفاعلات",ready:true},
+ {id:"life",t:"الحياة",e:"🧬",d:"الخلية، وأجهزة الجسم، والوراثة، والبيئة",ready:false},
+ {id:"energy",t:"الطاقة والحركة",e:"⚡",d:"القوى، والطاقة، والكهرباء، والموجات",ready:false},
+ {id:"earth",t:"الأرض والفضاء",e:"🌍",d:"الصخور، والطقس، والنظام الشمسي",ready:false}];
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let P;try{P=JSON.parse(localStorage.getItem("qn2")||"{}")}catch(e){P={}}
+P.pts=P.pts||0;P.stars=P.stars||{};P.mist=P.mist||{};P.seen=P.seen||{};
+const save=()=>{try{localStorage.setItem("qn2",JSON.stringify(P))}catch(e){}$("#pts").textContent=P.pts};
+let stack=[],cur=null;
+function show(html){$("#app").innerHTML=html;$("#back").style.display=stack.length?"inline-block":"none";$("#pts").textContent=P.pts;scrollTo(0,0);if(cur&&cur.fn===home)stars()}
+function go(fn,...a){if(cur)stack.push(cur);cur={fn,a};fn(...a)}
+function back(){const p=stack.pop();if(!p)return home();cur=p;p.fn(...p.a)}
+function swap(fn,...a){cur={fn,a};fn(...a)}
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+const starStr=n=>"★".repeat(n)+"☆".repeat(3-n);
+const qn=n=>n<=10&&n>=3?n+" أسئلة":n+" سؤالًا";
+const mistN=()=>Object.keys(P.mist).length;
 
-// Achievements List
-const achievements = [
-    { id: 'first_visit', name: 'الزيارة الأولى', description: 'قمت بزيارة المنصة لأول مرة', points: 50, icon: 'fa-door-open' },
-    { id: 'explorer', name: 'المستكشف', description: 'استكشفت 10 عناصر من الجدول الدوري', points: 50, icon: 'fa-compass' },
-    { id: 'scientist', name: 'العالم الناشئ', description: 'أكملت 5 تجارب علمية', points: 100, icon: 'fa-flask' },
-    { id: 'quiz_master', name: 'خبير الاختبارات', description: 'حصلت على 100% في اختبار', points: 75, icon: 'fa-trophy' },
-    { id: 'bookworm', name: 'محب القراءة', description: 'قرأت 10 دروس كاملة', points: 80, icon: 'fa-book-reader' },
-    { id: 'star_student', name: 'الطالب النجم', description: 'حصلت على 500 نقطة', points: 150, icon: 'fa-star' }
-];
+/* ===== الرئيسية ===== */
+function home(){
+  const L=LESSONS.length,got=LESSONS.reduce((a,l)=>a+(P.stars[l.id]||0),0),pct=Math.round(got/(L*3)*100);
+  show(`<section class="hero"><canvas id="sky" aria-hidden="true"></canvas>
+    <span class="kick">أساسيات العلوم للمرحلة المتوسطة</span>
+    <h1>منصة العلوم التفاعلية</h1><div class="en">Quantum Nexus</div>
+    <p>أهم أفكار العلوم في المرحلة المتوسطة، مع جدول دوري تفاعلي وأسئلة لكل منها تفسير.</p>
+    <div class="stats"><div><b>118</b><small>عنصرًا</small></div><div><b>${LESSONS.reduce((a,l)=>a+l.q.length,0)}</b><small>سؤالًا</small></div><div><b>${pct}%</b><small>الإنجاز</small></div></div></section>
+  <button class="big" onclick="go(table)"><span class="ic">🧪</span><span><b>الجدول الدوري التفاعلي</b><small>العناصر الـ118 كلها: اضغط أيّ عنصر لتعرف عنه</small></span></button>
+  <h2>محاور العلوم</h2>
+  <div class="grid2">${STRANDS.map(s=>s.ready?`<button class="strand" onclick="go(strand,'${s.id}')"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><span class="bar"><i style="width:${pct}%"></i></span></button>`:`<div class="strand soon" aria-disabled="true"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><small>🛠️ قيد الإعداد</small></div>`).join("")}</div>
+  <h2>أدوات</h2>
+  <div class="tools"><button class="tool" onclick="go(symbolQuiz)"><span>🔤</span>تحدّي الرموز</button><button class="tool" onclick="go(review)"><span>📒</span>مراجعة أخطائي${mistN()?`<em>${mistN()}</em>`:""}</button></div>
+  <footer>أسئلة تدريبية أصلية لأساسيات العلوم، وليست بديلًا عن الكتاب المدرسي أو المعلّم · بلا حساب وبلا إعلانات<br><a href="../">← رحلات تعليمية</a></footer>`);
+}
+function stars(){const c=$("#sky");if(!c||matchMedia("(prefers-reduced-motion: reduce)").matches)return;const x=c.getContext("2d"),r=devicePixelRatio||1;c.width=c.offsetWidth*r;c.height=c.offsetHeight*r;
+  const pts=Array.from({length:40},()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.3*r,vy:(Math.random()-.5)*.3*r}));
+  (function draw(){if(!document.body.contains(c))return;x.clearRect(0,0,c.width,c.height);x.fillStyle="#fff";x.strokeStyle="rgba(255,255,255,.18)";
+   pts.forEach(p=>{p.x=(p.x+p.vx+c.width)%c.width;p.y=(p.y+p.vy+c.height)%c.height;x.beginPath();x.arc(p.x,p.y,1.6*r,0,7);x.fill()});
+   for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<70*r){x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.stroke()}}
+   requestAnimationFrame(draw)})()}
 
-// Ranks
-const ranks = [
-    { name: 'مبتدئ', min: 0, max: 99 },
-    { name: 'مستكشف', min: 100, max: 249 },
-    { name: 'متعلم', min: 250, max: 499 },
-    { name: 'متقدم', min: 500, max: 999 },
-    { name: 'خبير', min: 1000, max: 1999 },
-    { name: 'عبقري', min: 2000, max: 999999 }
-];
-
-// Elements Data (118 elements - compact version)
-const elementsData = [
-    {symbol:'H',number:1,nameAr:'هيدروجين',nameEn:'Hydrogen',mass:1.008,type:'nonmetal',state:'غاز',group:1,period:1,row:1,col:1},
-    {symbol:'He',number:2,nameAr:'هيليوم',nameEn:'Helium',mass:4.003,type:'noble-gas',state:'غاز',group:18,period:1,row:1,col:18},
-    {symbol:'Li',number:3,nameAr:'ليثيوم',nameEn:'Lithium',mass:6.941,type:'alkali-metal',state:'صلب',group:1,period:2,row:2,col:1},
-    {symbol:'Be',number:4,nameAr:'بيريليوم',nameEn:'Beryllium',mass:9.012,type:'alkaline-earth',state:'صلب',group:2,period:2,row:2,col:2},
-    {symbol:'B',number:5,nameAr:'بورون',nameEn:'Boron',mass:10.81,type:'metalloid',state:'صلب',group:13,period:2,row:2,col:13},
-    {symbol:'C',number:6,nameAr:'كربون',nameEn:'Carbon',mass:12.01,type:'nonmetal',state:'صلب',group:14,period:2,row:2,col:14},
-    {symbol:'N',number:7,nameAr:'نيتروجين',nameEn:'Nitrogen',mass:14.01,type:'nonmetal',state:'غاز',group:15,period:2,row:2,col:15},
-    {symbol:'O',number:8,nameAr:'أكسجين',nameEn:'Oxygen',mass:16.00,type:'nonmetal',state:'غاز',group:16,period:2,row:2,col:16},
-    {symbol:'F',number:9,nameAr:'فلور',nameEn:'Fluorine',mass:19.00,type:'halogen',state:'غاز',group:17,period:2,row:2,col:17},
-    {symbol:'Ne',number:10,nameAr:'نيون',nameEn:'Neon',mass:20.18,type:'noble-gas',state:'غاز',group:18,period:2,row:2,col:18},
-    {symbol:'Na',number:11,nameAr:'صوديوم',nameEn:'Sodium',mass:22.99,type:'alkali-metal',state:'صلب',group:1,period:3,row:3,col:1},
-    {symbol:'Mg',number:12,nameAr:'مغنيسيوم',nameEn:'Magnesium',mass:24.31,type:'alkaline-earth',state:'صلب',group:2,period:3,row:3,col:2},
-    {symbol:'Al',number:13,nameAr:'ألومنيوم',nameEn:'Aluminum',mass:26.98,type:'metal',state:'صلب',group:13,period:3,row:3,col:13},
-    {symbol:'Si',number:14,nameAr:'سيليكون',nameEn:'Silicon',mass:28.09,type:'metalloid',state:'صلب',group:14,period:3,row:3,col:14},
-    {symbol:'P',number:15,nameAr:'فوسفور',nameEn:'Phosphorus',mass:30.97,type:'nonmetal',state:'صلب',group:15,period:3,row:3,col:15},
-    {symbol:'S',number:16,nameAr:'كبريت',nameEn:'Sulfur',mass:32.07,type:'nonmetal',state:'صلب',group:16,period:3,row:3,col:16},
-    {symbol:'Cl',number:17,nameAr:'كلور',nameEn:'Chlorine',mass:35.45,type:'halogen',state:'غاز',group:17,period:3,row:3,col:17},
-    {symbol:'Ar',number:18,nameAr:'أرجون',nameEn:'Argon',mass:39.95,type:'noble-gas',state:'غاز',group:18,period:3,row:3,col:18},
-    {symbol:'K',number:19,nameAr:'بوتاسيوم',nameEn:'Potassium',mass:39.10,type:'alkali-metal',state:'صلب',group:1,period:4,row:4,col:1},
-    {symbol:'Ca',number:20,nameAr:'كالسيوم',nameEn:'Calcium',mass:40.08,type:'alkaline-earth',state:'صلب',group:2,period:4,row:4,col:2},
-    {symbol:'Fe',number:26,nameAr:'حديد',nameEn:'Iron',mass:55.85,type:'transition-metal',state:'صلب',group:8,period:4,row:4,col:8},
-    {symbol:'Cu',number:29,nameAr:'نحاس',nameEn:'Copper',mass:63.55,type:'transition-metal',state:'صلب',group:11,period:4,row:4,col:11},
-    {symbol:'Zn',number:30,nameAr:'زنك',nameEn:'Zinc',mass:65.38,type:'transition-metal',state:'صلب',group:12,period:4,row:4,col:12},
-    {symbol:'Br',number:35,nameAr:'بروم',nameEn:'Bromine',mass:79.90,type:'halogen',state:'سائل',group:17,period:4,row:4,col:17},
-    {symbol:'Kr',number:36,nameAr:'كريبتون',nameEn:'Krypton',mass:83.80,type:'noble-gas',state:'غاز',group:18,period:4,row:4,col:18},
-    {symbol:'Ag',number:47,nameAr:'فضة',nameEn:'Silver',mass:107.87,type:'transition-metal',state:'صلب',group:11,period:5,row:5,col:11},
-    {symbol:'I',number:53,nameAr:'يود',nameEn:'Iodine',mass:126.90,type:'halogen',state:'صلب',group:17,period:5,row:5,col:17},
-    {symbol:'Xe',number:54,nameAr:'زينون',nameEn:'Xenon',mass:131.29,type:'noble-gas',state:'غاز',group:18,period:5,row:5,col:18},
-    {symbol:'Au',number:79,nameAr:'ذهب',nameEn:'Gold',mass:196.97,type:'transition-metal',state:'صلب',group:11,period:6,row:6,col:11},
-    {symbol:'Hg',number:80,nameAr:'زئبق',nameEn:'Mercury',mass:200.59,type:'transition-metal',state:'سائل',group:12,period:6,row:6,col:12}
-];
-
-// ============================================
-// BACKGROUND CANVAS ANIMATION
-// ============================================
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-let width, height;
-let particles = [];
-
-function initCanvas() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-    
-    // إنشاء جسيمات تمثل ذرات أو إلكترونات
-    const particleCount = 80;
-    particles = [];
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 3 + 1,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5,
-            color: `rgba(${100 + Math.random() * 155}, ${150 + Math.random() * 105}, 255, 0.7)`
-        });
-    }
+/* ===== المحور والدروس ===== */
+function strand(){
+  show(`<h1 style="font-size:24px;margin:6px 2px">⚗️ المادة والكيمياء</h1><p class="muted" style="margin:0 2px 12px">${LESSONS.length} دروس. ابدأ بالترتيب، أو اختر ما تحتاج إليه.</p>
+  ${LESSONS.map((l,i)=>`<button class="lesson" onclick="go(lesson,'${l.id}')"><span class="ic">${l.e}</span><span><b>${i+1}. ${l.t}</b><small>${qn(l.q.length)}</small></span><span class="stars" aria-label="${P.stars[l.id]||0} من 3 نجوم">${starStr(P.stars[l.id]||0)}</span></button>`).join("")}`);
+}
+const LX=id=>LESSONS.find(l=>l.id===id);
+function lesson(id){const l=LX(id);
+  show(`<h1 style="font-size:24px;margin:6px 2px">${l.e} ${l.t}</h1>
+  <div class="card"><b>💡 أهم الأفكار</b><ul>${l.sum.map(s=>`<li>${s}</li>`).join("")}</ul></div>
+  <button class="go" onclick="swap(quiz,{id:'${id}'})">ابدأ الأسئلة (${l.q.length})</button>
+  ${id==="table"?`<button class="go alt" onclick="go(table)">🧪 افتح الجدول الدوري</button>`:""}`);
 }
 
-function drawParticles() {
-    ctx.clearRect(0, 0, width, height);
-    
-    // رسم خطوط خلفية ناعمة
-    ctx.fillStyle = 'rgba(10, 15, 30, 0.3)';
-    ctx.fillRect(0, 0, width, height);
-    
-    // تحديث ورسم الجسيمات
-    particles.forEach(p => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-        
-        // الالتفاف حول الحواف
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-        
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-        
-        // إضافة تأثير وهج خفيف
-        ctx.shadowColor = 'rgba(100, 150, 255, 0.5)';
-        ctx.shadowBlur = 10;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-    });
-    
-    // رسم خطوط بين الجسيمات القريبة (تبدو كروابط جزيئية)
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < 100) {
-                ctx.beginPath();
-                ctx.strokeStyle = `rgba(150, 200, 255, ${0.2 * (1 - distance/100)})`;
-                ctx.lineWidth = 0.5;
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.stroke();
-            }
-        }
-    }
-    
-    requestAnimationFrame(drawParticles);
+/* ===== الأسئلة ===== */
+let Q=null;
+function mk(lid,i){const l=LX(lid),[p,o,x]=l.q[i];return {key:lid+"#"+i,lid,p,ans:o[0],opts:sh(o),x}}
+function quiz(cfg){
+  let list;
+  if(cfg.review){list=Object.keys(P.mist).map(k=>{const [lid,i]=k.split("#");return LX(lid)&&LX(lid).q[+i]?mk(lid,+i):null}).filter(Boolean);list=sh(list).slice(0,10)}
+  else if(cfg.symbols){list=cfg.list}
+  else{const l=LX(cfg.id);list=sh(l.q.map((_,i)=>mk(cfg.id,i)))}
+  if(!list.length){show(`<div class="card center"><p>لا توجد أخطاء للمراجعة 🎉</p></div><button class="go" onclick="swap(home)">الرئيسية</button>`);return}
+  Q={cfg,list,i:0,score:0};step();
 }
-
-window.addEventListener('resize', () => {
-    initCanvas();
-});
-
-// ============================================
-// MUSIC CONTROL
-// ============================================
-const audio = document.getElementById('bgMusic');
-const musicToggle = document.getElementById('musicToggle');
-const musicIcon = document.getElementById('musicIcon');
-let musicPlaying = false;
-
-// محاولة التشغيل التلقائي (مكتماً) ثم يمكن للمستخدم رفع الصوت
-audio.muted = true;
-audio.play().then(() => {
-    musicPlaying = true;
-    musicIcon.className = 'fas fa-volume-up';
-    musicToggle.innerHTML = '<i class="fas fa-volume-up"></i> كتم الموسيقى';
-}).catch(e => {
-    console.log('المتصفح منع التشغيل التلقائي، انتظر تفاعل المستخدم');
-    musicPlaying = false;
-    musicIcon.className = 'fas fa-volume-mute';
-    musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i> تشغيل الموسيقى';
-});
-
-function toggleMusic() {
-    if (musicPlaying) {
-        audio.pause();
-        musicIcon.className = 'fas fa-volume-mute';
-        musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i> تشغيل الموسيقى';
-    } else {
-        audio.muted = false; // إلغاء الكتم عند التشغيل اليدوي
-        audio.play();
-        musicIcon.className = 'fas fa-volume-up';
-        musicToggle.innerHTML = '<i class="fas fa-volume-up"></i> كتم الموسيقى';
-    }
-    musicPlaying = !musicPlaying;
+function step(){const t=Q.list[Q.i];Q.done=false;
+  show(`<div class="qhead"><span>${Q.cfg.review?"📒 مراجعة الأخطاء":Q.cfg.symbols?"🔤 تحدّي الرموز":esc(LX(Q.cfg.id).t)}</span><span>${Q.i+1} / ${Q.list.length}</span></div>
+  <div class="bar"><i style="width:${Q.i/Q.list.length*100}%"></i></div>
+  <div class="q">${t.p}</div>
+  ${t.opts.map((o,k)=>`<button class="opt" id="o${k}" onclick="pick(${k})">${o}</button>`).join("")}
+  <div id="fb"></div>`);
 }
-
-// ============================================
-// INITIALIZATION
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    updatePointsDisplay();
-    checkFirstVisit();
-    loadAchievementsDisplay();
-    initCanvas();
-    drawParticles();
-});
-
-function checkFirstVisit() {
-    const hasVisited = localStorage.getItem('hasVisited');
-    if (!hasVisited) {
-        localStorage.setItem('hasVisited', 'true');
-        unlockAchievement('first_visit');
-    }
+function pick(k){if(Q.done)return;Q.done=true;const t=Q.list[Q.i],ok=t.opts[k]===t.ans;
+  t.opts.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o===t.ans)b.classList.add("good");else if(j===k)b.classList.add("bad")});
+  if(ok){Q.score++;P.pts+=10;if(t.key)delete P.mist[t.key]}else if(t.key)P.mist[t.key]=Date.now();save();
+  $("#fb").innerHTML=`<div class="fb ${ok?"good":"bad"}"><b>${ok?"✅ إجابة صحيحة!":"❌ الإجابة الصحيحة: "+t.ans}</b><br>${t.x}</div>
+  <button class="go" onclick="next()">${Q.i+1<Q.list.length?"التالي":"النتيجة"}</button>`;
+  $("#fb").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
-
-// ============================================
-// NAVIGATION
-// ============================================
-function showPage(pageId) {
-    // Hide all pages
-    const pages = document.querySelectorAll('.page-section');
-    pages.forEach(page => page.classList.remove('active'));
-    
-    // Show selected page
-    const selectedPage = document.getElementById(pageId);
-    if (selectedPage) {
-        selectedPage.classList.add('active');
-        
-        // Update navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => link.classList.remove('active'));
-        event.target.classList.add('active');
-        
-        // Load page-specific content
-        if (pageId === 'periodic-table') {
-            loadPeriodicTable();
-        } else if (pageId === 'achievements') {
-            loadAchievementsDisplay();
-            updateStatsDisplay();
-        }
-        
-        // Scroll to top
-        window.scrollTo(0, 0);
-    }
+function next(){Q.i++;if(Q.i<Q.list.length)step();else finish()}
+function finish(){const n=Q.list.length,s=Q.score,r=s/n,st=r>=.9?3:r>=.7?2:r>=.5?1:0;
+  if(Q.cfg.id){P.stars[Q.cfg.id]=Math.max(P.stars[Q.cfg.id]||0,st);P.pts+=st*10}save();
+  show(`<div class="card center"><div class="score">${s} / ${n}</div>${Q.cfg.id?`<div class="stars" style="font-size:30px;margin:0">${starStr(st)}</div>`:""}
+  <p>${r>=.9?"ممتاز! أتقنت هذا الدرس 🌟":r>=.7?"عمل جيد! راجع الأخطاء لتصل إلى الإتقان 👍":r>=.5?"بداية طيبة؛ اقرأ «أهم الأفكار» ثم حاول مرة أخرى 💪":"لا بأس؛ اقرأ «أهم الأفكار» بهدوء، ثم أعد المحاولة 🤝"}</p></div>
+  <button class="go" onclick="swap(quiz,Q.cfg.symbols?{symbols:true,list:symbolList()}:Q.cfg)">محاولة جديدة</button>
+  ${mistN()?`<button class="go alt" onclick="swap(quiz,{review:true})">📒 مراجعة أخطائي (${mistN()})</button>`:""}
+  <button class="go alt" onclick="stack=[];swap(home)">الرئيسية</button>`);
 }
+function review(){quiz({review:true})}
 
-// ============================================
-// POINTS SYSTEM
-// ============================================
-function addPoints(points) {
-    userPoints += points;
-    localStorage.setItem('userPoints', userPoints.toString());
-    updatePointsDisplay();
-    showNotification(`+${points} نقطة`);
-    
-    // Check star student achievement
-    if (userPoints >= 500 && !unlockedAchievements.includes('star_student')) {
-        unlockAchievement('star_student');
-    }
+/* ===== تحدّي الرموز ===== */
+const COMMON=[1,2,3,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,26,29,30,47,50,53,79,80,82,92];
+function symbolList(){return sh(COMMON).slice(0,10).map((z,i)=>{const e=ELEMENTS[z-1],others=sh(COMMON.filter(y=>y!==z)).slice(0,3).map(y=>ELEMENTS[y-1]);
+  return i%2?{p:`ما العنصر الذي رمزه <b dir="ltr">${e.s}</b>؟`,ans:e.ar,opts:sh([e.ar,...others.map(o=>o.ar)]),x:`<b dir="ltr">${e.s}</b> رمز ${e.ar} (${e.en})، وعدده الذري ${e.z}.`}
+   :{p:`ما رمز عنصر <b>${e.ar}</b>؟`,ans:e.s,opts:sh([e.s,...others.map(o=>o.s)]),x:`رمز ${e.ar} هو <b dir="ltr">${e.s}</b>${e.s[0]!==e.en[0]?` (من اسمه اللاتيني أو القديم)`:""}، وعدده الذري ${e.z}.`}})}
+function symbolQuiz(){quiz({symbols:true,list:symbolList()})}
+
+/* ===== الجدول الدوري ===== */
+let filt="",term="";
+function cell(e){const dim=(filt&&e.c!==filt)||(term&&!(e.ar.includes(term)||e.en.toLowerCase().includes(term.toLowerCase())||e.s.toLowerCase()===term.toLowerCase()||String(e.z)===term));
+  return `<button class="el c-${e.c}${dim?" dim":""}" style="grid-column:${e.g};grid-row:${e.p==="la"?9:e.p==="ac"?10:e.p}" onclick="elem(${e.z})" aria-label="${e.ar} ${e.s} العدد الذري ${e.z}"><span class="n">${e.z}</span><span class="s">${e.s}</span><span class="a">${e.ar}</span></button>`}
+function table(){
+  show(`<h1 style="font-size:24px;margin:6px 2px">🧪 الجدول الدوري التفاعلي</h1>
+  <input class="search" id="term" placeholder="ابحث باسم العنصر أو رمزه أو عدده الذري" value="${esc(term)}" oninput="term=this.value.trim();drawPT()">
+  <div class="legend">${Object.entries(CAT).map(([k,v])=>`<button class="${filt===k?"on":""}" onclick="filt=filt==='${k}'?'':'${k}';table()"><i class="c-${k}"></i>${v}</button>`).join("")}</div>
+  <p class="fine" style="margin:0 2px 6px">↔️ اسحب الجدول جانبيًّا لرؤيته كاملًا، واضغط أيّ عنصر لتعرف عنه.</p>
+  <div class="ptwrap"><div class="pt" id="pt"></div></div>
+  <p class="fine">الصفّان السفليّان: اللانثانيدات (57–71) والأكتينيدات (89–103)، ومكانهما في الدورتين السادسة والسابعة.</p>`);
+  drawPT();const t=$("#term");if(term&&t){t.focus();t.setSelectionRange(term.length,term.length)}
 }
-
-function updatePointsDisplay() {
-    document.getElementById('userPoints').textContent = userPoints;
-    const totalDisplay = document.getElementById('totalPointsDisplay');
-    if (totalDisplay) {
-        totalDisplay.textContent = userPoints;
-    }
-    
-    const rankDisplay = document.getElementById('userRankDisplay');
-    if (rankDisplay) {
-        const rank = getUserRank();
-        rankDisplay.textContent = rank.name;
-    }
+function drawPT(){const el=$("#pt");if(!el)return;
+  el.innerHTML=ELEMENTS.map(cell).join("")+`<div class="el gap" style="grid-column:3;grid-row:6">57–71</div><div class="el gap" style="grid-column:3;grid-row:7">89–103</div><div style="grid-row:8;height:10px"></div>`;
+  if(term){const hit=ELEMENTS.filter(e=>e.ar.includes(term)||e.en.toLowerCase().includes(term.toLowerCase())||e.s.toLowerCase()===term.toLowerCase()||String(e.z)===term);if(hit.length===1){const b=el.children[hit[0].z-1];b&&b.scrollIntoView({block:"nearest",inline:"center"})}}
 }
-
-function getUserRank() {
-    for (let rank of ranks) {
-        if (userPoints >= rank.min && userPoints <= rank.max) {
-            return rank;
-        }
-    }
-    return ranks[0];
+function elem(z){const e=ELEMENTS[z-1];P.seen[z]=1;save();
+  const d=document.createElement("div");d.className="sheet";d.onclick=ev=>{if(ev.target===d)d.remove()};
+  d.innerHTML=`<div role="dialog" aria-label="${e.ar}"><div class="elhead"><div class="elbig c-${e.c}"><span class="n">${e.z}</span><span class="s">${e.s}</span></div>
+  <div><b style="font-size:24px">${e.ar}</b><div class="muted" dir="ltr" style="text-align:right">${e.en}</div><div class="muted">${CAT[e.c]}</div></div></div>
+  ${e.f?`<div class="card" style="margin:12px 0 0">💡 ${e.f}</div>`:""}
+  <div class="facts"><div><small>العدد الذري (عدد البروتونات)</small><b>${e.z}</b></div><div><small>الكتلة الذرية</small><b dir="ltr">${e.m}</b></div>
+  <div><small>الدورة</small><b>${e.p==="la"?6:e.p==="ac"?7:e.p}</b></div><div><small>المجموعة</small><b>${e.p==="la"||e.p==="ac"?"3 (سلسلة "+(e.p==="la"?"اللانثانيدات":"الأكتينيدات")+")":e.g}</b></div>
+  <div><small>الحالة في درجة حرارة الغرفة</small><b>${STATE[e.st]}</b></div><div><small>مشعّ؟</small><b>${e.r?"نعم ☢️":"لا"}</b></div></div>
+  <p class="fine">في الذرة المتعادلة من ${e.ar}: عدد البروتونات = عدد الإلكترونات = ${e.z}.</p>
+  <button class="go alt" onclick="this.closest('.sheet').remove()">إغلاق</button></div>`;
+  document.body.appendChild(d);
 }
-
-// ============================================
-// ACHIEVEMENTS SYSTEM
-// ============================================
-function unlockAchievement(achievementId) {
-    if (unlockedAchievements.includes(achievementId)) return;
-    
-    const achievement = achievements.find(a => a.id === achievementId);
-    if (!achievement) return;
-    
-    unlockedAchievements.push(achievementId);
-    localStorage.setItem('unlockedAchievements', JSON.stringify(unlockedAchievements));
-    
-    addPoints(achievement.points);
-    showNotification(`🏆 إنجاز جديد: ${achievement.name}!`, 3000);
-    loadAchievementsDisplay();
-}
-
-function loadAchievementsDisplay() {
-    const grid = document.getElementById('achievementsGrid');
-    if (!grid) return;
-    
-    grid.innerHTML = '';
-    
-    achievements.forEach(achievement => {
-        const isUnlocked = unlockedAchievements.includes(achievement.id);
-        const card = document.createElement('div');
-        card.className = `achievement-card ${isUnlocked ? 'unlocked' : 'locked'}`;
-        
-        card.innerHTML = `
-            <div class="achievement-badge">
-                <i class="fas ${achievement.icon}"></i>
-            </div>
-            <h4 style="margin: 1rem 0 0.5rem;">${achievement.name}</h4>
-            <p style="margin-bottom: 1rem; color: var(--text-color);">${achievement.description}</p>
-            <div style="background: ${isUnlocked ? 'linear-gradient(135deg, var(--warning-color), #d97706)' : 'var(--border-color)'};
-                        color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block;">
-                <i class="fas fa-star"></i> ${achievement.points} نقطة
-            </div>
-        `;
-        
-        grid.appendChild(card);
-    });
-    
-    // Update count
-    const countDisplay = document.getElementById('achievementsCount');
-    if (countDisplay) {
-        countDisplay.textContent = `${unlockedAchievements.length}/${achievements.length}`;
-    }
-}
-
-function updateStatsDisplay() {
-    document.getElementById('totalPointsDisplay').textContent = userPoints;
-    document.getElementById('achievementsCount').textContent = `${unlockedAchievements.length}/${achievements.length}`;
-    const rank = getUserRank();
-    document.getElementById('userRankDisplay').textContent = rank.name;
-}
-
-// ============================================
-// NOTIFICATIONS
-// ============================================
-function showNotification(message, duration = 2000) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.innerHTML = `<strong>${message}</strong>`;
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, duration);
-}
-
-// ============================================
-// CURRICULUM
-// ============================================
-function selectGrade(grade) {
-    const buttons = document.querySelectorAll('.grade-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.closest('.grade-btn').classList.add('active');
-    
-    document.getElementById('grade1-content').style.display = grade === 1 ? 'block' : 'none';
-    document.getElementById('grade3-content').style.display = grade === 3 ? 'block' : 'none';
-    
-    addPoints(10);
-}
-
-// ============================================
-// PERIODIC TABLE
-// ============================================
-function loadPeriodicTable() {
-    const container = document.getElementById('periodic-table-container');
-    if (!container) return;
-    
-    if (container.querySelector('.periodic-table')) return; // Already loaded
-    
-    container.innerHTML = '';
-    const table = document.createElement('div');
-    table.className = 'periodic-table';
-    
-    // Create 7x18 grid
-    for (let row = 1; row <= 7; row++) {
-        for (let col = 1; col <= 18; col++) {
-            const element = elementsData.find(e => e.row === row && e.col === col);
-            
-            if (element) {
-                const elementDiv = document.createElement('div');
-                elementDiv.className = `element ${element.type}`;
-                elementDiv.innerHTML = `
-                    <span class="atomic-number">${element.number}</span>
-                    <div class="symbol">${element.symbol}</div>
-                    <span class="name">${element.nameAr}</span>
-                `;
-                elementDiv.onclick = () => showElementDetails(element);
-                table.appendChild(elementDiv);
-            } else {
-                const emptyDiv = document.createElement('div');
-                emptyDiv.style.backgroundColor = 'transparent';
-                table.appendChild(emptyDiv);
-            }
-        }
-    }
-    
-    container.appendChild(table);
-}
-
-function showElementDetails(element) {
-    const modal = document.getElementById('elementModal');
-    const details = document.getElementById('elementDetails');
-    
-    details.innerHTML = `
-        <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); 
-                    color: white; padding: 2rem; border-radius: var(--border-radius); text-align: center; margin-bottom: 2rem;">
-            <div style="font-size: 4rem; font-weight: 900; margin-bottom: 0.5rem;">${element.symbol}</div>
-            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${element.nameAr}</div>
-            <div style="font-size: 1.25rem; opacity: 0.9;">${element.nameEn}</div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-            <div style="padding: 1rem; background: var(--light-color); border-radius: 8px;">
-                <div style="font-weight: 600; color: var(--dark-color); margin-bottom: 0.5rem;">
-                    <i class="fas fa-atom"></i> العدد الذري
-                </div>
-                <div style="font-size: 1.1rem;">${element.number}</div>
-            </div>
-            <div style="padding: 1rem; background: var(--light-color); border-radius: 8px;">
-                <div style="font-weight: 600; color: var(--dark-color); margin-bottom: 0.5rem;">
-                    <i class="fas fa-weight"></i> الكتلة الذرية
-                </div>
-                <div style="font-size: 1.1rem;">${element.mass}</div>
-            </div>
-            <div style="padding: 1rem; background: var(--light-color); border-radius: 8px;">
-                <div style="font-weight: 600; color: var(--dark-color); margin-bottom: 0.5rem;">
-                    <i class="fas fa-layer-group"></i> المجموعة
-                </div>
-                <div style="font-size: 1.1rem;">${element.group}</div>
-            </div>
-            <div style="padding: 1rem; background: var(--light-color); border-radius: 8px;">
-                <div style="font-weight: 600; color: var(--dark-color); margin-bottom: 0.5rem;">
-                    <i class="fas fa-stream"></i> الدورة
-                </div>
-                <div style="font-size: 1.1rem;">${element.period}</div>
-            </div>
-            <div style="padding: 1rem; background: var(--light-color); border-radius: 8px;">
-                <div style="font-weight: 600; color: var(--dark-color); margin-bottom: 0.5rem;">
-                    <i class="fas fa-th"></i> النوع
-                </div>
-                <div style="font-size: 1.1rem;">${getTypeNameAr(element.type)}</div>
-            </div>
-            <div style="padding: 1rem; background: var(--light-color); border-radius: 8px;">
-                <div style="font-weight: 600; color: var(--dark-color); margin-bottom: 0.5rem;">
-                    <i class="fas fa-vial"></i> الحالة
-                </div>
-                <div style="font-size: 1.1rem;">${element.state}</div>
-            </div>
-        </div>
-    `;
-    
-    modal.style.display = 'block';
-    
-    // Track exploration
-    elementsExplored++;
-    localStorage.setItem('elementsExplored', elementsExplored.toString());
-    
-    if (elementsExplored >= 10 && !unlockedAchievements.includes('explorer')) {
-        unlockAchievement('explorer');
-    }
-    
-    addPoints(5);
-}
-
-function getTypeNameAr(type) {
-    const types = {
-        'metal': 'فلز',
-        'nonmetal': 'لافلز',
-        'metalloid': 'شبه فلز',
-        'noble-gas': 'غاز نبيل',
-        'alkali-metal': 'فلز قلوي',
-        'alkaline-earth': 'قلوي ترابي',
-        'transition-metal': 'فلز انتقالي',
-        'halogen': 'هالوجين'
-    };
-    return types[type] || type;
-}
-
-function closeElementModal() {
-    document.getElementById('elementModal').style.display = 'none';
-}
-
-// ============================================
-// EXPERIMENTS
-// ============================================
-function viewExperiment(id) {
-    const experiments = [
-        'قياس كثافة المواد',
-        'الدائرة الكهربائية البسيطة',
-        'التركيب الضوئي في النباتات',
-        'خصائص المغناطيس',
-        'الاحتراق والأكسدة',
-        'حالات المادة وتحولاتها'
-    ];
-    
-    showNotification(`🔬 تجربة: ${experiments[id-1]}<br>قريباً سيتم إضافة محاكاة تفاعلية!`, 3000);
-    addPoints(15);
-}
-
-// ============================================
-// QUIZZES
-// ============================================
-function startQuiz(quizId) {
-    const quizzes = [
-        'الجدول الدوري والعناصر',
-        'تركيب المادة',
-        'الكهرباء والمغناطيسية',
-        'الأنظمة البيئية',
-        'الفضاء والنظام الشمسي',
-        'التفاعلات الكيميائية'
-    ];
-    
-    showNotification(`📝 اختبار: ${quizzes[quizId-1]}<br>قريباً سيتم إضافة الاختبارات التفاعلية!`, 3000);
-    addPoints(20);
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    const modal = document.getElementById('elementModal');
-    if (event.target == modal) {
-        closeElementModal();
-    }
-}
-
-// Add points for interacting with app
-let interactionCount = 0;
-document.addEventListener('click', function() {
-    interactionCount++;
-    if (interactionCount % 20 === 0) {
-        addPoints(5);
-    }
-});
-
-// Mobile Menu Toggle (for responsive design)
-function toggleMobileMenu() {
-    const nav = document.querySelector('.main-nav');
-    nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
-}
+addEventListener("keydown",e=>{if(e.key==="Escape"){const s=$(".sheet");if(s)s.remove()}});
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+swap(home);
 </script>
-
 </body>
 </html>
