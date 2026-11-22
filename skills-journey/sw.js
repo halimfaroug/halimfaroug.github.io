@@ -1,4 +1,4 @@
-const CACHE = 'skills-journey-clean-v32';
+const CACHE = 'skills-journey-clean-v33';
 const CORE = [
   './',
   './manifest.webmanifest',

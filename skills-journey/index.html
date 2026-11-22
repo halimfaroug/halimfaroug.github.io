@@ -887,7 +887,15 @@ function resetData(){
   if(!rst){rst=true;const b=$("#rst");if(b)b.textContent=gx("اضغطوا مرة أخرى للتأكيد: سيُمسح كل التقدّم");return}
   rst=false;try{localStorage.removeItem("skj2")}catch(e){}P=normalizeProgress({});stack=[];swap(home)
 }
-(function(){dlUpdate();swap(home)})();
+(function(){
+  /* نقل التقدّم من العنوان القديم skillsjourney.vercel.app */
+  const h=location.hash||"";
+  if(h.startsWith("#import=")){
+    try{const d=JSON.parse(decodeURIComponent(escape(atob(h.slice(8).replace(/-/g,"+").replace(/_/g,"/")))));
+      if(d&&typeof d==="object"&&(d.xp||0)>(P.xp||0)){P=normalizeProgress(d);save();setTimeout(()=>toast("نُقل تقدّمك من العنوان القديم ✅"),600)}}catch(e){}
+    try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+  }
+  dlUpdate();swap(home)})();
 </script>
 
 <script>if("serviceWorker" in navigator && location.protocol !== "file:"){navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>{if(reg.waiting){const n=document.createElement("div");n.className="update-note";n.innerHTML="يتوفر تحديث جديد للتطبيق <button type=\"button\">تحديث الآن</button>";n.querySelector("button").onclick=()=>{reg.waiting.postMessage({type:"SKIP_WAITING"});location.reload()};document.body.appendChild(n)}reg.addEventListener("updatefound",()=>{const w=reg.installing;if(w)w.addEventListener("statechange",()=>{if(w.state==="installed"&&navigator.serviceWorker.controller){const n=document.createElement("div");n.className="update-note";n.innerHTML="تم تجهيز تحديث جديد <button type=\"button\">تحديث الآن</button>";n.querySelector("button").onclick=()=>location.reload();document.body.appendChild(n)}})})}).catch(()=>{});}</script></body>
