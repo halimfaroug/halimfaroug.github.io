@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>رحلات تعليمية · Learning Journeys</title>
+<meta name="description" content="تطبيقات تعليمية مجانية للطلاب والأسر من إعداد حالم فاروق — Free educational apps for students and families by Halim Faroug.">
+<meta name="theme-color" content="#0B67D1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230B67D1'/><path d='M14 44 L28 26 L36 36 L44 22 L50 44 Z' fill='%23FFD566'/><circle cx='44' cy='18' r='5' fill='%23fff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0E2A47;--ink2:#4A6582;--bg:#EEF6FF;--card:#fff;--line:#D6E4F2;--brand:#0B67D1;--teal:#14A39A}
+@media (prefers-color-scheme:dark){:root{--ink:#EAF2FB;--ink2:#A9BCD1;--bg:#0B1624;--card:#13233A;--line:#24394F}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Cairo,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px}
+html[dir=ltr] body{font-size:16px}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+header.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;text-decoration:none}
+.logo svg{width:38px;height:38px}
+.lang{font:inherit;font-weight:800;font-size:15px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 16px;cursor:pointer}
+.hero{position:relative;overflow:hidden;border-radius:28px;color:#fff;padding:38px 28px 32px;margin:6px 0 30px;background:radial-gradient(120% 100% at 100% 0%,#3FA9FF 0%,rgba(63,169,255,0) 55%),linear-gradient(135deg,#0B67D1 0%,#0E4FA8 45%,#14A39A 100%);box-shadow:0 14px 34px rgba(11,103,209,.28)}
+.hero::after{content:"";position:absolute;inset-inline-end:-60px;bottom:-90px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
+.kicker{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px 14px;font-size:14px;font-weight:800}
+.hero h1{font-size:clamp(32px,6vw,52px);line-height:1.2;margin:12px 0 8px;font-weight:900}
+.hero p{margin:0;max-width:640px;font-size:18px;font-weight:600;color:rgba(255,255,255,.93)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;position:relative;z-index:1}
+.badges span{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:6px 12px;font-weight:800;font-size:14px}
+h2{font-size:24px;font-weight:900;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:34px}
+@media (min-width:720px){.grid{grid-template-columns:1fr 1fr}}
+.app{--g1:#FF9F43;--g2:#FF6B6B;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 20px rgba(31,82,126,.08);position:relative;overflow:hidden}
+.app::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:6px;background:linear-gradient(var(--g1),var(--g2))}
+.app.blue{--g1:#14A39A;--g2:#0B67D1}.app.violet{--g1:#7C5CFF;--g2:#3E8BFF}.app.green{--g1:#22C55E;--g2:#0EA5A4}
+.top{display:flex;align-items:center;gap:14px}
+.icon{flex:none;width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-size:34px;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2));box-shadow:0 6px 14px rgba(0,0,0,.15)}
+.app h3{margin:0;font-size:21px;font-weight:900;line-height:1.3}
+.app .en{display:block;font-size:14px;color:var(--ink2);font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:13px;font-weight:800;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--g1) 16%,transparent)}
+.app p{margin:0;color:var(--ink2);font-size:16px}
+.open{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:900;color:#fff;border-radius:16px;padding:12px;background:linear-gradient(135deg,var(--g1),var(--g2));box-shadow:0 6px 14px rgba(0,0,0,.12)}
+.open:focus-visible,.lang:focus-visible{outline:3px solid #FFD566;outline-offset:2px}
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:34px}
+.principles div{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
+.principles b{display:block;font-size:17px}.principles small{color:var(--ink2);font-size:14px}
+.principles i{font-style:normal;font-size:26px}
+.about{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;margin-bottom:30px}
+.about p{margin:6px 0 0;color:var(--ink2)}
+footer{text-align:center;color:var(--ink2);font-size:14px;padding:10px 0 34px}
+@media (max-width:520px){.hero{padding:28px 20px 24px;border-radius:22px}.hero p{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="bar">
+  <a class="logo" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0B67D1"/><path d="M14 44 L28 26 L36 36 L44 22 L50 44 Z" fill="#FFD566"/><circle cx="44" cy="18" r="5" fill="#fff"/></svg><span data-t="brand">رحلات تعليمية</span></a>
+  <button class="lang" id="lang" onclick="toggle()" aria-label="Switch to English">English</button>
+</header>
+
+<section class="hero">
+  <span class="kicker" data-t="kicker">تطبيقات تعليمية مجانية</span>
+  <h1 data-t="title">رحلات تعليمية</h1>
+  <p data-t="lead">تطبيقات صُمّمت لتجعل التعلّم في البيت ممتعًا وواضحًا: مرتبطة بالمنهج، تعمل على الجوال، ويستطيع الطالب أن يتدرّب فيها وحده أو مع أسرته.</p>
+  <div class="badges"><span data-t="b1">✓ مجانية بالكامل</span><span data-t="b2">✓ بلا حساب</span><span data-t="b3">✓ بلا إعلانات</span><span data-t="b4">✓ التقدّم محفوظ على جهازك</span></div>
+</section>
+
+<h2 data-t="apps">التطبيقات</h2>
+<div class="grid">
+  <article class="app blue">
+    <div class="top"><div class="icon" aria-hidden="true">🧭</div><h3><span data-t="sj">رحلة المهارات</span><span class="en" data-t="sjs">Skills Journey</span></h3></div>
+    <div class="tags"><span data-t="sjg">الصف الثالث والسادس</span><span data-t="sjc">لغتي · الرياضيات · العلوم</span></div>
+    <p data-t="sjd">تدريب على مهارات الاختبارات الوطنية «نافس» بأكثر من 3,500 سؤال مرتبط بدروس الكتب، مع نصوص للفهم القرائي، واختبار تجريبي موقّت، وملخّص للأسرة.</p>
+    <a class="open" href="https://skillsjourney.vercel.app/" target="_blank" rel="noopener"><span data-t="open">افتح التطبيق</span> ↗</a>
+  </article>
+  <article class="app">
+    <div class="top"><div class="icon" aria-hidden="true">🔤</div><h3><span data-t="ka">كلماتي</span><span class="en" data-t="kas">Kalimati</span></h3></div>
+    <div class="tags"><span data-t="kag">المرحلة الابتدائية</span><span data-t="kac">مفردات اللغة الإنجليزية</span></div>
+    <p data-t="kad">أكثر من 20 كتابًا مصوّرًا لكلمات إنجليزية مع معانيها العربية ونطقها، وألعاب للمطابقة والإملاء وبناء الجمل، وملصقات تحفيزية.</p>
+    <a class="open" href="https://kalimati-crafter.vercel.app/" target="_blank" rel="noopener"><span data-t="open">افتح التطبيق</span> ↗</a>
+  </article>
+  <article class="app violet">
+    <div class="top"><div class="icon" aria-hidden="true">٥</div><h3><span data-t="m5">مغامرة الرياضيات ٥</span><span class="en" data-t="m5s">Math5 Expert</span></h3></div>
+    <div class="tags"><span data-t="m5g">الصف الخامس الابتدائي</span><span data-t="m5c">الرياضيات</span></div>
+    <p data-t="m5d">66 تمرينًا تفاعليًّا في 6 فصول: الأعداد الكبيرة، والكسور، والهندسة، والضرب والقسمة، والأنماط والجبر، وحل المسائل.</p>
+    <a class="open" href="https://math-expert-zeta.vercel.app/" target="_blank" rel="noopener"><span data-t="open">افتح التطبيق</span> ↗</a>
+  </article>
+  <article class="app green">
+    <div class="top"><div class="icon" aria-hidden="true">⚛️</div><h3><span data-t="qn">منصة العلوم التفاعلية</span><span class="en" data-t="qns">Quantum Nexus</span></h3></div>
+    <div class="tags"><span data-t="qng">الأول والثالث المتوسط</span><span data-t="qnc">العلوم</span></div>
+    <p data-t="qnd">32 درسًا في 8 وحدات، وجدول دوري تفاعلي لـ118 عنصرًا، وتجارب علمية افتراضية، واختبارات قصيرة مع نقاط وإنجازات.</p>
+    <a class="open" href="https://halimfaroug.github.io/Quantum-Nexus_Modern_Academy-Schools/" target="_blank" rel="noopener"><span data-t="open">افتح التطبيق</span> ↗</a>
+  </article>
+</div>
+
+<h2 data-t="how">لماذا هذه التطبيقات؟</h2>
+<div class="principles">
+  <div><i>📚</i><b data-t="p1">مرتبطة بالمنهج</b><small data-t="p1d">مبنية على دروس الكتب المدرسية، ولكل سؤال تفسير مبسّط.</small></div>
+  <div><i>📱</i><b data-t="p2">للجوال أولًا</b><small data-t="p2d">تُفتح من الرابط مباشرة، ويمكن إضافتها إلى الشاشة الرئيسية.</small></div>
+  <div><i>🔒</i><b data-t="p3">خصوصية كاملة</b><small data-t="p3d">لا حسابات ولا جمع بيانات؛ التقدّم يبقى على جهاز الأسرة.</small></div>
+  <div><i>👨‍👩‍👧</i><b data-t="p4">للأسرة أيضًا</b><small data-t="p4d">تساعد أولياء الأمور على متابعة أبنائهم بلا تعقيد.</small></div>
+</div>
+
+<section class="about">
+  <h2 data-t="who">من يقف وراء هذه التطبيقات؟</h2>
+  <p data-t="whod">أنا حالم فاروق عبدالرحيم الحاج، محاضر في اللغة الإنجليزية والترجمة بجامعة حفر الباطن. أعدّ هذه التطبيقات تطوّعًا، إيمانًا بأن التقنية يمكن أن تجعل التعلّم أقرب إلى كل طالب وأسرة. الأسئلة والمحتوى تدريبية، وليست بديلًا عن المعلّم أو الكتاب المدرسي.</p>
+</section>
+
+<footer><span data-t="foot">© 2026 رحلات تعليمية · حالم فاروق</span> · <a href="https://github.com/halimfaroug" target="_blank" rel="noopener">GitHub</a></footer>
+</div>
+<script>
+const EN={brand:"Learning Journeys",kicker:"Free educational apps",title:"Learning Journeys",
+lead:"Apps that make learning at home clear and enjoyable: tied to the curriculum, built for phones, and easy for a student to use alone or with family.",
+b1:"✓ Completely free",b2:"✓ No account",b3:"✓ No ads",b4:"✓ Progress stays on your device",apps:"The apps",
+sj:"Skills Journey",sjs:"رحلة المهارات",sjg:"Grades 3 and 6",sjc:"Arabic · Maths · Science",
+sjd:"Practice for the skills in Saudi Arabia's national Nafes tests: more than 3,500 questions tied to textbook lessons, reading-comprehension passages, a timed mock exam and a family summary.",
+ka:"Kalimati",kas:"كلماتي",kag:"Primary school",kac:"English vocabulary",
+kad:"More than 20 picture books of English words with Arabic meanings and pronunciation, plus matching, spelling and sentence-building games and reward stickers.",
+m5:"Math5 Expert",m5s:"مغامرة الرياضيات ٥",m5g:"Grade 5",m5c:"Mathematics",
+m5d:"66 interactive exercises in 6 chapters: large numbers, fractions, geometry, multiplication and division, patterns and algebra, and problem solving.",
+qn:"Quantum Nexus",qns:"منصة العلوم التفاعلية",qng:"Intermediate grades 1 and 3",qnc:"Science",
+qnd:"32 lessons in 8 units, an interactive periodic table of 118 elements, virtual experiments, and short quizzes with points and achievements.",
+open:"Open the app",how:"Why these apps?",p1:"Tied to the curriculum",p1d:"Built on textbook lessons, with a simple explanation for every question.",
+p2:"Phone first",p2d:"Open straight from the link, and add to the home screen.",p3:"Fully private",p3d:"No accounts and no data collection; progress stays on the family's device.",
+p4:"Made for families too",p4d:"Helps parents follow their children's learning without fuss.",who:"Who is behind these apps?",
+whod:"I am Halim Faroug Abdulraheem Elhag, a lecturer in English language and translation at the University of Hafr Al-Batin. I build these apps voluntarily, because technology can bring learning closer to every student and family. The questions and content are for practice and do not replace the teacher or the textbook.",
+foot:"© 2026 Learning Journeys · Halim Faroug"};
+const AR={};document.querySelectorAll("[data-t]").forEach(e=>AR[e.dataset.t]=e.textContent);
+function apply(l){const d=l==="en"?EN:AR;document.querySelectorAll("[data-t]").forEach(e=>{if(d[e.dataset.t])e.textContent=d[e.dataset.t]});
+document.documentElement.lang=l==="en"?"en":"ar";document.documentElement.dir=l==="en"?"ltr":"rtl";
+const b=document.getElementById("lang");b.textContent=l==="en"?"العربية":"English";b.setAttribute("aria-label",l==="en"?"التبديل إلى العربية":"Switch to English");
+document.title=l==="en"?"Learning Journeys · رحلات تعليمية":"رحلات تعليمية · Learning Journeys";try{localStorage.setItem("lj-lang",l)}catch(e){}}
+function toggle(){apply(document.documentElement.lang==="ar"?"en":"ar")}
+try{if(localStorage.getItem("lj-lang")==="en")apply("en")}catch(e){}
+</script>
+</body>
+</html>
