@@ -106,7 +106,7 @@ const CAT={alkali:"فلزات قلوية",alkaline:"فلزات قلوية أرض
 const STATE={solid:"صلب",liquid:"سائل",gas:"غاز",unknown:"غير معروف (عنصر مُصنَّع)"};
 const STRANDS=[
  {id:"matter",t:"المادة والكيمياء",e:"⚗️",d:"الذرة، والجدول الدوري، والتفاعلات",ready:true},
- {id:"life",t:"الحياة",e:"🧬",d:"الخلية، وأجهزة الجسم، والوراثة، والبيئة",ready:false},
+ {id:"life",t:"الحياة",e:"🧬",d:"الخلية، وأجهزة الجسم، والوراثة، والبيئة",ready:true},
  {id:"energy",t:"الطاقة والحركة",e:"⚡",d:"القوى، والطاقة، والكهرباء، والموجات",ready:false},
  {id:"earth",t:"الأرض والفضاء",e:"🌍",d:"الصخور، والطقس، والنظام الشمسي",ready:false}];
 const $=s=>document.querySelector(s);
@@ -128,6 +128,7 @@ const mistN=()=>Object.keys(P.mist).length;
 /* ===== الرئيسية ===== */
 function home(){
   const L=LESSONS.length,got=LESSONS.reduce((a,l)=>a+(P.stars[l.id]||0),0),pct=Math.round(got/(L*3)*100);
+  const sp=sid=>{const ls=LESSONS.filter(l=>l.s===sid);return ls.length?Math.round(ls.reduce((a,l)=>a+(P.stars[l.id]||0),0)/(ls.length*3)*100):0};
   show(`<section class="hero"><canvas id="sky" aria-hidden="true"></canvas>
     <span class="kick">أساسيات العلوم للمرحلة المتوسطة</span>
     <h1>منصة العلوم التفاعلية</h1><div class="en">Quantum Nexus</div>
@@ -135,7 +136,7 @@ function home(){
     <div class="stats"><div><b>118</b><small>عنصرًا</small></div><div><b>${LESSONS.reduce((a,l)=>a+l.q.length,0)}</b><small>سؤالًا</small></div><div><b>${pct}%</b><small>الإنجاز</small></div></div></section>
   <button class="big" onclick="go(table)"><span class="ic">🧪</span><span><b>الجدول الدوري التفاعلي</b><small>العناصر الـ118 كلها: اضغط أيّ عنصر لتعرف عنه</small></span></button>
   <h2>محاور العلوم</h2>
-  <div class="grid2">${STRANDS.map(s=>s.ready?`<button class="strand" onclick="go(strand,'${s.id}')"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><span class="bar"><i style="width:${pct}%"></i></span></button>`:`<div class="strand soon" aria-disabled="true"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><small>🛠️ قيد الإعداد</small></div>`).join("")}</div>
+  <div class="grid2">${STRANDS.map(s=>s.ready?`<button class="strand" onclick="go(strand,'${s.id}')"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><small>${LESSONS.filter(l=>l.s===s.id).length} دروس</small><span class="bar"><i style="width:${sp(s.id)}%"></i></span></button>`:`<div class="strand soon" aria-disabled="true"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><small>🛠️ قيد الإعداد</small></div>`).join("")}</div>
   <h2>أدوات</h2>
   <div class="tools"><button class="tool" onclick="go(symbolQuiz)"><span>🔤</span>تحدّي الرموز</button><button class="tool" onclick="go(review)"><span>📒</span>مراجعة أخطائي${mistN()?`<em>${mistN()}</em>`:""}</button></div>
   <footer>أسئلة تدريبية أصلية لأساسيات العلوم، وليست بديلًا عن الكتاب المدرسي أو المعلّم · بلا حساب وبلا إعلانات<br><a href="../">← رحلات تعليمية</a></footer>`);
@@ -148,9 +149,9 @@ function stars(){const c=$("#sky");if(!c||matchMedia("(prefers-reduced-motion: r
    requestAnimationFrame(draw)})()}
 
 /* ===== المحور والدروس ===== */
-function strand(){
-  show(`<h1 style="font-size:24px;margin:6px 2px">⚗️ المادة والكيمياء</h1><p class="muted" style="margin:0 2px 12px">${LESSONS.length} دروس. ابدأ بالترتيب، أو اختر ما تحتاج إليه.</p>
-  ${LESSONS.map((l,i)=>`<button class="lesson" onclick="go(lesson,'${l.id}')"><span class="ic">${l.e}</span><span><b>${i+1}. ${l.t}</b><small>${qn(l.q.length)}</small></span><span class="stars" aria-label="${P.stars[l.id]||0} من 3 نجوم">${starStr(P.stars[l.id]||0)}</span></button>`).join("")}`);
+function strand(sid){const S=STRANDS.find(s=>s.id===sid),ls=LESSONS.filter(l=>l.s===sid);
+  show(`<h1 style="font-size:24px;margin:6px 2px">${S.e} ${S.t}</h1><p class="muted" style="margin:0 2px 12px">${ls.length} دروس. ابدأ بالترتيب، أو اختر ما تحتاج إليه.</p>
+  ${ls.map((l,i)=>`<button class="lesson" onclick="go(lesson,'${l.id}')"><span class="ic">${l.e}</span><span><b>${i+1}. ${l.t}</b><small>${qn(l.q.length)}</small></span><span class="stars" aria-label="${P.stars[l.id]||0} من 3 نجوم">${starStr(P.stars[l.id]||0)}</span></button>`).join("")}`);
 }
 const LX=id=>LESSONS.find(l=>l.id===id);
 function lesson(id){const l=LX(id);

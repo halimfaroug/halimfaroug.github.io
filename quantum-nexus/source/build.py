@@ -1,6 +1,10 @@
 import json,sys,os
 sys.path.insert(0,'/home/claude/qn')
-from matter import LESSONS
+from matter import LESSONS as M
+from life import LESSONS as LF
+for l in M: l['s']='matter'
+for l in LF: l['s']='life'
+LESSONS=M+LF
 E=json.load(open('/home/claude/qn/elements.json'))
 for l in LESSONS:
     for p,o,x in l['q']:
