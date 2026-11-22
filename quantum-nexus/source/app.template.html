@@ -99,9 +99,34 @@ footer a{color:inherit}
 .planets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.planets button{display:flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:var(--card);color:var(--ink);font-weight:800;font-size:14px}.planets i{width:12px;height:12px;border-radius:50%}
 input[type=range]{accent-color:#5B3FD9;height:32px}
 #fs small{font-size:.7em}#fs{padding:4px 10px}.top .brand{white-space:nowrap;min-width:0}
-@media (max-width:420px){html[data-font="1"] .bt,html[data-font="2"] .bt{display:none}}
+@media (max-width:420px){.bt{display:none}}
 .big.lab{background:linear-gradient(135deg,#0B7285,#5B3FD9);margin-top:12px}
-</style>
+.kind{display:flex;flex-direction:column;background:color-mix(in srgb,var(--brand) 10%,var(--card));border:1px solid color-mix(in srgb,var(--brand) 30%,var(--line));border-radius:14px;padding:6px 12px;margin-top:10px;font-weight:900;color:var(--brand)}
+@media (prefers-color-scheme:dark){.kind{color:#C9BEFF}}
+.kind small{font-weight:700;color:var(--ink2);font-size:13px}
+.slots{display:grid;gap:6px;margin-bottom:10px}
+.slot{display:flex;align-items:center;gap:10px;min-height:42px;padding:4px 12px;border-radius:14px;border:2px dashed var(--line);background:transparent;font-weight:800;font-size:16px;text-align:start;color:var(--ink)}
+.slot.full{border-style:solid;border-color:var(--brand);background:var(--card)}
+.slot em{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--line);display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:14px}
+.slot.full em{background:var(--brand);color:#fff}
+.slot.good{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}.slot.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px;min-height:10px}
+.chip{padding:9px 14px;border-radius:999px;border:2px solid var(--line);background:var(--card);font-weight:800;font-size:16px;color:var(--ink)}
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.mL,.mR{padding:10px;border-radius:14px;border:2px solid var(--line);background:var(--card);font-weight:800;font-size:15px;line-height:1.45;text-align:start;color:var(--ink);box-shadow:inset -6px 0 0 var(--c)}
+.mL.sel{border-color:var(--brand);outline:3px solid color-mix(in srgb,var(--brand) 35%,transparent)}
+.mL.on,.mR.on{border-color:var(--c)}
+.mL.good{background:color-mix(in srgb,var(--good) 14%,var(--card))}.mL.bad{background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.ans{margin:4px 0 0;padding-inline-start:20px;font-weight:700}
+.numrow{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.numin{width:150px;font:inherit;font-size:24px;font-weight:900;text-align:center;padding:8px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+.numin:focus{outline:none;border-color:var(--brand)}.numin.good{border-color:var(--good)}.numin.bad{border-color:var(--bad)}
+.miniwrap{overflow-x:auto;margin:0 -14px;padding:0 14px 6px}.mini{display:grid;grid-template-columns:repeat(18,32px);gap:3px;width:max-content}
+.mc{aspect-ratio:1/1.15;padding:0;border:1px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink);font:800 13px system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-width:0}
+.mc.gapx{border:0;background:transparent;color:var(--ink2)}
+.mc.sel{background:var(--brand);color:#fff;border-color:var(--brand)}
+.mc.good{background:var(--good);color:#fff;border-color:var(--good)}.mc.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.nw{white-space:nowrap}</style>
 </head>
 <body>
 <header class="top">
@@ -149,13 +174,13 @@ function home(){
     <span class="kick">أساسيات العلوم للمرحلة المتوسطة</span>
     <h1>منصة العلوم التفاعلية</h1><div class="en">Quantum Nexus</div>
     <p>أهم أفكار العلوم في المرحلة المتوسطة، مع جدول دوري تفاعلي وأسئلة لكل منها تفسير.</p>
-    <div class="stats"><div><b>118</b><small>عنصرًا</small></div><div><b>${LESSONS.reduce((a,l)=>a+l.q.length,0)}</b><small>سؤالًا</small></div><div><b>${pct}%</b><small>الإنجاز</small></div></div></section>
+    <div class="stats"><div><b>118</b><small>عنصرًا</small></div><div><b>${LESSONS.reduce((a,l)=>a+nQ(l),0)}</b><small>سؤالًا</small></div><div><b>${pct}%</b><small>الإنجاز</small></div></div></section>
   <button class="big" onclick="go(table)"><span class="ic">🧪</span><span><b>الجدول الدوري التفاعلي</b><small>العناصر الـ118 كلها: اضغط أيّ عنصر لتعرف عنه</small></span></button>
   <button class="big lab" onclick="go(labs)"><span class="ic">🔭</span><span><b>المختبر التفاعلي</b><small>نماذج حيّة تتحرك: ذرّة تبنيها، وDNA يدور، وكواكب، ودائرة كهربائية</small></span></button>
   <h2>محاور العلوم</h2>
   <div class="grid2">${STRANDS.map(s=>s.ready?`<button class="strand" onclick="go(strand,'${s.id}')"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><small>${LESSONS.filter(l=>l.s===s.id).length} دروس</small><span class="bar"><i style="width:${sp(s.id)}%"></i></span></button>`:`<div class="strand soon" aria-disabled="true"><span class="ic">${s.e}</span><b>${s.t}</b><small>${s.d}</small><small>🛠️ قيد الإعداد</small></div>`).join("")}</div>
   <h2>أدوات</h2>
-  <div class="tools"><button class="tool" onclick="go(symbolQuiz)"><span>🔤</span>تحدّي الرموز</button><button class="tool" onclick="go(review)"><span>📒</span>مراجعة أخطائي${mistN()?`<em>${mistN()}</em>`:""}</button></div>
+  <div class="tools"><button class="tool" onclick="go(findQuiz)"><span>🔎</span>اعثر على العنصر</button><button class="tool" onclick="go(symbolQuiz)"><span>🔤</span>تحدّي الرموز</button><button class="tool" onclick="go(review)"><span>📒</span>مراجعة أخطائي${mistN()?`<em>${mistN()}</em>`:""}</button></div>
   <footer>أسئلة تدريبية أصلية لأساسيات العلوم، وليست بديلًا عن الكتاب المدرسي أو المعلّم · بلا حساب وبلا إعلانات<br><a href="../">← رحلات تعليمية</a></footer>`);
 }
 function stars(){const c=$("#sky");if(!c||matchMedia("(prefers-reduced-motion: reduce)").matches)return;const x=c.getContext("2d"),r=devicePixelRatio||1;c.width=c.offsetWidth*r;c.height=c.offsetHeight*r;
@@ -168,13 +193,13 @@ function stars(){const c=$("#sky");if(!c||matchMedia("(prefers-reduced-motion: r
 /* ===== المحور والدروس ===== */
 function strand(sid){const S=STRANDS.find(s=>s.id===sid),ls=LESSONS.filter(l=>l.s===sid);
   show(`<h1 style="font-size:24px;margin:6px 2px">${S.e} ${S.t}</h1><p class="muted" style="margin:0 2px 12px">${ls.length} دروس. ابدأ بالترتيب، أو اختر ما تحتاج إليه.</p>
-  ${ls.map((l,i)=>`<button class="lesson" onclick="go(lesson,'${l.id}')"><span class="ic">${l.e}</span><span><b>${i+1}. ${l.t}</b><small>${qn(l.q.length)}</small></span><span class="stars" aria-label="${P.stars[l.id]||0} من 3 نجوم">${starStr(P.stars[l.id]||0)}</span></button>`).join("")}`);
+  ${ls.map((l,i)=>`<button class="lesson" onclick="go(lesson,'${l.id}')"><span class="ic">${l.e}</span><span><b>${i+1}. ${l.t}</b><small>${qn(nQ(l))}${(l.ix||[]).length?" · منها "+(l.ix.length===1?"سؤال تفاعلي":l.ix.length===2?"سؤالان تفاعليان":l.ix.length+" أسئلة تفاعلية"):""}</small></span><span class="stars" aria-label="${P.stars[l.id]||0} من 3 نجوم">${starStr(P.stars[l.id]||0)}</span></button>`).join("")}`);
 }
 const LX=id=>LESSONS.find(l=>l.id===id);
 function lesson(id){const l=LX(id);
   show(`<h1 style="font-size:24px;margin:6px 2px">${l.e} ${l.t}</h1>
   <div class="card"><b>💡 أهم الأفكار</b><ul>${l.sum.map(s=>`<li>${s}</li>`).join("")}</ul></div>
-  <button class="go" onclick="swap(quiz,{id:'${id}'})">ابدأ الأسئلة (${l.q.length})</button>
+  <button class="go" onclick="swap(quiz,{id:'${id}'})">ابدأ الأسئلة (${nQ(l)})</button>
   ${LAB_OF[id]?`<button class="go alt" style="margin-top:10px" onclick="go(lab,'${LAB_OF[id]}')">🔭 جرّب النموذج الحيّ: ${LABS.find(x=>x.id===LAB_OF[id]).t}</button>`:""}
   ${id==="table"?`<button class="go alt" style="margin-top:10px" onclick="go(table)">🧪 افتح الجدول الدوري</button>`:""}`);
 }
@@ -182,34 +207,86 @@ function lesson(id){const l=LX(id);
 /* ===== الأسئلة ===== */
 let Q=null;
 function mk(lid,i){const l=LX(lid),[p,o,x]=l.q[i];return {key:lid+"#"+i,lid,p,ans:o[0],opts:sh(o),x}}
+function mkx(lid,i){return Object.assign({},LX(lid).ix[i],{key:lid+"#x"+i,lid})}
+function fromKey(k){const [lid,i]=k.split("#"),l=LX(lid);if(!l)return null;if(i[0]==="x")return l.ix&&l.ix[+i.slice(1)]?mkx(lid,+i.slice(1)):null;return l.q[+i]?mk(lid,+i):null}
+const nQ=l=>l.q.length+(l.ix||[]).length;
+const KIND={order:"🔢 رتّب",match:"🔗 صِل",num:"✏️ احسب",pt:"🧪 اضغط في الجدول"};
+const HINT={order:"اضغط العناصر بالترتيب الصحيح. اضغط عنصرًا مختارًا لإرجاعه.",match:"اضغط عنصرًا من اليمين، ثم ما يناسبه من اليسار.",num:"اكتب الرقم فقط.",pt:"اضغط العنصر في الجدول، ثم «تحقّق»."};
 function quiz(cfg){
   let list;
-  if(cfg.review){list=Object.keys(P.mist).map(k=>{const [lid,i]=k.split("#");return LX(lid)&&LX(lid).q[+i]?mk(lid,+i):null}).filter(Boolean);list=sh(list).slice(0,10)}
-  else if(cfg.symbols){list=cfg.list}
-  else{const l=LX(cfg.id);list=sh(l.q.map((_,i)=>mk(cfg.id,i)))}
+  if(cfg.review){list=Object.keys(P.mist).map(fromKey).filter(Boolean);list=sh(list).slice(0,10)}
+  else if(cfg.symbols||cfg.find){list=cfg.list}
+  else{const l=LX(cfg.id);list=sh([...l.q.map((_,i)=>mk(cfg.id,i)),...(l.ix||[]).map((_,i)=>mkx(cfg.id,i))])}
   if(!list.length){show(`<div class="card center"><p>لا توجد أخطاء للمراجعة 🎉</p></div><button class="go" onclick="swap(home)">الرئيسية</button>`);return}
   Q={cfg,list,i:0,score:0};step();
 }
+function qtitle(){return Q.cfg.review?"📒 مراجعة الأخطاء":Q.cfg.symbols?"🔤 تحدّي الرموز":Q.cfg.find?"🔎 اعثر على العنصر":esc(LX(Q.cfg.id).t)}
 function step(){const t=Q.list[Q.i];Q.done=false;
-  show(`<div class="qhead"><span>${Q.cfg.review?"📒 مراجعة الأخطاء":Q.cfg.symbols?"🔤 تحدّي الرموز":esc(LX(Q.cfg.id).t)}</span><span>${Q.i+1} / ${Q.list.length}</span></div>
+  let body;
+  if(!t.k)body=t.opts.map((o,k)=>`<button class="opt" id="o${k}" onclick="pick(${k})">${o}</button>`).join("");
+  else if(t.k==="order"){let o;do{o=sh(t.items.map((_,i)=>i))}while(t.items.length>1&&o.every((v,i)=>v===i));Q.pool=o;Q.sel=[];body=`<div id="pool" class="chips"></div><div id="slots" class="slots"></div><button class="go" id="chk" disabled onclick="checkOrder()">تحقّق</button>`}
+  else if(t.k==="match"){Q.right=sh(t.pairs.map((_,i)=>i));Q.link={};Q.mL=null;body=`<div id="mt" class="mt"></div><button class="go" id="chk" disabled onclick="checkMatch()">تحقّق</button>`}
+  else if(t.k==="num")body=`<div class="numrow"><input id="numin" class="numin" inputmode="decimal" autocomplete="off" aria-label="الإجابة" placeholder="؟" onkeydown="if(event.key==='Enter')checkNum()"><span class="muted">${t.u||""}</span></div><button class="go" onclick="checkNum()">تحقّق</button>`;
+  else if(t.k==="pt"){Q.ptSel=null;body=`<div class="miniwrap" dir="ltr"><div class="mini" id="mini">${miniTable()}</div></div><p class="fine center" style="margin:2px 0 0">اسحب الجدول يمينًا ويسارًا لترى بقية العناصر</p><p class="fine center" id="ptsel">لم تختر عنصرًا بعد</p><button class="go" id="chk" disabled onclick="checkPT()">تحقّق</button>`}
+  show(`<div class="qhead"><span>${qtitle()}</span><span>${Q.i+1} / ${Q.list.length}</span></div>
   <div class="bar"><i style="width:${Q.i/Q.list.length*100}%"></i></div>
-  <div class="q">${t.p}</div>
-  ${t.opts.map((o,k)=>`<button class="opt" id="o${k}" onclick="pick(${k})">${o}</button>`).join("")}
-  <div id="fb"></div>`);
+  ${t.k?`<div class="kind">${KIND[t.k]}<small>${HINT[t.k]}</small></div>`:""}
+  <div class="q">${t.p}</div>${body}<div id="fb"></div>`);
+  if(t.k==="order")drawOrder();if(t.k==="match")drawMatch();
 }
-function pick(k){if(Q.done)return;Q.done=true;const t=Q.list[Q.i],ok=t.opts[k]===t.ans;
-  t.opts.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o===t.ans)b.classList.add("good");else if(j===k)b.classList.add("bad")});
+function resolve(ok,wrongMsg){Q.done=true;const t=Q.list[Q.i];
   if(ok){Q.score++;P.pts+=10;if(t.key)delete P.mist[t.key]}else if(t.key)P.mist[t.key]=Date.now();save();
-  $("#fb").innerHTML=`<div class="fb ${ok?"good":"bad"}"><b>${ok?"✅ إجابة صحيحة!":"❌ الإجابة الصحيحة: "+t.ans}</b><br>${t.x}</div>
+  const c=$("#chk");if(c)c.remove();document.querySelectorAll("#app .go:not(#fb .go)").forEach(b=>{if(b.textContent==="تحقّق")b.remove()});
+  $("#fb").innerHTML=`<div class="fb ${ok?"good":"bad"}"><b>${ok?"✅ إجابة صحيحة!":"❌ "+wrongMsg}</b><br>${t.x}</div>
   <button class="go" onclick="next()">${Q.i+1<Q.list.length?"التالي":"النتيجة"}</button>`;
   $("#fb").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
+function pick(k){if(Q.done)return;const t=Q.list[Q.i],ok=t.opts[k]===t.ans;
+  t.opts.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o===t.ans)b.classList.add("good");else if(j===k)b.classList.add("bad")});
+  resolve(ok,"الإجابة الصحيحة: "+t.ans);
+}
+/* رتّب */
+function drawOrder(){const t=Q.list[Q.i],n=t.items.length;
+  $("#slots").innerHTML=Array.from({length:n},(_,k)=>k<Q.sel.length?`<button class="slot full" onclick="unOrder(${k})" ${Q.done?"disabled":""}><em>${k+1}</em>${t.items[Q.sel[k]]}</button>`:`<div class="slot"><em>${k+1}</em></div>`).join("");
+  $("#pool").innerHTML=Q.pool.filter(i=>!Q.sel.includes(i)).map(i=>`<button class="chip" onclick="doOrder(${i})">${t.items[i]}</button>`).join("");
+  const c=$("#chk");if(c)c.disabled=Q.sel.length<n}
+function doOrder(i){if(Q.done)return;Q.sel.push(i);drawOrder()}
+function unOrder(k){if(Q.done)return;Q.sel.splice(k,1);drawOrder()}
+function checkOrder(){if(Q.done)return;const t=Q.list[Q.i],ok=Q.sel.every((v,k)=>v===k);Q.done=true;drawOrder();
+  [...document.querySelectorAll(".slot.full")].forEach((b,k)=>b.classList.add(Q.sel[k]===k?"good":"bad"));
+  resolve(ok,"الترتيب الصحيح: "+t.items.join(" ← "))}
+/* صِل */
+const MC=["#5B3FD9","#0FB5CE","#E5484D","#F59E0B","#16A34A"];
+function drawMatch(){const t=Q.list[Q.i],L=Q.link;
+  $("#mt").innerHTML=t.pairs.map((pr,i)=>{const j=Q.right[i],li=Object.keys(L).find(k=>L[k]===j);
+    return `<button class="mL${Q.mL===i?" sel":""}${L[i]!==undefined?" on":""}" style="--c:${L[i]!==undefined?MC[i]:"transparent"}" onclick="mPick(${i})" ${Q.done?"disabled":""}>${pr[0]}</button>
+    <button class="mR${li!==undefined?" on":""}" style="--c:${li!==undefined?MC[li]:"transparent"}" onclick="mLink(${j})" ${Q.done?"disabled":""}>${t.pairs[j][1]}</button>`}).join("");
+  const c=$("#chk");if(c)c.disabled=Object.keys(L).length<t.pairs.length}
+function mPick(i){if(Q.done)return;if(Q.link[i]!==undefined)delete Q.link[i];Q.mL=i;drawMatch()}
+function mLink(j){if(Q.done)return;if(Q.mL===null){const k=Object.keys(Q.link).find(k=>Q.link[k]===j);if(k!==undefined){delete Q.link[k];drawMatch()}else toast("اختر أولًا عنصرًا من العمود الأيمن");return}
+  for(const k in Q.link)if(Q.link[k]===j)delete Q.link[k];Q.link[Q.mL]=j;Q.mL=null;drawMatch()}
+function checkMatch(){if(Q.done)return;const t=Q.list[Q.i],ok=t.pairs.every((_,i)=>Q.link[i]===i);Q.done=true;drawMatch();
+  const L=[...document.querySelectorAll(".mL")];t.pairs.forEach((_,i)=>L[i].classList.add(Q.link[i]===i?"good":"bad"));
+  resolve(ok,"التوصيل الصحيح:"+`<ul class="ans">${t.pairs.map(p=>`<li>${p[0]} ← ${p[1]}</li>`).join("")}</ul>`)}
+/* احسب */
+function checkNum(){if(Q.done)return;const t=Q.list[Q.i],inp=$("#numin"),raw=inp.value.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[٫,،]/g,".").replace(/\s/g,"");
+  if(raw===""||isNaN(+raw)){toast("اكتب رقمًا أولًا");inp.focus();return}
+  const ok=Math.abs(+raw-t.a)<=(t.tol||0)+1e-9;inp.disabled=true;inp.classList.add(ok?"good":"bad");resolve(ok,`الإجابة الصحيحة: ${t.a} ${t.u||""}`)}
+/* اضغط في الجدول */
+function miniTable(){return ELEMENTS.filter(e=>e.p!=="la"&&e.p!=="ac").map(e=>`<button class="mc" id="mc${e.z}" style="grid-column:${e.g};grid-row:${e.p}" onclick="ptPick(${e.z})" aria-label="${e.ar}">${e.s}</button>`).join("")+`<div class="mc gapx" style="grid-column:3;grid-row:6">*</div><div class="mc gapx" style="grid-column:3;grid-row:7">*</div>`}
+function ptPick(z){if(Q.done)return;if(Q.ptSel)$("#mc"+Q.ptSel).classList.remove("sel");Q.ptSel=z;$("#mc"+z).classList.add("sel");const e=ELEMENTS[z-1];$("#ptsel").innerHTML=`اخترت: <b>${e.ar}</b> <span dir="ltr">(${e.s})</span>`;$("#chk").disabled=false}
+function ptOK(t,z){return t.z?t.z.includes(z):ELEMENTS[z-1].c===t.c}
+function checkPT(){if(Q.done||!Q.ptSel)return;const t=Q.list[Q.i],ok=ptOK(t,Q.ptSel);Q.done=true;
+  ELEMENTS.forEach(e=>{const b=$("#mc"+e.z);if(!b)return;b.disabled=true;if(ptOK(t,e.z))b.classList.add("good")});
+  if(!ok)$("#mc"+Q.ptSel).classList.add("bad");
+  const right=ELEMENTS.filter(e=>ptOK(t,e.z)&&e.p!=="la"&&e.p!=="ac");
+  resolve(ok,"الإجابة: "+right.map(e=>e.ar).join("، ")+" (مظلَّلة بالأخضر)")}
 function next(){Q.i++;if(Q.i<Q.list.length)step();else finish()}
 function finish(){const n=Q.list.length,s=Q.score,r=s/n,st=r>=.9?3:r>=.7?2:r>=.5?1:0;
   if(Q.cfg.id){P.stars[Q.cfg.id]=Math.max(P.stars[Q.cfg.id]||0,st);P.pts+=st*10}save();
   show(`<div class="card center"><div class="score">${s} / ${n}</div>${Q.cfg.id?`<div class="stars" style="font-size:30px;margin:0">${starStr(st)}</div>`:""}
   <p>${r>=.9?"ممتاز! أتقنت هذا الدرس 🌟":r>=.7?"عمل جيد! راجع الأخطاء لتصل إلى الإتقان 👍":r>=.5?"بداية طيبة؛ اقرأ «أهم الأفكار» ثم حاول مرة أخرى 💪":"لا بأس؛ اقرأ «أهم الأفكار» بهدوء، ثم أعد المحاولة 🤝"}</p></div>
-  <button class="go" onclick="swap(quiz,Q.cfg.symbols?{symbols:true,list:symbolList()}:Q.cfg)">محاولة جديدة</button>
+  <button class="go" onclick="swap(quiz,Q.cfg.symbols?{symbols:true,list:symbolList()}:Q.cfg.find?{find:true,list:findList()}:Q.cfg)">محاولة جديدة</button>
   ${mistN()?`<button class="go alt" onclick="swap(quiz,{review:true})">📒 مراجعة أخطائي (${mistN()})</button>`:""}
   <button class="go alt" onclick="stack=[];swap(home)">الرئيسية</button>`);
 }
@@ -221,6 +298,9 @@ function symbolList(){return sh(COMMON).slice(0,10).map((z,i)=>{const e=ELEMENTS
   return i%2?{p:`ما العنصر الذي رمزه <b dir="ltr">${e.s}</b>؟`,ans:e.ar,opts:sh([e.ar,...others.map(o=>o.ar)]),x:`<b dir="ltr">${e.s}</b> رمز ${e.ar} (${e.en})، وعدده الذري ${e.z}.`}
    :{p:`ما رمز عنصر <b>${e.ar}</b>؟`,ans:e.s,opts:sh([e.s,...others.map(o=>o.s)]),x:`رمز ${e.ar} هو <b dir="ltr">${e.s}</b>${e.s[0]!==e.en[0]?` (من اسمه اللاتيني أو القديم)`:""}، وعدده الذري ${e.z}.`}})}
 function symbolQuiz(){quiz({symbols:true,list:symbolList()})}
+const FIND=[1,2,3,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,26,29,30,47,53,79,80,82];
+function findList(){return sh(FIND).slice(0,10).map(z=>{const e=ELEMENTS[z-1];return {k:"pt",z:[z],p:`اضغط على عنصر <b>${e.ar}</b>.`,x:`${e.ar} <span dir="ltr">(${e.s})</span>: العدد الذري ${e.z}، في الدورة ${e.p} والمجموعة ${e.g}.`}})}
+function findQuiz(){quiz({find:true,list:findList()})}
 
 /* ===== الجدول الدوري ===== */
 let filt="",term="";

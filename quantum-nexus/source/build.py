@@ -9,6 +9,23 @@ for l in LF: l['s']='life'
 for l in EN: l['s']='energy'
 for l in EA: l['s']='earth'
 LESSONS=M+LF+EN+EA
+from interactive import IX
+for l in LESSONS:
+    if l['id'] in IX: l['ix']=IX[l['id']]
+assert set(IX)<=set(l['id'] for l in LESSONS)
+for l in LESSONS:
+    for it in l.get('ix',[]):
+        k=it['k']; assert k in ('order','match','num','pt')
+        if k=='order': assert len(it['items'])==len(set(it['items']))>=3
+        if k=='match': assert len({p[1] for p in it['pairs']})==len(it['pairs'])>=3
+        if k=='pt': assert 'z' in it or 'c' in it
+import re
+U=re.compile(r'([\d.,]+ ?(?:م/ث²|م/ث|كم/ساعة|كم/ث|°س))')
+nb=lambda s:U.sub(r'<span class="nw">\1</span>',s)
+for l in LESSONS:
+    l['q']=[(nb(p),o,nb(x)) for p,o,x in l['q']]
+    for it in l.get('ix',[]):
+        it['p']=nb(it['p']);it['x']=nb(it['x'])
 E=json.load(open('/home/claude/qn/elements.json'))
 for l in LESSONS:
     for p,o,x in l['q']:
@@ -30,4 +47,4 @@ self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.al
 self.addEventListener('fetch',e=>{{if(e.request.method!=='GET')return;
   e.respondWith(fetch(e.request).then(r=>{{const c=r.clone();caches.open(CACHE).then(x=>x.put(e.request,c));return r}}).catch(()=>caches.match(e.request).then(m=>m||caches.match('./index.html'))))}});
 """)
-print('built', len(t), sum(len(l['q']) for l in LESSONS))
+print('built', len(t), sum(len(l['q'])+len(l.get('ix',[])) for l in LESSONS), 'interactive', sum(len(l.get('ix',[])) for l in LESSONS))
